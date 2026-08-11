@@ -1,4 +1,8 @@
+using AlSaad.Application.Interfaces.IRepositories;
+using AlSaad.Application.Interfaces.IServices;
+using AlSaad.Infrastructure.Services;
 using AlSaad.Persistence.Context;
+using AlSaad.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +13,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlsaadConnection")));
+//repo scoped
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+
+//services scoped
+builder.Services.AddScoped<IAuthenticationService,AuthenticationService>();
+builder.Services.AddScoped<ITokenService, JwtTokenService>();
 
 var app = builder.Build();
 
@@ -20,6 +31,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 app.Run();
