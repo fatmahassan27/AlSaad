@@ -9,7 +9,7 @@ namespace AlSaad.Application.Interfaces.IServices
 {
     public interface ITokenService
     {
-        string GenerateToken(User user);
+        string GenerateToken(ApplicationUser user);
 
     }
 

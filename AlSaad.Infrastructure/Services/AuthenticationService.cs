@@ -1,7 +1,7 @@
 ﻿using AlSaad.Application.DTOs;
-using AlSaad.Application.Interfaces.IRepositories;
 using AlSaad.Application.Interfaces.IServices;
 using AlSaad.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,22 +12,21 @@ namespace AlSaad.Infrastructure.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        
-        private readonly IUserRepository _userRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ITokenService _tokenService;
-        private const int RefreshTokenValidDays = 30;
-        private const int AccessTokenValidMinutes = 60;
-
-        public AuthenticationService(IUserRepository userRepository, ITokenService tokenService)
+      
+        public AuthenticationService(ITokenService tokenService, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
-            _userRepository = userRepository;
             _tokenService = tokenService;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public  async Task<AuthenticationResponseDTO> Register(RegisterDTO request)
         {
-            var existing = await _userRepository.GetByEmailAsync(request.Email);
-            if (existing != null)
+            var existingUser = await _userManager.FindByEmailAsync(request.Email);
+            if (existingUser != null)
             {
                 return new AuthenticationResponseDTO
                 {
@@ -35,16 +34,29 @@ namespace AlSaad.Infrastructure.Services
                     Message = "Unable to register with this email address."
                 };
             }
-            var user = new User { };
-            //{
-            //    Email = request.Email.Trim().ToLowerInvariant(),
-            //    FullName = request.FullName,
-            //    CreatedDate = DateTime.Now,
-            //    Password = request.Password,
-            //    Role = "Customer",
-            //};
 
-            await _userRepository.AddAsync(user);
+            if (!await _roleManager.RoleExistsAsync("Admin"))
+                return new AuthenticationResponseDTO
+                {
+                    Success = false,
+                    Message = "Unable to register with this Role."
+                };
+
+            var user = new ApplicationUser 
+            {
+                UserName = request.UserName,
+                Email = request.Email,
+                Password = request.Password,
+            };
+
+            var createResult = await _userManager.CreateAsync(user, request.Password);
+            if (!createResult.Succeeded)
+                return new AuthenticationResponseDTO
+                {
+                    Success = false,
+                    Message = "Unable to register with user"
+                };
+            await _userManager.AddToRoleAsync(user, "Admin");
 
             var token = _tokenService.GenerateToken(user);
 
@@ -59,17 +71,26 @@ namespace AlSaad.Infrastructure.Services
 
         public async Task<AuthenticationResponseDTO> Login(LoginDTO request)
         {
-            var user = await _userRepository.GetByEmailAsync(request.Email);
-            if (user == null || user.Password != request.Password)
+            var user = await _userManager.FindByEmailAsync(request.Email);
+
+            if (user == null)
             {
                 return new AuthenticationResponseDTO
                 {
                     Success = false,
-                    Message = "Invalid email or password."
+                    Message = "Invalid User."
                 };
             }
+            var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
+            if (!isPasswordValid)
+                return new AuthenticationResponseDTO
+                {
+                    Success = false,
+                    Message = "Invalid password."
+                };
+            var roles = await _userManager.GetRolesAsync(user);
+            var roleName = roles.FirstOrDefault() ?? "Admin";
 
-          
             var token = _tokenService.GenerateToken(user);
             return new AuthenticationResponseDTO
             {

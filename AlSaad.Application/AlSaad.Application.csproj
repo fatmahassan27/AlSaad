@@ -10,4 +10,8 @@
     <ProjectReference Include="..\AlSaad.Domain\AlSaad.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\IRepositories\" />
+  </ItemGroup>
+
 </Project>

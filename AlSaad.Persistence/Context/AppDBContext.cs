@@ -1,4 +1,5 @@
 ﻿using AlSaad.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,23 @@ using System.Threading.Tasks;
 
 namespace AlSaad.Persistence.Context
 {
-    public class AppDBContext :DbContext
+    public class AppDBContext :IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         public AppDBContext(DbContextOptions<AppDBContext> options) :base(options)
         {
 
         }
-         public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ApplicationUser>(entity =>
+            {
+                entity.Property(u => u.UserName).HasMaxLength(50).IsRequired();
+            });
+
+            modelBuilder.Entity<ApplicationRole>(entity =>
+            {
+                entity.Property(r => r.Description).HasMaxLength(100);
+            });
         }
     }
 }
