@@ -10,9 +10,8 @@ namespace AlSaad.Domain.Entities
 {
     public class ApplicationUser : IdentityUser<Guid>
     {
-        public string UserName { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public bool IsActive { get; set; } = true;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public string FullName { get; set; }    
+        public string CustomPassword { get; set; }
+
     }
 }

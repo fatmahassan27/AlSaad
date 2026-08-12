@@ -1,8 +1,9 @@
-using AlSaad.Application.Interfaces.IRepositories;
+using AlSaad.Application.Common.Configuration;
 using AlSaad.Application.Interfaces.IServices;
+using AlSaad.Domain.Entities;
 using AlSaad.Infrastructure.Services;
 using AlSaad.Persistence.Context;
-using AlSaad.Persistence.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,11 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlsaadConnection")));
+builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlSaadConnection")));
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 //repo scoped
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 //builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
 //services scoped
 builder.Services.AddScoped<IAuthenticationService,AuthenticationService>();
 builder.Services.AddScoped<ITokenService, JwtTokenService>();

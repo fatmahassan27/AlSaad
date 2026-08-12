@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AlSaad.Infrastructure.Services
 {
@@ -34,29 +35,59 @@ namespace AlSaad.Infrastructure.Services
                     Message = "Unable to register with this email address."
                 };
             }
-
-            if (!await _roleManager.RoleExistsAsync("Admin"))
+            var existingUserName = await _userManager.FindByNameAsync(request.UserName);
+            if (existingUserName != null)
+            {
+                return new AuthenticationResponseDTO
+                {
+                    Success = false,
+                    Message = "User Name is already exist"
+                };
+            }
+            if (!await _roleManager.RoleExistsAsync("User"))
                 return new AuthenticationResponseDTO
                 {
                     Success = false,
                     Message = "Unable to register with this Role."
                 };
 
-            var user = new ApplicationUser 
+            var user = new ApplicationUser
             {
+                FullName = request.FullName,
                 UserName = request.UserName,
                 Email = request.Email,
-                Password = request.Password,
+                CustomPassword = request.Password,
+                PhoneNumber = request.PhoneNumber,
             };
 
             var createResult = await _userManager.CreateAsync(user, request.Password);
+            
             if (!createResult.Succeeded)
+            {
+                var errors = string.Join(" | ",createResult.Errors.Select(e => e.Description));
                 return new AuthenticationResponseDTO
                 {
                     Success = false,
-                    Message = "Unable to register with user"
+                    Message = errors
                 };
-            await _userManager.AddToRoleAsync(user, "Admin");
+            }
+    
+
+         
+            //return new AuthenticationResponseDTO
+            //{
+            //    Success = false,
+            //    Message = "Unable to register with user"
+            //};
+            var roleResult = await _userManager.AddToRoleAsync(user, "User");
+            if (!roleResult.Succeeded)
+            {
+                return new AuthenticationResponseDTO
+                {
+                    Success = false,
+                    Message = string.Join(", ", roleResult.Errors.Select(e => e.Description))
+                };
+            }
 
             var token = _tokenService.GenerateToken(user);
 
@@ -71,7 +102,7 @@ namespace AlSaad.Infrastructure.Services
 
         public async Task<AuthenticationResponseDTO> Login(LoginDTO request)
         {
-            var user = await _userManager.FindByEmailAsync(request.Email);
+            var user = await _userManager.FindByNameAsync(request.UserName);
 
             if (user == null)
             {
@@ -89,7 +120,7 @@ namespace AlSaad.Infrastructure.Services
                     Message = "Invalid password."
                 };
             var roles = await _userManager.GetRolesAsync(user);
-            var roleName = roles.FirstOrDefault() ?? "Admin";
+            var roleName = roles.FirstOrDefault() ?? "User";
 
             var token = _tokenService.GenerateToken(user);
             return new AuthenticationResponseDTO

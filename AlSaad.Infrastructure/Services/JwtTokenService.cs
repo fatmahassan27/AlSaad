@@ -23,15 +23,12 @@ namespace AlSaad.Infrastructure.Services
         }
         public string GenerateToken(ApplicationUser user)
         {
-            if (string.IsNullOrWhiteSpace(_settings.Value.Key))
-                throw new InvalidOperationException("JWT signing key is not configured.");
-
+            
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                //new Claim(ClaimTypes.Role, user.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Value.Key));

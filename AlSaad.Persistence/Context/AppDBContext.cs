@@ -15,17 +15,11 @@ namespace AlSaad.Persistence.Context
         {
 
         }
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ApplicationUser>(entity =>
-            {
-                entity.Property(u => u.UserName).HasMaxLength(50).IsRequired();
-            });
+            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApplicationRole>(entity =>
-            {
-                entity.Property(r => r.Description).HasMaxLength(100);
-            });
         }
     }
 }
