@@ -102,7 +102,7 @@ namespace AlSaad.Infrastructure.Services
 
         public async Task<AuthenticationResponseDTO> Login(LoginDTO request)
         {
-            var user = await _userManager.FindByNameAsync(request.UserName);
+            var user = await _userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
             {
