@@ -1,1 +1,244 @@
-<p>registeration works!</p>
+<div class="auth-screen">
+
+  <!-- Branding Panel -->
+  <aside class="brand-panel">
+    <div class="brand-content">
+
+      <div class="logo">AlSaad</div>
+
+      <h2>Create your account.</h2>
+
+      <p>
+        Join AlSaad and start discovering the car
+        that's right for you.
+      </p>
+
+      <div class="brand-decoration">
+        <div class="road"></div>
+        <div class="road-line"></div>
+      </div>
+
+    </div>
+  </aside>
+
+
+  <!-- Register Panel -->
+  <main class="form-panel">
+
+    <div class="form-wrapper">
+
+      <!-- Mobile Logo -->
+      <div class="mobile-logo">AlSaad</div>
+
+      <form
+        class="auth-card"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+      >
+
+        <!-- Header -->
+        <div class="auth-header">
+          <h1>Create an account</h1>
+
+          <p>
+            Fill in your details to create your account.
+          </p>
+        </div>
+
+
+        <!-- Error -->
+        <div
+          class="alert alert-error"
+          *ngIf="errorMessage()"
+          role="alert"
+        >
+          {{ errorMessage() }}
+        </div>
+
+
+        <!-- Success -->
+        <div
+          class="alert alert-success"
+          *ngIf="successMessage()"
+          role="alert"
+        >
+          {{ successMessage() }}
+        </div>
+
+
+        <!-- Full Name -->
+        <div class="field">
+
+          <label for="fullName">
+            Full Name
+          </label>
+
+          <input
+            id="fullName"
+            type="text"
+            formControlName="fullName"
+            placeholder="Enter your full name"
+            autocomplete="name"
+          />
+
+          <span
+            class="field-error"
+            *ngIf="
+              form.controls.fullName.invalid &&
+              form.controls.fullName.touched
+            "
+          >
+            Full name is required.
+          </span>
+
+        </div>
+
+
+        <!-- Username -->
+        <div class="field">
+
+          <label for="userName">
+            Username
+          </label>
+
+          <input
+            id="userName"
+            type="text"
+            formControlName="UserName"
+            placeholder="Enter your username"
+            autocomplete="username"
+          />
+
+          <span
+            class="field-error"
+            *ngIf="
+              form.controls.UserName.invalid &&
+              form.controls.UserName.touched
+            "
+          >
+            Username is required.
+          </span>
+
+        </div>
+
+
+        <!-- Email -->
+        <div class="field">
+
+          <label for="email">
+            Email address
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+
+          <span
+            class="field-error"
+            *ngIf="
+              form.controls.email.invalid &&
+              form.controls.email.touched
+            "
+          >
+            Please enter a valid email address.
+          </span>
+
+        </div>
+
+
+        <!-- Password -->
+        <div class="field">
+
+          <label for="password">
+            Password
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            autocomplete="new-password"
+          />
+
+          <span
+            class="field-error"
+            *ngIf="
+              form.controls.password.invalid &&
+              form.controls.password.touched
+            "
+          >
+            Password must be at least 6 characters.
+          </span>
+
+        </div>
+
+
+        <!-- Phone -->
+        <div class="field">
+
+          <label for="phoneNumber">
+            Phone Number
+          </label>
+
+          <input
+            id="phoneNumber"
+            type="tel"
+            formControlName="phoneNumber"
+            placeholder="Enter your phone number"
+            autocomplete="tel"
+          />
+
+          <span
+            class="field-error"
+            *ngIf="
+              form.controls.phoneNumber.invalid &&
+              form.controls.phoneNumber.touched
+            "
+          >
+            Phone number is required.
+          </span>
+
+        </div>
+
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="isSubmitting()"
+        >
+
+          <span *ngIf="!isSubmitting()">
+            Create account
+          </span>
+
+          <span *ngIf="isSubmitting()">
+            Creating account...
+          </span>
+
+        </button>
+
+
+        <!-- Login -->
+        <p class="auth-footer">
+
+          Already have an account?
+
+          <a routerLink="/login">
+           Log in
+          </a>
+
+        </p>
+
+      </form>
+
+    </div>
+
+  </main>
+
+</div>

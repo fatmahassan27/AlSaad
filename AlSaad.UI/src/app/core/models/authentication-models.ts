@@ -20,10 +20,8 @@ export interface AuthUser {
 }
 
 export interface AuthResponse {
-  accessToken: string;
-  user: AuthUser;
-  Success : boolean;
-  Message: string;
-  token:string;
-  ExpiresDate:Date;
+    success: boolean;
+    message: string;
+    token: string;
+    expiresDate: Date | null;
 }

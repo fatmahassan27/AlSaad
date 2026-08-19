@@ -1,0 +1,116 @@
+<div class="auth-screen">
+  <!-- Branding Panel -->
+  <aside class="brand-panel">
+    <div class="brand-content">
+      <div class="logo">AlSaad</div>
+
+      <h2>Find your next car.</h2>
+
+      <p>
+        A trusted marketplace to discover, compare,
+        and find the car that's right for you.
+      </p>
+
+      <div class="brand-decoration">
+        <div class="road"></div>
+        <div class="road-line"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Login Panel -->
+  <main class="form-panel">
+    <div class="form-wrapper">
+
+      <div class="mobile-logo">AlSaad</div>
+
+      <form
+        class="auth-card"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="auth-header">
+          <h1>Welcome back</h1>
+          <p>Sign in to continue to your account.</p>
+        </div>
+
+        <!-- Error -->
+        <div
+          class="alert"
+          *ngIf="errorMessage()"
+          role="alert"
+        >
+          {{ errorMessage() }}
+        </div>
+
+        <!-- Email -->
+        <div class="field">
+          <label for="email">Email address</label>
+
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+
+          <span
+            class="field-error"
+            *ngIf="
+              form.controls.email.invalid &&
+              form.controls.email.touched
+            "
+          >
+            Please enter a valid email address.
+          </span>
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+          <div class="field-label-row">
+            <label for="password">Password</label>
+
+            <a href="#" class="forgot-link">
+              Forgot password?
+            </a>
+          </div>
+
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+
+          <span
+            class="field-error"
+            *ngIf="
+              form.controls.password.invalid &&
+              form.controls.password.touched
+            "
+          >
+            Password must be at least 6 characters.
+          </span>
+        </div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="isSubmitting()"
+        >
+          <span *ngIf="!isSubmitting()">Log In</span>
+        </button>
+
+        <!-- Register -->
+        <p class="auth-footer">
+          Don't have an account?
+          <a routerLink="/register">Create an account</a>
+        </p>
+      </form>
+
+    </div>
+  </main>
+</div>

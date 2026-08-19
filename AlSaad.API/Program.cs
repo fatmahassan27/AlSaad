@@ -15,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlSaadConnection")));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+builder.Services.AddCors(options =>options.AddPolicy("AllowAngular", policy =>policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod()));
 //repo scoped
 //builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
@@ -32,7 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowAngular");
 app.UseAuthentication();
 app.UseAuthorization();
 
