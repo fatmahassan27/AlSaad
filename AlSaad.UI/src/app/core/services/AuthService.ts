@@ -17,7 +17,6 @@ export class AuthService {
   private isBrowser = isPlatformBrowser(this.platformId);
 
   private readonly currentUserSignal = signal<AuthUser | null>(this.readUserFromStorage());
-
   readonly currentUser = computed(() => this.currentUserSignal());
   readonly isLoggedIn = computed(() => this.currentUserSignal() !== null);
 
@@ -52,6 +51,10 @@ export class AuthService {
   private persistSession(res: AuthResponse): void {
     if (!this.isBrowser) return;
       localStorage.setItem(TOKEN_KEY, res.token);
+      localStorage.setItem(USER_KEY,JSON.stringify(res.user));
+
+      this.currentUserSignal.set(res.user);
+
   }
 
   private readUserFromStorage(): AuthUser | null {

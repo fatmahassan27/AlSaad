@@ -1,0 +1,111 @@
+.page-header {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+
+}
+.page-header h1 {
+  font-size: 22px;
+  text-align: center;
+  color: #1b2a4a;
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.balance-card {
+  background-color: #1b2a4a;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.balance-label {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.balance-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f4a300;
+}
+
+.section {
+  margin-bottom: 36px;
+  text-align: center;
+
+}
+
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1b2a4a;
+  margin-bottom: 16px;
+}
+
+.tabsle-wrapper {
+  overflow-x: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.data-table thead {
+  background-color: #1b2a4a;
+  color: #fff;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px 14px;
+  text-align: center;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background-color: #f7f8fa;
+}
+
+.summary-table .row-label {
+  text-align: start;
+  font-weight: 600;
+  color: #1b2a4a;
+  background-color: #f7f8fa;
+}
+
+.negative {
+  color: #e63946;
+  font-weight: 700;
+}
+
+.view-btn {
+  background-color: #f4a300;
+  color: #1b2a4a;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.view-btn:hover {
+  background-color: #dd9400;
+}

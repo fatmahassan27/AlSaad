@@ -1,0 +1,66 @@
+<section class="page-header">
+  <h1>حسابك</h1>
+  <div class="balance-card">
+    <span class="balance-label">رصيدك الحالي</span>
+    <span class="balance-value">{{ currentBalance | number }} جنيه</span>
+  </div>
+  
+</section>
+
+<section class="section">
+  <h2 class="section-title">ملخص معاملاتك على مدار آخر 6 أشهر</h2>
+
+  <div class="table-wrapper">
+    <table class="data-table summary-table">
+      <thead>
+        <tr>
+          <th>الشهر</th>
+          <th *ngFor="let m of monthlySummary">{{ m.month }} ({{ m.year }})</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">صافي مشترياتك</td>
+          <td *ngFor="let m of monthlySummary">{{ m.netPurchases | number }}</td>
+        </tr>
+        <tr>
+          <td class="row-label">صافي مدفوعاتك</td>
+          <td *ngFor="let m of monthlySummary">{{ m.netPayments | number }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">تفاصيل الحركة</h2>
+
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>تاريخ العملية</th>
+          <th>العملية</th>
+          <th>قيمة العملية</th>
+          <th>الرصيد قبل العملية</th>
+          <th>الرصيد بعد العملية</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of transactions">
+          <td>{{ t.date }}</td>
+          <td>{{ t.operationType }}</td>
+          <td>{{ t.operationValue | number }} جنيه</td>
+          <td [class.negative]="t.balanceBefore < 0">{{ t.balanceBefore | number }}</td>
+          <td [class.negative]="t.balanceAfter < 0">{{ t.balanceAfter | number }}</td>
+          <td>
+            <button type="button" class="view-btn" (click)="viewStatement(t)">
+              عرض كشف الحساب
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

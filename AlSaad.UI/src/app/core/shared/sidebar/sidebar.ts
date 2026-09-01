@@ -44,13 +44,7 @@ export class Sidebar {
 
     {
       label: 'حسابك',
-            path: "",
-
-      children: [
-        { label: 'بيانات الحساب', path: '/account/profile' },
-        { label: 'تعديل الحساب', path: '/account/edit' },
-        { label: 'تسجيل الخروج', path: '/logout' }
-      ]
+            path: '/account',
     },
 
     {
@@ -66,7 +60,7 @@ export class Sidebar {
 
     {
       label: 'سلة طلباتك',
-      path: '/cart'
+      path: '/carts'
     }
 
   ];

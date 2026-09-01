@@ -12,5 +12,7 @@ namespace AlSaad.Application.DTOs
         public string Message { get; set; } = string.Empty;
         public string Token { get; set; } = string.Empty;
         public DateTime? ExpiresDate { get; set; }
+        public UserDTO? User { get; set; }
+
     }
 }

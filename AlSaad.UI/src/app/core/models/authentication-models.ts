@@ -24,4 +24,6 @@ export interface AuthResponse {
     message: string;
     token: string;
     expiresDate: Date | null;
+    user: AuthUser;
+
 }

@@ -7,6 +7,8 @@ import { Maker } from '../app/core/cars/maker/maker';
 import { Models } from '../app/core/cars/models/models';
 import { Cart } from '../app/core/features/cart/cart';
 import { Part } from './core/cars/part/part';
+import { Account } from './core/features/account/account';
+
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: Registeration },
@@ -20,6 +22,7 @@ export const routes: Routes = [
       { path: 'models', component: Models },
       { path: 'carts', component: Cart },
       { path: 'parts', component: Part },
+      { path: 'account', component: Account }
     ]
   }
 ];

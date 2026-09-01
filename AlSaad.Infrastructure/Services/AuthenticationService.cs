@@ -123,12 +123,21 @@ namespace AlSaad.Infrastructure.Services
             var roleName = roles.FirstOrDefault() ?? "User";
 
             var token = _tokenService.GenerateToken(user);
-            return new AuthenticationResponseDTO
-            {
-                Success = true,
-                Message = "Login successful.",
-                Token = token,
-            };
+             var response = new AuthenticationResponseDTO
+             {
+                 Success = true,
+                 Message = "Login successful.",
+                 Token = token,
+                 User = new UserDTO
+                 {
+                     UserName = user.UserName ?? "",
+                     FullName = user.FullName ?? "",
+                     Email = user.Email ?? "",
+                     Role = roleName
+                 }
+             };
+
+            return response;
         }
     }
 }
