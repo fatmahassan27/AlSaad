@@ -1,0 +1,98 @@
+<section class="page-header">
+  <h1>سلة طلباتك</h1>
+</section>
+
+<div class="table-wrapper" *ngIf="items.length > 0">
+
+  <table class="data-table">
+
+    <thead>
+      <tr>
+        <th>اسم الصنف</th>
+        <th>الموديل</th>
+        <th>الماركة</th>
+        <th>بلد المنشأ</th>
+        <th>ملاحظات</th>
+        <th>السعر</th>
+        <th>الكمية</th>
+        <th>إجمالي السعر</th>
+        <th>الكود</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let item of items">
+
+        <td>{{ item.name }}</td>
+
+        <td>{{ item.model }}</td>
+
+        <td>{{ item.brand }}</td>
+
+        <td>{{ item.origin }}</td>
+
+        <td>{{ item.notes }}</td>
+
+        <td>
+          {{ item.price | number }} جنيه
+        </td>
+
+        <td>
+          {{ item.qty }}
+        </td>
+
+        <td>
+          {{ item.price * item.qty | number }} جنيه
+        </td>
+
+        <td>
+          {{ item.code }}
+        </td>
+
+        <td>
+          <button
+            type="button"
+            class="remove-btn"
+            (click)="remove(item.code)"
+          >
+            مسح
+          </button>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+<div
+  class="empty-cart"
+  *ngIf="items.length === 0"
+>
+  <p>السلة فاضية دلوقتي.</p>
+
+  <a
+    routerLink="/makers"
+    class="cta-btn"
+  >
+    تصفح قطع الغيار
+  </a>
+</div>
+
+<div
+  class="cart-summary"
+  *ngIf="items.length > 0"
+>
+  <span>
+    عدد الأصناف: {{ items.length }}
+  </span>
+
+  <span>
+    مجموع سعر الطلبات:
+    {{ totalPrice | number }} جنيه
+  </span>
+</div>

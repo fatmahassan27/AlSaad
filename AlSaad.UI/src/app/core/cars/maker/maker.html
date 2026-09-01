@@ -1,0 +1,50 @@
+<section class="page-header">
+  <div class="page-header-content">
+    <span class="page-label">اختار عربيتك</span>
+
+    <h1>جميع أنواع السيارات</h1>
+
+    <p>
+      اختار ماركة عربيتك عشان نعرضلك الموديلات المتاحة
+    </p>
+  </div>
+</section>
+
+
+<section class="makers-section">
+
+  <div class="makers-grid">
+
+    <button
+      type="button"
+      *ngFor="let maker of makers"
+      class="maker-card"
+      [ngClass]="maker.colorClass"
+      (click)="goToModels(maker)"
+    >
+
+      <div class="maker-icon">
+        🚗
+      </div>
+
+      <div class="maker-info">
+
+        <span class="maker-name-ar">
+          {{ maker.englishName }}
+        </span>
+
+        <span class="maker-name-en">
+          {{ maker.name }}
+        </span>
+
+      </div>
+
+      <span class="maker-arrow">
+        ←
+      </span>
+
+    </button>
+
+  </div>
+
+</section>

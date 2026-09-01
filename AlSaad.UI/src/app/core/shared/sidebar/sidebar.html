@@ -1,0 +1,48 @@
+<nav class="top-menu">
+
+  <ul class="menu">
+
+    <li
+      *ngFor="let category of categories"
+      class="menu-item"
+    >
+
+      <a
+        *ngIf="category.path"
+        [routerLink]="category.path"
+        class="menu-link"
+      >
+        {{ category.label }}
+
+        <span *ngIf="category.children">
+          ▾
+        </span>
+      </a>
+
+      <span
+        *ngIf="!category.path"
+        class="menu-link"
+      >
+        {{ category.label }}
+
+        <span *ngIf="category.children">
+          ▾
+        </span>
+      </span>
+
+      <ul
+        *ngIf="category.children"
+        class="submenu"
+      >
+        <li *ngFor="let child of category.children">
+          <a [routerLink]="child.path">
+            {{ child.label }}
+          </a>
+        </li>
+      </ul>
+
+    </li>
+
+  </ul>
+
+</nav>

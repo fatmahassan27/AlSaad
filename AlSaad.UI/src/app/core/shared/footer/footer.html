@@ -1,0 +1,38 @@
+<footer class="app-footer">
+  <div class="footer-content">
+    <div class="footer-col about">
+      <div class="footer-logo">
+        <!-- <mat-icon>directions_car</mat-icon> -->
+        <span>قطع غيار السيارات</span>
+      </div>
+      <p>
+        موقعك الموثوق لشراء قطع غيار السيارات الأصلية والبديلة بأفضل الأسعار
+        وتوصيل لكل المحافظات.
+      </p>
+    </div>
+
+    <div class="footer-col links">
+      <h4>روابط سريعة</h4>
+      <ul>
+        <li *ngFor="let link of quickLinks">
+          <a [routerLink]="link.path">{{ link.label }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-col contact">
+      <h4>تواصل معنا</h4>
+      <!-- <p><mat-icon inline="true">call</mat-icon> 19XXX</p> -->
+      <!-- <p><mat-icon inline="true">email</mat-icon> support&#64;example.com</p> -->
+      <div class="social-icons">
+        <!-- <a href="#" aria-label="فيسبوك"><mat-icon>facebook</mat-icon></a>
+        <a href="#" aria-label="واتساب"><mat-icon>chat</mat-icon></a>
+        <a href="#" aria-label="انستجرام"><mat-icon>camera_alt</mat-icon></a> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; {{ currentYear }} قطع غيار السيارات - جميع الحقوق محفوظة</span>
+  </div>
+</footer>

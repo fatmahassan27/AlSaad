@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.top-sidebar {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 900;
+}
+
+.content-area {
+  display: block;
+  width: 100%;
+}
+
+.page-content {
+  display: block;
+  width: 100%;
+  min-height: calc(100vh - 124px);
+}

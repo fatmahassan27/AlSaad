@@ -1,0 +1,30 @@
+<section class="page-header">
+  <button type="button" class="back-btn" (click)="goBackToMakers()">
+    ← رجوع للماركات
+  </button>
+  <h1>جميع الموديلات{{ makerName ? ' - ' + makerName : '' }}</h1>
+  <p>اختار موديل عربيتك عشان نوريك قطع الغيار المتاحة</p>
+</section>
+
+<div class="models-grid" *ngIf="filteredModels.length > 0">
+  <button
+    type="button"
+    *ngFor="let model of filteredModels"
+    class="model-card"
+    (click)="goToParts(model)">
+    <div class="model-image">
+      <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.3">
+        <path d="M3 12l1.5-5A2 2 0 0 1 6.4 5.5h11.2a2 2 0 0 1 1.9 1.5L21 12"></path>
+        <rect x="1.5" y="12" width="21" height="6.5" rx="1.8"></rect>
+        <circle cx="6.5" cy="19" r="1.7"></circle>
+        <circle cx="17.5" cy="19" r="1.7"></circle>
+      </svg>
+    </div>
+    <span class="model-name">{{ model.name }}</span>
+    <span class="model-years">{{ model.yearsRange }}</span>
+  </button>
+</div>
+
+<div class="empty-state" *ngIf="filteredModels.length === 0">
+  <p>مفيش موديلات متاحة للماركة دي دلوقتي.</p>
+</div>
