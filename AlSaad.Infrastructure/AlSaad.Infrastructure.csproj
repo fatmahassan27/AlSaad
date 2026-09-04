@@ -19,4 +19,8 @@
     <ProjectReference Include="..\AlSaad.Domain\AlSaad.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ExternalServices\" />
+  </ItemGroup>
+
 </Project>

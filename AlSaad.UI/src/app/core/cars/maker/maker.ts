@@ -13,8 +13,6 @@ export class Maker {
    makers: Makers[] = [
     { id: 1, name: 'كيا', englishName: 'KIA', colorClass: 'brand-kia' },
     { id: 2, name: 'هيونداي', englishName: 'HYUNDAI', colorClass: 'brand-hyundai' },
-    { id: 3, name: 'شيفروليه - دايو', englishName: 'CHEVROLET / DAEWOO', colorClass: 'brand-chevrolet' },
-    { id: 4, name: 'سيان يونج', englishName: 'SSANGYONG', colorClass: 'brand-ssangyong' }
   ];
 
   constructor(private router: Router) {}
