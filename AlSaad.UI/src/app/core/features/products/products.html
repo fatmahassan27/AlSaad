@@ -1,0 +1,150 @@
+<section class="page-header">
+  <h1>المنتجات</h1>
+</section>
+
+<div class="table-wrapper" *ngIf="!isLoading && !errorMessage">
+
+  <table class="data-table">
+<thead>
+
+  <!-- Column Names -->
+  <tr>
+    <th>الكود</th>
+    <th>اسم المنتج</th>
+    <th>الماركة</th>
+    <th>الكاتيجوري</th>
+    <th>السعر</th>
+    <th>المخزون</th>
+    <th>الحالة</th>
+  </tr>
+
+  <!-- Search Row -->
+  <tr class="search-row">
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="codeSearch"
+        (input)="filterProducts()"
+        placeholder="بحث بالكود"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="nameSearch"
+        (input)="filterProducts()"
+        placeholder="بحث بالاسم"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="brandSearch"
+        (input)="filterProducts()"
+        placeholder="بحث بالماركة"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="categorySearch"
+        (input)="filterProducts()"
+        placeholder="بحث بالكاتيجوري"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="priceSearch"
+        (input)="filterProducts()"
+        placeholder="بحث بالسعر"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="stockSearch"
+        (input)="filterProducts()"
+        placeholder="بحث بالمخزون"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="statusSearch"
+        (input)="filterProducts()"
+        placeholder="نشط / موقوف"
+      />
+    </th>
+
+  </tr>
+
+</thead>
+
+<tbody>
+
+  <tr *ngFor="let product of filteredProducts">
+
+    <td>
+      {{ product.code || '-' }}
+    </td>
+
+    <td>
+      {{ product.name }}
+    </td>
+
+    <td>
+      {{ product.brand || '-' }}
+    </td>
+
+    <td>
+      {{ product.category || '-' }}
+    </td>
+
+    <td>
+      {{ product.price }} جنيه
+    </td>
+
+    <td>
+      {{ product.stockQuantity }}
+    </td>
+
+    <td>
+      <span
+        [class]="product.isActive
+          ? 'badge active'
+          : 'badge inactive'"
+      >
+        {{ product.isActive ? 'نشط' : 'موقوف' }}
+      </span>
+    </td>
+
+  </tr>
+
+  <tr *ngIf="filteredProducts.length === 0">
+
+    <td colspan="7" class="empty-row">
+      مفيش منتجات لعرضها
+    </td>
+
+  </tr>
+
+</tbody>
+  </table>
+
+</div>
+
+<div *ngIf="isLoading" class="status-message">
+  جاري التحميل...
+</div>
+
+<div *ngIf="errorMessage" class="status-message error">
+  {{ errorMessage }}
+</div>

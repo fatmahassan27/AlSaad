@@ -20,6 +20,13 @@ export class Part implements OnInit{
   modelId = 0;
   modelName = '';
   searchTerm = '';
+  //searched items 
+  codeSearch = '';
+nameSearch = '';
+brandSearch = '';
+originSearch = '';
+notesSearch = '';
+priceSearch = '';
    allModels: ModelOption[] = [
     { id: 101, makerId: 1, name: 'سيراتو', yearsRange: '2014-2018' },
     { id: 102, makerId: 1, name: 'سبورتاج', yearsRange: '2016-2021' },
@@ -74,14 +81,58 @@ export class Part implements OnInit{
     this.allParts.forEach(p => (this.quantities[p.code] = 1));
   }
 
-  get filteredParts(): Parts[] {
-    if (!this.searchTerm.trim()) return this.allParts;
-    const term = this.searchTerm.trim().toLowerCase();
-    return this.allParts.filter(
-      p => p.name.toLowerCase().includes(term) || p.code.toLowerCase().includes(term)
-    );
-  }
+  // get filteredParts(): Parts[] {
+  //   if (!this.searchTerm.trim()) return this.allParts;
+  //   const term = this.searchTerm.trim().toLowerCase();
+  //   return this.allParts.filter(
+  //     p => p.name.toLowerCase().includes(term) || p.code.toLowerCase().includes(term)
+  //   );
+  // }
+get filteredParts(): Parts[] {
 
+  const code = this.codeSearch.trim().toLowerCase();
+  const name = this.nameSearch.trim().toLowerCase();
+  const brand = this.brandSearch.trim().toLowerCase();
+  const origin = this.originSearch.trim().toLowerCase();
+  const notes = this.notesSearch.trim().toLowerCase();
+  const price = this.priceSearch.trim().toLowerCase();
+
+  return this.allParts.filter(part => {
+
+    const matchesCode =
+      !code ||
+      part.code.toLowerCase().includes(code);
+
+    const matchesName =
+      !name ||
+      part.name.toLowerCase().includes(name);
+
+    const matchesBrand =
+      !brand ||
+      part.brand.toLowerCase().includes(brand);
+
+    const matchesOrigin =
+      !origin ||
+      part.origin.toLowerCase().includes(origin);
+
+    const matchesNotes =
+      !notes ||
+      part.notes.toLowerCase().includes(notes);
+
+    const matchesPrice =
+      !price ||
+      part.price.toString().includes(price);
+
+    return (
+      matchesCode &&
+      matchesName &&
+      matchesBrand &&
+      matchesOrigin &&
+      matchesNotes &&
+      matchesPrice
+    );
+  });
+}
   getTotal(part: Parts): number {
     return part.price * (this.quantities[part.code] || 1);
   }
@@ -111,4 +162,13 @@ export class Part implements OnInit{
       queryParamsHandling: 'merge'
     });
   }
+
+  clearFilters(): void {
+  this.codeSearch = '';
+  this.nameSearch = '';
+  this.brandSearch = '';
+  this.originSearch = '';
+  this.notesSearch = '';
+  this.priceSearch = '';
+}
 }

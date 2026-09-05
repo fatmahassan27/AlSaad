@@ -1,0 +1,289 @@
+.page-header {
+margin-bottom: 1.5rem;
+padding: 1.5rem 1.75rem;
+background: linear-gradient(135deg, #ffffff, #f7f9fc);
+border: 1px solid #e8ebf0;
+border-radius: 14px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.page-header h1 {
+margin: 0;
+font-size: 1.7rem;
+font-weight: 700;
+color: #1f2937;
+}
+
+/* =========================
+Table Container
+========================= */
+
+.table-wrapper {
+width: 100%;
+overflow-x: auto;
+background: #ffffff;
+border: 1px solid #e6e9ee;
+border-radius: 14px;
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================
+Table
+========================= */
+
+.data-table {
+width: 100%;
+min-width: 900px;
+border-collapse: separate;
+border-spacing: 0;
+direction: rtl;
+}
+
+/* =========================
+Header
+========================= */
+
+.data-table thead tr:first-child th {
+background: #f5f7fa;
+color: #374151;
+font-size: 0.9rem;
+font-weight: 700;
+padding: 1rem;
+border-bottom: 1px solid #e1e5eb;
+white-space: nowrap;
+}
+
+.data-table thead tr:first-child th:first-child {
+border-top-right-radius: 14px;
+}
+
+.data-table thead tr:first-child th:last-child {
+border-top-left-radius: 14px;
+}
+
+/* =========================
+Search Row
+========================= */
+
+.data-table .search-row th {
+background: #ffffff;
+padding: 0.65rem 0.7rem;
+border-bottom: 2px solid #e5e7eb;
+}
+
+.search-row input {
+width: 100%;
+box-sizing: border-box;
+padding: 0.65rem 0.8rem;
+
+border: 1px solid #d9dee7;
+border-radius: 8px;
+
+background: #f9fafb;
+color: #1f2937;
+
+font-size: 0.85rem;
+font-family: inherit;
+
+outline: none;
+
+transition:
+border-color 0.2s ease,
+box-shadow 0.2s ease,
+background 0.2s ease;
+}
+
+.search-row input::placeholder {
+color: #9ca3af;
+}
+
+.search-row input:hover {
+background: #ffffff;
+border-color: #c5cad3;
+}
+
+.search-row input:focus {
+background: #ffffff;
+border-color: #6b7280;
+box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1);
+}
+
+/* =========================
+Table Body
+========================= */
+
+.data-table tbody td {
+padding: 1rem;
+color: #374151;
+font-size: 0.9rem;
+border-bottom: 1px solid #edf0f3;
+background: #ffffff;
+white-space: nowrap;
+}
+
+.data-table tbody tr {
+transition: background 0.2s ease;
+}
+
+.data-table tbody tr:hover td {
+background: #f8fafc;
+}
+
+.data-table tbody tr:last-child td {
+border-bottom: none;
+}
+
+/* =========================
+Product Name
+========================= */
+
+.data-table tbody td:nth-child(2) {
+font-weight: 600;
+color: #111827;
+}
+
+/* =========================
+Code
+========================= */
+
+.data-table tbody td:first-child {
+font-family: monospace;
+font-weight: 600;
+color: #4b5563;
+}
+
+/* =========================
+Price
+========================= */
+
+.data-table tbody td:nth-child(5) {
+font-weight: 700;
+color: #111827;
+}
+
+/* =========================
+Stock
+========================= */
+
+.data-table tbody td:nth-child(6) {
+font-weight: 600;
+}
+
+/* =========================
+Status Badge
+========================= */
+
+.badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+min-width: 65px;
+
+padding: 0.35rem 0.7rem;
+
+border-radius: 999px;
+
+font-size: 0.78rem;
+font-weight: 700;
+
+border: 1px solid transparent;
+}
+
+.badge.active {
+background: #ecfdf3;
+color: #15803d;
+border-color: #bbf7d0;
+}
+
+.badge.inactive {
+background: #fef2f2;
+color: #dc2626;
+border-color: #fecaca;
+}
+
+/* =========================
+Loading / Error
+========================= */
+
+.status-message {
+margin-top: 1rem;
+padding: 1.25rem;
+
+background: #ffffff;
+border: 1px solid #e6e9ee;
+border-radius: 12px;
+
+text-align: center;
+color: #6b7280;
+
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.status-message.error {
+color: #dc2626;
+background: #fffafa;
+border-color: #fecaca;
+}
+
+/* =========================
+Empty State
+========================= */
+
+.empty-row {
+text-align: center !important;
+color: #9ca3af !important;
+padding: 3rem !important;
+font-size: 0.95rem !important;
+}
+
+/* =========================
+Scrollbar
+========================= */
+
+.table-wrapper::-webkit-scrollbar {
+height: 7px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+background: #f1f3f5;
+border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+background: #c9ced6;
+border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+background: #aeb4bd;
+}
+
+/* =========================
+Responsive
+========================= */
+
+@media (max-width: 768px) {
+
+.page-header {
+padding: 1.1rem 1.25rem;
+}
+
+.page-header h1 {
+font-size: 1.4rem;
+}
+
+.table-wrapper {
+border-radius: 10px;
+}
+
+.data-table thead tr:first-child th,
+.data-table tbody td {
+padding: 0.75rem;
+}
+
+.search-row input {
+padding: 0.55rem 0.65rem;
+font-size: 0.8rem;
+}
+}

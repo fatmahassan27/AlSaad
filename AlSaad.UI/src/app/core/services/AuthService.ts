@@ -43,10 +43,15 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  getToken(): string | null {
-    if (!this.isBrowser) return null;
-    return localStorage.getItem(TOKEN_KEY);
+getToken(): string | null {
+  if (!this.isBrowser) return null;
+  const token = localStorage.getItem(TOKEN_KEY);
+  console.log('TOKEN FROM STORAGE:', token);
+  if (!token || token === 'undefined' || token === 'null') {
+    return null;
   }
+  return token;
+}
 
   private persistSession(res: AuthResponse): void {
     if (!this.isBrowser) return;

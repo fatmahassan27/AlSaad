@@ -1,60 +1,189 @@
 <section class="page-header">
-  <a [routerLink]="['/models']" [queryParams]="{ makerId, makerName }" class="back-btn">
+  <a
+    [routerLink]="['/models']"
+    [queryParams]="{ makerId, makerName }"
+    class="back-btn"
+  >
     ← رجوع للموديلات
   </a>
+
   <h1>قطع غيار {{ modelName }}</h1>
 </section>
 
 <div class="toolbar">
+
   <div class="quick-switch">
     <label>انتقال مباشر لموديل تاني:</label>
-    <select [(ngModel)]="modelId" (change)="onModelSwitch()">
-      <option *ngFor="let m of modelsForMaker" [value]="m.id">{{ m.name }} {{ m.yearsRange }}</option>
-    </select>
+
+<select
+  [(ngModel)]="modelId"
+  (change)="onModelSwitch()"
+>
+  <option
+    *ngFor="let m of modelsForMaker"
+    [value]="m.id"
+  >
+    {{ m.name }} {{ m.yearsRange }}
+  </option>
+</select>
   </div>
 
-  <input
-    type="text"
-    class="search-input"
-    [(ngModel)]="searchTerm"
-    placeholder="ابحث بالكود أو اسم الصنف" />
+<a
+routerLink="/cart"
+class="cart-link-btn"
 
-  <a routerLink="/cart" class="cart-link-btn">سلة طلباتك ({{ cart.totalCount }})</a>
+>
+
+سلة طلباتك ({{ cart.totalCount }})
+
+  </a>
+
 </div>
 
 <div class="table-wrapper">
+
   <table class="data-table">
-    <thead>
-      <tr>
-        <th>الكود</th>
-        <th>اسم الصنف</th>
-        <th>الماركة</th>
-        <th>بلد المنشأ</th>
-        <th>ملاحظات</th>
-        <th>السعر</th>
-        <th>الكمية</th>
-        <th>إجمالي السعر</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let part of filteredParts">
-        <td>{{ part.code }}</td>
-        <td>{{ part.name }}</td>
-        <td>{{ part.brand }}</td>
-        <td>{{ part.origin }}</td>
-        <td>{{ part.notes }}</td>
-        <td>{{ part.price }} جنيه</td>
-        <td>
-          <input type="number" min="1" class="qty-input" [(ngModel)]="quantities[part.code]" />
-        </td>
-        <td>{{ getTotal(part) }} جنيه</td>
-        <td>
-          <button type="button" class="add-cart-btn" (click)="addToCart(part)">أضف للسلة</button>
-        </td>
-      </tr>
-    </tbody>
+
+<thead>
+
+  <!-- أسماء الأعمدة -->
+  <tr>
+    <th>الكود</th>
+    <th>اسم الصنف</th>
+    <th>الماركة</th>
+    <th>بلد المنشأ</th>
+    <th>ملاحظات</th>
+    <th>السعر</th>
+    <th>الكمية</th>
+    <th>إجمالي السعر</th>
+    <th></th>
+  </tr>
+
+  <!-- Search لكل Column -->
+  <tr class="search-row">
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="codeSearch"
+        placeholder="بحث بالكود"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="nameSearch"
+        placeholder="بحث بالاسم"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="brandSearch"
+        placeholder="بحث بالماركة"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="originSearch"
+        placeholder="بحث بالمنشأ"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="notesSearch"
+        placeholder="بحث بالملاحظات"
+      />
+    </th>
+
+    <th>
+      <input
+        type="text"
+        [(ngModel)]="priceSearch"
+        placeholder="بحث بالسعر"
+      />
+    </th>
+
+    <!-- الكمية -->
+    <th></th>
+
+    <!-- إجمالي السعر -->
+    <th></th>
+
+    <!-- إضافة للسلة -->
+    <th></th>
+
+  </tr>
+
+</thead>
+
+<tbody>
+
+  <tr *ngFor="let part of filteredParts">
+
+    <td>
+      {{ part.code }}
+    </td>
+
+    <td>
+      {{ part.name }}
+    </td>
+
+    <td>
+      {{ part.brand }}
+    </td>
+
+    <td>
+      {{ part.origin }}
+    </td>
+
+    <td>
+      {{ part.notes }}
+    </td>
+
+    <td>
+      {{ part.price }} جنيه
+    </td>
+
+    <td>
+      <input
+        type="number"
+        min="1"
+        class="qty-input"
+        [(ngModel)]="quantities[part.code]"
+      />
+    </td>
+
+    <td>
+      {{ getTotal(part) }} جنيه
+    </td>
+
+    <td>
+      <button
+        type="button"
+        class="add-cart-btn"
+        (click)="addToCart(part)"
+      >
+        أضف للسلة
+      </button>
+    </td>
+
+  </tr>
+
+</tbody>
   </table>
 
-  <p class="empty-state" *ngIf="filteredParts.length === 0">مفيش نتائج مطابقة للبحث.</p>
+  <p
+    class="empty-state"
+    *ngIf="filteredParts.length === 0"
+  >
+    مفيش نتائج مطابقة للبحث.
+  </p>
+
 </div>

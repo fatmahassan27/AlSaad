@@ -8,6 +8,7 @@ import { Models } from '../app/core/cars/models/models';
 import { Cart } from '../app/core/features/cart/cart';
 import { Part } from './core/cars/part/part';
 import { Account } from './core/features/account/account';
+import { Products } from './core/features/products/products';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,7 +23,9 @@ export const routes: Routes = [
       { path: 'models', component: Models },
       { path: 'carts', component: Cart },
       { path: 'parts', component: Part },
-      { path: 'account', component: Account }
+      { path: 'account', component: Account },
+      { path: 'products', component: Products } 
+
     ]
   }
 ];

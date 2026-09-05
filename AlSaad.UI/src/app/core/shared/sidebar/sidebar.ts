@@ -57,7 +57,10 @@ export class Sidebar {
         { label: 'الطلبات الملغاة', path: '/orders/cancelled' }
       ]
     },
-
+  {
+    label: 'المنتجات',
+    path: '/products',
+  },
     {
       label: 'سلة طلباتك',
       path: '/carts'

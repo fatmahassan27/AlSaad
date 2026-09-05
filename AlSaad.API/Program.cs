@@ -1,10 +1,13 @@
 using AlSaad.Application.Common.Configuration;
 using AlSaad.Application.Interfaces.IServices;
 using AlSaad.Domain.Entities;
+using AlSaad.Infrastructure.ExternalServices.Daftra.DaftraServices;
+using AlSaad.Infrastructure.ExternalServices.Daftra.IDaftraInterfaces;
 using AlSaad.Infrastructure.Services;
 using AlSaad.Persistence.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +25,17 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFramew
 //services scoped
 builder.Services.AddScoped<IAuthenticationService,AuthenticationService>();
 builder.Services.AddScoped<ITokenService, JwtTokenService>();
+builder.Services.Configure<DaftraSettings>(builder.Configuration.GetSection("Daftra"));
 
+builder.Services.AddHttpClient<IDaftraApiClient, DaftraApiClient>((sp, client) =>
+{
+    var settings = sp.GetRequiredService<IOptions<DaftraSettings>>().Value;
+    client.BaseAddress = new Uri(settings.BaseUrl);
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+    client.DefaultRequestHeaders.Add("apikey", settings.ApiKey);
+});
+
+builder.Services.AddScoped<IProductCatalogService, ProductCatalogService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
