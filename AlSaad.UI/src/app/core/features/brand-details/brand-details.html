@@ -1,0 +1,8 @@
+<a routerLink="/inventory/brands" class="back-link">→ رجوع لكل الماركات</a>
+
+<div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+<div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
+
+<div *ngIf="brand && !isLoading" class="details-card">
+  <h1>{{ brand.name }}</h1>
+</div>

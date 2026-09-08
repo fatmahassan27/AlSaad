@@ -29,7 +29,8 @@ export class Sidebar {
     { label: 'تصنيفات المنتجات', path: '/inventory/categories' },
     { label: 'حركات المخزون', path: '/inventory/requisitions' },
     { label: 'المخازن', path: '/inventory/stores' } ,
-    { label: 'حركات المخزون التفصيلية', path: '/inventory/stock-transactions' }
+    { label: 'حركات المخزون التفصيلية', path: '/inventory/stock-transactions' },
+    { label: 'الماركات', path: '/inventory/brands' }
   ]
 },
     {

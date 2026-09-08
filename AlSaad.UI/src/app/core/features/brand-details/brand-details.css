@@ -1,0 +1,4 @@
+.back-link { display: inline-block; margin-bottom: 1.5rem; color: #2c5aa0; text-decoration: none; }
+.details-card { background: #fff; border-radius: 12px; padding: 1.5rem; }
+.status-message { padding: 1rem; text-align: center; color: #666; }
+.status-message.error { color: #c0392b; }

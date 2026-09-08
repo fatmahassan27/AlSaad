@@ -29,12 +29,15 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
 builder.Services.AddScoped<IRequisitionService, RequisitionService>();
 builder.Services.AddScoped<IStockTransactionService, StockTransactionService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IStoreService, StoreService>();
+///////////////////////////////////////////////
 builder.Services.AddDaftraHttpClient<IDaftraProductClient, DaftraProductApiClient>(); 
 builder.Services.AddDaftraHttpClient<IDaftraRequisitionClient, DaftraRequisitionClient>(); 
 builder.Services.AddDaftraHttpClient<IDaftraProductCategoryClient, DaftraProductCategoryClient>(); 
 builder.Services.AddDaftraHttpClient<IDaftraStoreClient,DaftraStoreClient>();
 builder.Services.AddDaftraHttpClient<IDaftraStockTransactionClient,DaftraStockTransactionClient>();
+builder.Services.AddDaftraHttpClient<IDaftraBrandClient,DaftraBrandClient>();
 
 var app = builder.Build();
 
