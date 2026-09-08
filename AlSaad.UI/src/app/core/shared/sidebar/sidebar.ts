@@ -27,7 +27,9 @@ export class Sidebar {
   children: [
     { label: 'المنتجات', path: '/inventory/products' },
     { label: 'تصنيفات المنتجات', path: '/inventory/categories' },
-    { label: 'حركات المخزون', path: '/inventory/requisitions' }
+    { label: 'حركات المخزون', path: '/inventory/requisitions' },
+    { label: 'المخازن', path: '/inventory/stores' } 
+
   ]
 },
     {

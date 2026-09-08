@@ -13,6 +13,8 @@ import { Requisitions } from './core/features/requisitions/requisitions';
 import { RequisitionDetails } from './core/features/requisition-details/requisition-details';
 import { ProductCategories } from './core/features/product-categories/product-categories';
 import { CategoryDetails } from './core/features/category-details/category-details';
+import { Store } from './core/features/store/store';
+import { StoreDetails } from './core/features/store-details/store-details';
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: Registeration },
@@ -36,6 +38,8 @@ export const routes: Routes = [
           { path: 'categories/:id', component: CategoryDetails },
           { path: 'requisitions', component: Requisitions },
           { path: 'requisitions/:id', component: RequisitionDetails },
+          { path: 'stores', component: Store },           
+          { path: 'stores/:id', component: StoreDetails }, 
         ]
       },
     ]
