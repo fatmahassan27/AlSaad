@@ -1,0 +1,19 @@
+<a routerLink="/inventory/stock-transactions" class="back-link">→ رجوع لكل الحركات</a>
+
+<div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+<div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
+
+<div *ngIf="transaction && !isLoading" class="details-card">
+  <h1>حركة رقم {{ transaction.id }}</h1>
+
+  <div class="info-grid">
+    <div><span class="label">التاريخ:</span> {{ transaction.receivedDate | date: 'yyyy-MM-dd' }}</div>
+    <div><span class="label">النوع:</span> {{ getTypeLabel(transaction.transactionType) }}</div>
+    <div><span class="label">المصدر:</span> {{ getSourceLabel(transaction.sourceType) }}</div>
+    <div><span class="label">الحالة:</span> {{ getStatusLabel(transaction.status) }}</div>
+    <div><span class="label">الكمية:</span> {{ transaction.quantity }}</div>
+    <div><span class="label">السعر:</span> {{ transaction.price ?? '-' }}</div>
+    <div><span class="label">الإجمالي:</span> {{ transaction.totalPrice ?? '-' }}</div>
+    <div *ngIf="transaction.notes"><span class="label">ملاحظات:</span> {{ transaction.notes }}</div>
+  </div>
+</div>

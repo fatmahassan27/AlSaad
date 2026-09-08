@@ -15,6 +15,8 @@ import { ProductCategories } from './core/features/product-categories/product-ca
 import { CategoryDetails } from './core/features/category-details/category-details';
 import { Store } from './core/features/store/store';
 import { StoreDetails } from './core/features/store-details/store-details';
+import { StockTransactions } from './core/features/stock-transactions/stock-transactions';
+import { StockTransactionDetails } from './core/features/stock-transaction-details/stock-transaction-details';
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: Registeration },
@@ -39,7 +41,9 @@ export const routes: Routes = [
           { path: 'requisitions', component: Requisitions },
           { path: 'requisitions/:id', component: RequisitionDetails },
           { path: 'stores', component: Store },           
-          { path: 'stores/:id', component: StoreDetails }, 
+          { path: 'stores/:id', component: StoreDetails },
+          { path: 'stock-transactions', component: StockTransactions },
+          { path: 'stock-transactions/:id', component: StockTransactionDetails },
         ]
       },
     ]
