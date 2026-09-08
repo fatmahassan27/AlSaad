@@ -11,9 +11,3 @@ export interface Product {
   stockQuantity: number;
   isActive: boolean;
 }
-export interface PagedResult<T> {
-  items: T[];
-  page: number;
-  pageCount: number;
-  totalResults: number;
-}

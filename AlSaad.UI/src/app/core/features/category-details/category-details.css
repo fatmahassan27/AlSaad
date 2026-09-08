@@ -1,0 +1,40 @@
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #2c5aa0;
+  text-decoration: none;
+}
+
+.details-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.category-image {
+  max-width: 200px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.label {
+  font-weight: 600;
+  margin-left: 0.4rem;
+}
+
+.status-message {
+  padding: 1rem;
+  text-align: center;
+  color: #666;
+}
+
+.status-message.error {
+  color: #c0392b;
+}

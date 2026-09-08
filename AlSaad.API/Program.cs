@@ -26,7 +26,10 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFramew
 builder.Services.AddScoped<IAuthenticationService,AuthenticationService>();
 builder.Services.AddScoped<ITokenService, JwtTokenService>();
 builder.Services.Configure<DaftraSettings>(builder.Configuration.GetSection("Daftra"));
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
 
+builder.Services.AddScoped<IRequisitionService, RequisitionService>();
 builder.Services.AddHttpClient<IDaftraApiClient, DaftraApiClient>((sp, client) =>
 {
     var settings = sp.GetRequiredService<IOptions<DaftraSettings>>().Value;
@@ -35,7 +38,21 @@ builder.Services.AddHttpClient<IDaftraApiClient, DaftraApiClient>((sp, client) =
     client.DefaultRequestHeaders.Add("apikey", settings.ApiKey);
 });
 
-builder.Services.AddScoped<IProductCatalogService, ProductCatalogService>();
+builder.Services.AddHttpClient<IDaftraRequisitionClient, DaftraRequisitionClient>((sp, client) =>
+{
+    var settings = sp.GetRequiredService<IOptions<DaftraSettings>>().Value;
+    client.BaseAddress = new Uri(settings.BaseUrl);
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+    client.DefaultRequestHeaders.Add("apikey", settings.ApiKey);
+});
+builder.Services.AddHttpClient<IDaftraProductCategoryClient, DaftraProductCategoryClient>((sp, client) =>
+{
+    var settings = sp.GetRequiredService<IOptions<DaftraSettings>>().Value;
+    client.BaseAddress = new Uri(settings.BaseUrl);
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+    client.DefaultRequestHeaders.Add("apikey", settings.ApiKey);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

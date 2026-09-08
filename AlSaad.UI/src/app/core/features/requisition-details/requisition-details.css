@@ -1,0 +1,57 @@
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #2c5aa0;
+  text-decoration: none;
+}
+
+.details-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.label {
+  font-weight: 600;
+  margin-left: 0.4rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem 1rem;
+  text-align: right;
+  border-bottom: 1px solid #eee;
+}
+
+.data-table th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.status-message {
+  padding: 1rem;
+  text-align: center;
+  color: #666;
+}
+
+.status-message.error {
+  color: #c0392b;
+}
+
+.empty-row {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+}

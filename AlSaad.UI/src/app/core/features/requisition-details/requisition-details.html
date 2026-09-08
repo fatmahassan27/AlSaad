@@ -1,0 +1,35 @@
+<a routerLink="/inventory/requisitions" class="back-link">→ رجوع لكل الحركات</a>
+<div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+<div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
+
+<div *ngIf="requisition && !isLoading" class="details-card">
+  <h1>حركة رقم {{ requisition.number }}</h1>
+
+  <div class="info-grid">
+    <div><span class="label">التاريخ:</span> {{ requisition.date | date: 'yyyy-MM-dd' }}</div>
+    <div><span class="label">النوع:</span> {{ getTypeLabel(requisition.type) }}</div>
+    <div><span class="label">الحالة:</span> {{ getStatusLabel(requisition.status) }}</div>
+    <div *ngIf="requisition.notes"><span class="label">ملاحظات:</span> {{ requisition.notes }}</div>
+  </div>
+
+  <h2>الأصناف</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>المنتج</th>
+        <th>الكمية</th>
+        <th>سعر الوحدة</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of requisition.items">
+        <td>{{ item.productName || '-' }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.unitPrice ?? '-' }}</td>
+      </tr>
+      <tr *ngIf="requisition.items.length === 0">
+        <td colspan="3" class="empty-row">مفيش أصناف في الحركة دي</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

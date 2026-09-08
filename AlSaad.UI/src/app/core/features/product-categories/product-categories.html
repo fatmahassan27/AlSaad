@@ -1,0 +1,33 @@
+<section class="page-header">
+  <h1>تصنيفات المنتجات</h1>
+</section>
+
+<div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+
+<div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
+
+<div class="table-wrapper" *ngIf="!isLoading && !errorMessage">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>الاسم</th>
+        <th>الوصف</th>
+        <th>التصنيف الأب</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.name }}</td>
+        <td>{{ category.description || '-' }}</td>
+        <td>{{ category.parentCategoryName || '-' }}</td>
+        <td>
+          <a [routerLink]="['/categories', category.id]" class="view-link">عرض التفاصيل</a>
+        </td>
+      </tr>
+      <tr *ngIf="categories.length === 0">
+        <td colspan="4" class="empty-row">مفيش تصنيفات لعرضها</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

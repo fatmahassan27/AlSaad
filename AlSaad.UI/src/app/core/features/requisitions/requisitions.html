@@ -1,0 +1,38 @@
+<section class="page-header">
+  <h1>حركات المخزون</h1>
+</section>
+
+<div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+
+<div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
+
+<div class="table-wrapper" *ngIf="!isLoading && !errorMessage">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>رقم الحركة</th>
+        <th>التاريخ</th>
+        <th>النوع</th>
+        <th>الحالة</th>
+        <th>عدد الأصناف</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let requisition of requisitions">
+        <td>{{ requisition.number }}</td>
+        <td>{{ requisition.date | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ getTypeLabel(requisition.type) }}</td>
+        <td>
+          <span class="badge">{{ getStatusLabel(requisition.status) }}</span>
+        </td>
+        <td>{{ requisition.items.length }}</td>
+        <td>
+        <a [routerLink]="['/inventory/requisitions', requisition.id]" class="view-link">عرض التفاصيل</a>        </td>
+      </tr>
+      <tr *ngIf="requisitions.length === 0">
+        <td colspan="6" class="empty-row">مفيش حركات مخزون لعرضها</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

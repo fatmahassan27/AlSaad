@@ -1,0 +1,19 @@
+<a routerLink="/categories" class="back-link">→ رجوع لكل التصنيفات</a>
+
+<div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+<div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
+
+<div *ngIf="category && !isLoading" class="details-card">
+  <img *ngIf="category.imageUrl" [src]="category.imageUrl" [alt]="category.name" class="category-image" />
+
+  <h1>{{ category.name }}</h1>
+
+  <div class="info-grid">
+    <div *ngIf="category.description">
+      <span class="label">الوصف:</span> {{ category.description }}
+    </div>
+    <div>
+      <span class="label">التصنيف الأب:</span> {{ category.parentCategoryName || 'تصنيف رئيسي' }}
+    </div>
+  </div>
+</div>

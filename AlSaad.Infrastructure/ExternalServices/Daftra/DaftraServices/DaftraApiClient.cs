@@ -12,37 +12,17 @@ using System.Threading.Tasks;
 
 namespace AlSaad.Infrastructure.ExternalServices.Daftra.DaftraServices
 {
-    public class DaftraApiClient : IDaftraApiClient
+    public class DaftraApiClient : GenericDaftraApiClientBase, IDaftraApiClient
     {
-        private readonly HttpClient _httpClient;
-
-        public DaftraApiClient(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
-        //allow read numbers from string in json response
+        public DaftraApiClient(HttpClient httpClient) : base(httpClient) { }
         private static readonly JsonSerializerOptions _jsonOptions = new()
         {
             NumberHandling = JsonNumberHandling.AllowReadingFromString
         };
-        public async Task<DaftraProductListResponse> GetProductsAsync(int page = 1, int limit = 20, CancellationToken cancellationToken = default)
-        {
-            var response = await _httpClient.GetAsync($"products.json?page={page}&limit={limit}", cancellationToken);
-            response.EnsureSuccessStatusCode();
+        public Task<DaftraProductListResponse> GetProductsAsync(int page = 1, int limit = 20, CancellationToken cancellationToken = default)
+            => GetListAsync<DaftraProductListResponse>($"products.json?page={page}&limit={limit}", cancellationToken);
 
-            var result = await response.Content.ReadFromJsonAsync<DaftraProductListResponse>(_jsonOptions, cancellationToken);
-            return result ?? new DaftraProductListResponse();
-        }
-
-        public async Task<DaftraSingleProductResponse?> GetProductByIdAsync(int id, CancellationToken cancellationToken = default)
-        {
-            var response = await _httpClient.GetAsync($"products/{id}.json", cancellationToken);
-
-            if (response.StatusCode == HttpStatusCode.NotFound)
-                return null;
-
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<DaftraSingleProductResponse>(_jsonOptions, cancellationToken);
-        }
+        public Task<DaftraSingleProductResponse?> GetProductByIdAsync(int id, CancellationToken cancellationToken = default)
+            => GetSingleAsync<DaftraSingleProductResponse>($"products/{id}.json", cancellationToken);
     }
 }

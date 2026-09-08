@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace AlSaad.Infrastructure.Services
 {
-     public class ProductCatalogService :IProductCatalogService
+     public class ProductService :IProductService
     {
         private readonly IDaftraApiClient _daftraApiClient;
 
-        public ProductCatalogService(IDaftraApiClient daftraApiClient)
+        public ProductService(IDaftraApiClient daftraApiClient)
         {
             _daftraApiClient = daftraApiClient;
         }

@@ -9,7 +9,10 @@ import { Cart } from '../app/core/features/cart/cart';
 import { Part } from './core/cars/part/part';
 import { Account } from './core/features/account/account';
 import { Products } from './core/features/products/products';
-
+import { Requisitions } from './core/features/requisitions/requisitions';
+import { RequisitionDetails } from './core/features/requisition-details/requisition-details';
+import { ProductCategories } from './core/features/product-categories/product-categories';
+import { CategoryDetails } from './core/features/category-details/category-details';
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: Registeration },
@@ -24,8 +27,17 @@ export const routes: Routes = [
       { path: 'carts', component: Cart },
       { path: 'parts', component: Part },
       { path: 'account', component: Account },
-      { path: 'products', component: Products } 
-
+      {
+        path: 'inventory',
+        children: [
+          { path: '', redirectTo: 'products', pathMatch: 'full' },
+          { path: 'products', component: Products },
+          { path: 'categories', component: ProductCategories },
+          { path: 'categories/:id', component: CategoryDetails },
+          { path: 'requisitions', component: Requisitions },
+          { path: 'requisitions/:id', component: RequisitionDetails },
+        ]
+      },
     ]
   }
 ];

@@ -21,7 +21,15 @@ export class Sidebar {
         { label: ' التصنيفات', path: '/prices/filters' }
       ]
     },
-
+{
+  label: 'المخزون',
+  path: "",
+  children: [
+    { label: 'المنتجات', path: '/inventory/products' },
+    { label: 'تصنيفات المنتجات', path: '/inventory/categories' },
+    { label: 'حركات المخزون', path: '/inventory/requisitions' }
+  ]
+},
     {
       label: 'بحث بالكود أو رقم القطعة',
             path: "",

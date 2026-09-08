@@ -8,9 +8,9 @@ namespace AlSaad.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductCatalogService _productCatalogService;
+        private readonly IProductService _productCatalogService;
 
-        public ProductsController(IProductCatalogService productCatalogService)
+        public ProductsController(IProductService productCatalogService)
         {
             _productCatalogService = productCatalogService;
         }
