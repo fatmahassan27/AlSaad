@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AlSaad.Infrastructure.ExternalServices.Daftra.IDaftraInterfaces
 {
-    public interface IDaftraApiClient
+    public interface IDaftraProductClient
     {
         Task<DaftraProductListResponse> GetProductsAsync(int page = 1, int limit = 20, CancellationToken cancellationToken = default);
         Task<DaftraSingleProductResponse?> GetProductByIdAsync(int id, CancellationToken cancellationToken = default);

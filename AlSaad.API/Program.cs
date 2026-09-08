@@ -1,3 +1,4 @@
+﻿using AlSaad.API.Extentions;
 using AlSaad.Application.Common.Configuration;
 using AlSaad.Application.Interfaces.IServices;
 using AlSaad.Domain.Entities;
@@ -19,39 +20,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlSaadConnection")));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddCors(options =>options.AddPolicy("AllowAngular", policy =>policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod()));
-//repo scoped
-//builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
 //services scoped
-builder.Services.AddScoped<IAuthenticationService,AuthenticationService>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITokenService, JwtTokenService>();
 builder.Services.Configure<DaftraSettings>(builder.Configuration.GetSection("Daftra"));
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
-
 builder.Services.AddScoped<IRequisitionService, RequisitionService>();
-builder.Services.AddHttpClient<IDaftraApiClient, DaftraApiClient>((sp, client) =>
-{
-    var settings = sp.GetRequiredService<IOptions<DaftraSettings>>().Value;
-    client.BaseAddress = new Uri(settings.BaseUrl);
-    client.DefaultRequestHeaders.Add("Accept", "application/json");
-    client.DefaultRequestHeaders.Add("apikey", settings.ApiKey);
-});
 
-builder.Services.AddHttpClient<IDaftraRequisitionClient, DaftraRequisitionClient>((sp, client) =>
-{
-    var settings = sp.GetRequiredService<IOptions<DaftraSettings>>().Value;
-    client.BaseAddress = new Uri(settings.BaseUrl);
-    client.DefaultRequestHeaders.Add("Accept", "application/json");
-    client.DefaultRequestHeaders.Add("apikey", settings.ApiKey);
-});
-builder.Services.AddHttpClient<IDaftraProductCategoryClient, DaftraProductCategoryClient>((sp, client) =>
-{
-    var settings = sp.GetRequiredService<IOptions<DaftraSettings>>().Value;
-    client.BaseAddress = new Uri(settings.BaseUrl);
-    client.DefaultRequestHeaders.Add("Accept", "application/json");
-    client.DefaultRequestHeaders.Add("apikey", settings.ApiKey);
-});
+builder.Services.AddDaftraHttpClient<IDaftraProductClient, DaftraProductApiClient>(); // جديد
+builder.Services.AddDaftraHttpClient<IDaftraRequisitionClient, DaftraRequisitionClient>(); // جديد
+builder.Services.AddDaftraHttpClient<IDaftraProductCategoryClient, DaftraProductCategoryClient>(); // جديد
 
 var app = builder.Build();
 

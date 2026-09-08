@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace AlSaad.Infrastructure.ExternalServices.Daftra.DaftraServices
 {
-    public class DaftraApiClient : GenericDaftraApiClientBase, IDaftraApiClient
+    public class DaftraProductApiClient : GenericDaftraApiClientBase, IDaftraProductClient
     {
-        public DaftraApiClient(HttpClient httpClient) : base(httpClient) { }
+        public DaftraProductApiClient(HttpClient httpClient) : base(httpClient) { }
         private static readonly JsonSerializerOptions _jsonOptions = new()
         {
             NumberHandling = JsonNumberHandling.AllowReadingFromString

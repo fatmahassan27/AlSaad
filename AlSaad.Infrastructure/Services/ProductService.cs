@@ -12,9 +12,9 @@ namespace AlSaad.Infrastructure.Services
 {
      public class ProductService :IProductService
     {
-        private readonly IDaftraApiClient _daftraApiClient;
+        private readonly IDaftraProductClient _daftraApiClient;
 
-        public ProductService(IDaftraApiClient daftraApiClient)
+        public ProductService(IDaftraProductClient daftraApiClient)
         {
             _daftraApiClient = daftraApiClient;
         }
