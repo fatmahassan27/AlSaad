@@ -15,10 +15,7 @@ namespace AlSaad.Infrastructure.ExternalServices.Daftra.DaftraServices
     public class DaftraProductApiClient : GenericDaftraApiClientBase, IDaftraProductClient
     {
         public DaftraProductApiClient(HttpClient httpClient) : base(httpClient) { }
-        private static readonly JsonSerializerOptions _jsonOptions = new()
-        {
-            NumberHandling = JsonNumberHandling.AllowReadingFromString
-        };
+      
         public Task<DaftraProductListResponse> GetProductsAsync(int page = 1, int limit = 20, CancellationToken cancellationToken = default)
             => GetListAsync<DaftraProductListResponse>($"products.json?page={page}&limit={limit}", cancellationToken);
 

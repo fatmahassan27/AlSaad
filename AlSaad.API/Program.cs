@@ -28,10 +28,11 @@ builder.Services.Configure<DaftraSettings>(builder.Configuration.GetSection("Daf
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
 builder.Services.AddScoped<IRequisitionService, RequisitionService>();
-
-builder.Services.AddDaftraHttpClient<IDaftraProductClient, DaftraProductApiClient>(); // جديد
-builder.Services.AddDaftraHttpClient<IDaftraRequisitionClient, DaftraRequisitionClient>(); // جديد
-builder.Services.AddDaftraHttpClient<IDaftraProductCategoryClient, DaftraProductCategoryClient>(); // جديد
+builder.Services.AddScoped<IStoreService, StoreService>();
+builder.Services.AddDaftraHttpClient<IDaftraProductClient, DaftraProductApiClient>(); 
+builder.Services.AddDaftraHttpClient<IDaftraRequisitionClient, DaftraRequisitionClient>(); 
+builder.Services.AddDaftraHttpClient<IDaftraProductCategoryClient, DaftraProductCategoryClient>(); 
+builder.Services.AddDaftraHttpClient<IDaftraStoreClient,DaftraStoreClient>(); 
 
 var app = builder.Build();
 
