@@ -1,13 +1,13 @@
-
-html, body {
-  height: 100%;
+html,
+body {
   margin: 0;
-  font-family: 'Cairo', sans-serif;
-  direction: rtl;
-  background-color: #f7f8fa;
+  padding: 0;
+  width: 100%;
+  background: #ffffff;
+  overflow-x: hidden;
 }
-
-:root {
-  --brand-primary: #1b2a4a;
-  --brand-accent: #f4a300;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }

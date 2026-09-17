@@ -1,10 +1,10 @@
-<app-header></app-header>
+<div class="app-layout">
 
-<div class="top-sidebar">
-  <app-sidebar></app-sidebar>
-</div>
+  <app-header
+    (menuToggle)="sidebar.toggleSidebar()">
+  </app-header>
 
-<div class="content-area">
+  <app-sidebar #sidebar></app-sidebar>
 
   <main class="page-content">
     <router-outlet></router-outlet>

@@ -1,81 +1,83 @@
-import { Component } from '@angular/core';
+import { Component ,EventEmitter, Input , Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Category } from '../../models/Category';
 
 @Component({
   selector: 'app-sidebar',
-  standalone:true,
-  imports: [CommonModule, RouterModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule
+  ],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css',
+  styleUrl: './sidebar.css'
 })
 export class Sidebar {
-   categories: Category[] = [
-    {
-      label: 'كشف الأسعار',
-      path: "",
-      children: [
-        { label: 'انواع السيارات  ', path: '/makers' },
-        { label: 'الماركات', path: '/prices/oils' },
-        { label: ' التصنيفات', path: '/prices/filters' }
-      ]
+   @Input() isOpen = false;
+  @Output() close = new EventEmitter<void>();
+  private openSubmenus = new Set<string>();
+ categories: Category[]=[
+ {
+      label: 'زيوت وفلاتر',
+      path: '/oils-filters'
     },
-{
-  label: 'المخزون',
-  path: "",
-  children: [
-    { label: 'المنتجات', path: '/inventory/products' },
-    { label: 'تصنيفات المنتجات', path: '/inventory/categories' },
-    { label: 'حركات المخزون', path: '/inventory/requisitions' },
-    { label: 'المخازن', path: '/inventory/stores' } ,
-    { label: 'حركات المخزون التفصيلية', path: '/inventory/stock-transactions' },
-    { label: 'الماركات', path: '/inventory/brands' }
-  ]
-},
     {
-      label: 'بحث بالكود أو رقم القطعة',
-            path: "",
-
-      children: [
-        { label: 'بحث بالكود', path: '/search/code' },
-        { label: 'بحث برقم القطعة', path: '/search/part-number' }
-      ]
+      label: 'فرامل',
+      path: '/brakes'
     },
-
     {
-      label: 'عروض خاصة',
-            path: "",
-
-      children: [
-        { label: 'عروض اليوم', path: '/offers/today' },
-        { label: 'العروض الجديدة', path: '/offers/new' }
-      ]
+      label: 'كهرباء',
+      path: '/electrical'
     },
-
     {
-      label: 'حسابك',
-            path: '/account',
+      label: 'إطارات',
+      path: '/tires'
     },
-
     {
-      label: 'طلباتك القديمة',
-            path: "",
+      label: 'عفشة',
+      path: '/suspension'
+    },{ label: 'قوالب الوحدات', path: '/inventory/unit-templates' }
+ ]
+  // فتح / قفل الـ Sidebar
+  closeSidebar(): void {
+    this.close.emit();
+  }
 
-      children: [
-        { label: 'كل الطلبات', path: '/orders' },
-        { label: 'الطلبات المكتملة', path: '/orders/completed' },
-        { label: 'الطلبات الملغاة', path: '/orders/cancelled' }
-      ]
-    },
-  {
-    label: 'المنتجات',
-    path: '/products',
-  },
-    {
-      label: 'سلة طلباتك',
-      path: '/carts'
-    }
 
-  ];
+  // فتح / قفل الـ Submenu
+     toggleSubmenu(category: Category): void { 
+   if (!category.children) 
+    { return; }
+    const key = category.label; 
+    if (this.openSubmenus.has(key)) { 
+     this.openSubmenus.delete(key); } 
+     else {this.openSubmenus.add(key); }
+     }
+
+     isSubmenuOpen(category: Category): boolean {
+ 
+     return this.openSubmenus.has(category.label);
+  }
+
+
+  // تسجيل الخروج
+  logout(): void {
+
+    localStorage.removeItem('alsaad_token');
+    localStorage.removeItem('alsaad_user');
+
+    this.closeSidebar();
+
+    // لو عندك AuthService للـ logout هنستخدمه هنا بدل الكود ده
+  }
+
+ toggleSidebar(): void {
+  this.isOpen = !this.isOpen;
+
+  console.log('SIDEBAR STATE:', this.isOpen);
+}
+
+
+
 }

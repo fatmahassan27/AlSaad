@@ -1,1 +1,362 @@
-.page-header { width: 100%; padding: 55px 24px 35px; text-align: center; } .page-header-content { max-width: 800px; margin: 0 auto; } .page-label { display: inline-block; margin-bottom: 10px; padding: 6px 14px; background: rgba(244, 163, 0, 0.12); color: var(--brand-accent); border-radius: 20px; font-size: 13px; font-weight: 700; } .page-header h1 { margin: 0 0 12px; color: var(--brand-primary); font-size: 34px; font-weight: 800; } .page-header p { margin: 0; color: #6b7280; font-size: 16px; } /* ========================= */ /* Makers Section */ /* ========================= */ .makers-section { width: 100%; padding: 10px 30px 60px; } .makers-grid { width: 100%; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; } /* ========================= */ /* Maker Card */ /* ========================= */ .maker-card { position: relative; min-height: 150px; display: flex; align-items: center; gap: 18px; padding: 24px; border: 1px solid #e8ebf0; border-radius: 18px; background: #ffffff; cursor: pointer; text-align: right; box-shadow: 0 5px 20px rgba(27, 42, 74, 0.06); transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; } .maker-card:hover { transform: translateY(-6px); border-color: var(--brand-accent); box-shadow: 0 12px 30px rgba(27, 42, 74, 0.12); } /* ========================= */ /* Icon */ /* ========================= */ .maker-icon { width: 58px; height: 58px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 15px; background: #f7f8fa; font-size: 28px; transition: 0.25s ease; } .maker-card:hover .maker-icon { transform: scale(1.08); } /* ========================= */ /* Maker Info */ /* ========================= */ .maker-info { display: flex; flex-direction: column; gap: 5px; flex: 1; } .maker-name-ar { color: var(--brand-primary); font-size: 19px; font-weight: 800; } .maker-name-en { color: #8a919d; font-size: 13px; font-weight: 500; } /* ========================= */ /* Arrow */ /* ========================= */ .maker-arrow { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #f7f8fa; color: var(--brand-primary); font-size: 18px; transition: 0.25s ease; } .maker-card:hover .maker-arrow { background: var(--brand-accent); color: white; transform: translateX(-4px); } /* ========================= */ /* Responsive */ /* ========================= */ @media (max-width: 1000px) { .makers-grid { grid-template-columns: repeat(3, 1fr); } } @media (max-width: 750px) { .makers-grid { grid-template-columns: repeat(2, 1fr); } .page-header h1 { font-size: 28px; } } @media (max-width: 500px) { .makers-section { padding: 10px 15px 40px; } .makers-grid { grid-template-columns: 1fr; } .maker-card { min-height: 120px; } }
+/* =========================================================
+   PAGE
+========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+.page-header {
+  width: 100%;
+  padding: 55px 24px 35px;
+  text-align: center;
+  background: #ffffff;
+}
+
+.page-header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   PAGE LABEL
+========================================================= */
+
+.page-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 7px 16px;
+
+  background: rgba(224, 0, 0, 0.08);
+  color: #e00000;
+
+  border: 1px solid rgba(224, 0, 0, 0.15);
+  border-radius: 0;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.page-header h1 {
+  margin: 0 0 12px;
+
+  color: #111111;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.page-header p {
+  margin: 0;
+
+  color: #777777;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   MAKERS SECTION
+========================================================= */
+
+.makers-section {
+  width: 100%;
+  padding: 10px 30px 60px;
+
+  background: #ffffff;
+}
+
+.makers-grid {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+
+/* =========================================================
+   MAKER CARD
+========================================================= */
+
+.maker-card {
+  position: relative;
+
+  min-height: 150px;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 24px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e2e2;
+  border-radius: 0;
+
+  cursor: pointer;
+  text-align: right;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+
+  overflow: hidden;
+}
+
+/* Red side accent */
+
+.maker-card::before {
+  content: '';
+
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  width: 4px;
+  height: 0;
+
+  background: #e00000;
+
+  transition: height 0.25s ease;
+}
+
+.maker-card:hover::before {
+  height: 100%;
+}
+
+
+/* Small racing-style decoration */
+
+.maker-card::after {
+  content: '';
+
+  position: absolute;
+  left: -35px;
+  bottom: 8px;
+
+  width: 90px;
+  height: 3px;
+
+  background: #e00000;
+
+  transform: skewX(-25deg);
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.maker-card:hover::after {
+  opacity: 1;
+}
+
+
+/* Hover */
+
+.maker-card:hover {
+  transform: translateY(-6px);
+
+  background: #fafafa;
+
+  border-color: #cfcfcf;
+
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.maker-icon {
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #111111;
+
+  color: #ffffff;
+
+  border-radius: 0;
+
+  font-size: 27px;
+
+  transform: skewX(-7deg);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.maker-card:hover .maker-icon {
+  background: #e00000;
+  color: #ffffff;
+
+  transform: skewX(-7deg) scale(1.08);
+}
+
+
+/* =========================================================
+   MAKER INFO
+========================================================= */
+
+.maker-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  flex: 1;
+  min-width: 0;
+}
+
+.maker-name-ar {
+  color: #151515;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: 900;
+
+  transition: color 0.2s ease;
+}
+
+.maker-card:hover .maker-name-ar {
+  color: #e00000;
+}
+
+.maker-name-en {
+  color: #888888;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.maker-arrow {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f1f1f1;
+
+  color: #555555;
+
+  border-radius: 0;
+
+  font-size: 18px;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.maker-card:hover .maker-arrow {
+  background: #e00000;
+  color: #ffffff;
+
+  transform: translateX(-4px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .makers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+
+@media (max-width: 750px) {
+
+  .makers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-header {
+    padding: 45px 20px 30px;
+  }
+
+  .page-header h1 {
+    font-size: 28px;
+  }
+
+  .page-header p {
+    font-size: 14px;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .makers-section {
+    padding: 10px 15px 40px;
+  }
+
+  .makers-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .maker-card {
+    min-height: 120px;
+    padding: 18px;
+  }
+
+  .maker-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 24px;
+  }
+
+  .maker-name-ar {
+    font-size: 17px;
+  }
+
+  .maker-name-en {
+    font-size: 11px;
+  }
+
+}

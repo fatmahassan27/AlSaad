@@ -31,6 +31,8 @@ builder.Services.AddScoped<IRequisitionService, RequisitionService>();
 builder.Services.AddScoped<IStockTransactionService, StockTransactionService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IStoreService, StoreService>();
+builder.Services.AddScoped<IUnitTemplateService, UnitTemplateService>();
+
 ///////////////////////////////////////////////
 builder.Services.AddDaftraHttpClient<IDaftraProductClient, DaftraProductApiClient>(); 
 builder.Services.AddDaftraHttpClient<IDaftraRequisitionClient, DaftraRequisitionClient>(); 
@@ -38,6 +40,13 @@ builder.Services.AddDaftraHttpClient<IDaftraProductCategoryClient, DaftraProduct
 builder.Services.AddDaftraHttpClient<IDaftraStoreClient,DaftraStoreClient>();
 builder.Services.AddDaftraHttpClient<IDaftraStockTransactionClient,DaftraStockTransactionClient>();
 builder.Services.AddDaftraHttpClient<IDaftraBrandClient,DaftraBrandClient>();
+builder.Services.AddHttpClient<IDaftraUnitTemplateClient, DaftraUnitTemplateClient>((sp, client) =>
+{
+    var settings = sp.GetRequiredService<IOptions<DaftraSettings>>().Value;
+    client.BaseAddress = new Uri(settings.BaseUrlV2Entity);   // ⚠️ مختلف عن باقي الموديولات
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+    client.DefaultRequestHeaders.Add("apikey", settings.ApiKey);
+});
 
 var app = builder.Build();
 

@@ -12,14 +12,4 @@ import {Sidebar} from  '../sidebar/sidebar';
   styleUrl: './mainlayout.css',
 })
 export class Mainlayout {
-
- sidebarOpen = false;
-
-  toggleSidenav(): void {
-    this.sidebarOpen = !this.sidebarOpen;
-  }
-
-  closeSidenav(): void {
-    this.sidebarOpen = false;
-  }
 }

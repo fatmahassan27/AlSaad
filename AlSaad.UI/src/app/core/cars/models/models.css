@@ -1,81 +1,359 @@
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
 .page-header {
-  text-align: center;
+  width: 100%;
   margin-bottom: 32px;
+  padding: 10px 0 25px;
+
+  text-align: center;
   position: relative;
 }
+
+.page-header::after {
+  content: '';
+
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) skewX(-25deg);
+
+  width: 55px;
+  height: 3px;
+
+  background: #e00000;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+
+  color: #111111;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.page-header p {
+  margin: 0;
+
+  color: #777777;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
 
 .back-btn {
   position: absolute;
   right: 0;
   top: 0;
-  background: none;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  background: transparent;
   border: none;
-  color: #1b2a4a;
-  font-size: 14px;
-  font-weight: 600;
+
+  color: #555555;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+
   cursor: pointer;
+
   padding: 8px 12px;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .back-btn:hover {
-  text-decoration: underline;
+  color: #e00000;
+  transform: translateX(-4px);
 }
 
-.page-header h1 {
-  font-size: 22px;
-  color: #1b2a4a;
-  margin: 0 0 8px;
-}
 
-.page-header p {
-  color: rgba(0, 0, 0, 0.55);
-  margin: 0;
-  font-size: 14px;
-}
+/* =========================================================
+   MODELS GRID
+========================================================= */
 
 .models-grid {
+  width: 100%;
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+
   gap: 16px;
 }
 
+
+/* =========================================================
+   MODEL CARD
+========================================================= */
+
 .model-card {
+  position: relative;
+
+  min-height: 145px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
+  justify-content: center;
+
+  gap: 7px;
+
   padding: 20px 12px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e2e2;
+  border-radius: 0;
+
   cursor: pointer;
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+
+  overflow: hidden;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
+
+
+/* Red top line */
+
+.model-card::before {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 0;
+  height: 3px;
+
+  background: #e00000;
+
+  transition: width 0.3s ease;
+}
+
+.model-card:hover::before {
+  width: 100%;
+}
+
+
+/* Small corner decoration */
+
+.model-card::after {
+  content: '';
+
+  position: absolute;
+
+  bottom: 8px;
+  right: -20px;
+
+  width: 55px;
+  height: 2px;
+
+  background: #e00000;
+
+  transform: skewX(-25deg);
+
+  opacity: 0;
+
+  transition: opacity 0.25s ease;
+}
+
+.model-card:hover::after {
+  opacity: 1;
+}
+
+
+/* Hover */
 
 .model-card:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  background: #fafafa;
+
+  border-color: #cccccc;
+
+  transform: translateY(-5px);
+
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.10);
 }
+
+
+/* =========================================================
+   MODEL IMAGE / ICON
+========================================================= */
 
 .model-image {
-  color: #1b2a4a;
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   margin-bottom: 6px;
+
+  background: #111111;
+
+  color: #ffffff;
+
+  font-size: 25px;
+
+  border-radius: 0;
+
+  transform: skewX(-7deg);
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    color 0.25s ease;
 }
+
+.model-card:hover .model-image {
+  background: #e00000;
+
+  color: #ffffff;
+
+  transform: skewX(-7deg) scale(1.08);
+}
+
+
+/* =========================================================
+   MODEL NAME
+========================================================= */
 
 .model-name {
+  color: #151515;
+
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
-  font-weight: 700;
-  color: #1b2a4a;
+  font-weight: 800;
+
+  text-align: center;
+
+  transition: color 0.2s ease;
 }
+
+.model-card:hover .model-name {
+  color: #e00000;
+}
+
+
+/* =========================================================
+   MODEL YEARS
+========================================================= */
 
 .model-years {
-  font-size: 12px;
-  color: #f4a300;
+  color: #888888;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
   font-weight: 600;
+
+  transition: color 0.2s ease;
 }
 
+.model-card:hover .model-years {
+  color: #555555;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
 .empty-state {
+  width: 100%;
+
   text-align: center;
-  padding: 60px 0;
-  color: rgba(0, 0, 0, 0.5);
+
+  padding: 60px 20px;
+
+  color: #888888;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .page-header {
+    margin-bottom: 25px;
+  }
+
+  .page-header h1 {
+    font-size: 23px;
+  }
+
+  .models-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .model-card {
+    min-height: 135px;
+    padding: 16px 8px;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .page-header {
+    padding-top: 45px;
+  }
+
+  .back-btn {
+    right: auto;
+    left: 0;
+
+    font-size: 12px;
+  }
+
+  .page-header h1 {
+    font-size: 21px;
+  }
+
+  .models-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .model-card {
+    min-height: 125px;
+  }
+
+  .model-image {
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
+
+  .model-name {
+    font-size: 14px;
+  }
+
 }

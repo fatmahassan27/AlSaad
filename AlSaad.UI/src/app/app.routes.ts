@@ -19,6 +19,8 @@ import { StockTransactions } from './core/features/stock-transactions/stock-tran
 import { StockTransactionDetails } from './core/features/stock-transaction-details/stock-transaction-details';
 import { Brands } from './core/features/brands/brands';
 import { BrandDetails } from './core/features/brand-details/brand-details';
+import { UnitTemplates } from './core/features/unit-templates/unit-templates';
+import { UnitTemplateDetails } from './core/features/unit-template-details/unit-template-details';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -49,6 +51,8 @@ export const routes: Routes = [
           { path: 'stock-transactions/:id', component: StockTransactionDetails },
           { path: 'brands', component: Brands },
           { path: 'brands/:id', component: BrandDetails },
+          { path: 'unit-templates', component: UnitTemplates },
+          { path: 'unit-templates/:id', component: UnitTemplateDetails },
         ]
       },
     ]

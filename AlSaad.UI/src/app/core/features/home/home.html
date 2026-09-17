@@ -1,49 +1,339 @@
-<section class="hero">
-  <div class="hero-content">
-    <h1>قطع غيار أصلية لعربيتك</h1>
-    <p>أفضل الأسعار وضمان حقيقي على كل قطعة، وتوصيل لحد باب البيت</p>
-    <a routerLink="/makers" class="cta-btn">تسوق الآن</a>
-  </div>
-</section>
+<section class="home-page">
 
-<section class="section">
-  <h2 class="section-title">تسوق حسب الفئة</h2>
-  <div class="categories-grid">
-    <a *ngFor="let cat of categories" [routerLink]="cat.path" class="category-card">
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8">
-        <circle cx="12" cy="12" r="9"></circle>
-        <path d="M12 7v5l3 3"></path>
-      </svg>
-      <span>{{ cat.label }}</span>
-    </a>
-  </div>
-</section>
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
 
-<section class="offer-banner">
-  <div>
-    <h3>عروض خاصة</h3>
-    <p>خصومات تصل لـ 30% على قطع غيار مختارة لفترة محدودة</p>
-  </div>
-  <a routerLink="/offers" class="cta-btn light">شوف العروض</a>
-</section>
+  <section class="hero">
 
-<section class="section">
-  <h2 class="section-title">منتجات مميزة</h2>
-  <div class="products-grid">
-    <div *ngFor="let product of featuredProducts" class="product-card">
-      <div class="product-image">
-        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="3" y="7" width="18" height="10" rx="2"></rect>
-          <circle cx="7.5" cy="17" r="1.5"></circle>
-          <circle cx="16.5" cy="17" r="1.5"></circle>
-        </svg>
+    <!-- Decorative Elements -->
+    <div class="hero-red-shape shape-one"></div>
+    <div class="hero-red-shape shape-two"></div>
+    <div class="hero-red-line"></div>
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <div class="hero-content">
+
+      <div class="hero-small-title">
+        <span></span>
+        PREMIUM AUTO PARTS
+        <span></span>
       </div>
-      <span class="product-category">{{ product.category }}</span>
-      <h4 class="product-name">{{ product.name }}</h4>
-      <div class="product-price">
-        <span class="price">{{ product.price }} جنيه</span>
+
+
+      <h1>
+
+        <span class="white-text">
+          CAR
+        </span>
+
+        <span class="red-text">
+          SERVICE
+        </span>
+
+      </h1>
+
+
+      <div class="title-line"></div>
+
+
+      <p class="hero-description">
+        كل ما تحتاجه لسيارتك
+        <br>
+        قطع غيار عالية الجودة وخدمة موثوقة
+      </p>
+
+
+      <!-- Services -->
+
+      <div class="services">
+
+        <div class="service">
+
+          <span class="service-number">
+            01
+          </span>
+
+          <div>
+            <strong>
+              Full Maintenance
+            </strong>
+
+            <small>
+              صيانة كاملة
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="service">
+
+          <span class="service-number">
+            02
+          </span>
+
+          <div>
+            <strong>
+              Oil Change
+            </strong>
+
+            <small>
+              تغيير الزيوت والفلاتر
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="service">
+
+          <span class="service-number">
+            03
+          </span>
+
+          <div>
+            <strong>
+              Brake Service
+            </strong>
+
+            <small>
+              أنظمة الفرامل
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="service">
+
+          <span class="service-number">
+            04
+          </span>
+
+          <div>
+            <strong>
+              Engine Check
+            </strong>
+
+            <small>
+              فحص المحرك
+            </small>
+          </div>
+
+        </div>
+
       </div>
-      <button type="button" class="add-btn">أضف للسلة</button>
+
+
+      <!-- Buttons -->
+
+      <div class="hero-buttons">
+
+        <a
+          routerLink="/products"
+          class="primary-btn"
+        >
+          OUR PRODUCTS
+
+          <span class="material-icons">
+            arrow_back
+          </span>
+        </a>
+
+
+        <a
+          routerLink="/makers"
+          class="secondary-btn"
+        >
+          BOOK NOW
+        </a>
+
+      </div>
+
+
+      <!-- Contact -->
+
+      <div class="hero-contact">
+
+        <span>
+          +20 123 456 7890
+        </span>
+
+        <span class="contact-divider"></span>
+
+        <span>
+          @saad.auto
+        </span>
+
+      </div>
+
     </div>
-  </div>
+
+
+    <!-- ================= CAR ================= -->
+
+    <div class="hero-visual">
+
+      <div class="visual-circle"></div>
+
+      <div class="visual-red-block"></div>
+
+
+      <div class="car-caption">
+
+        <span>
+          AL SAAD
+        </span>
+
+        <strong>
+          AUTOMOTIVE
+        </strong>
+
+      </div>
+
+
+      <div class="visual-bottom-line"></div>
+
+    </div>
+
+
+    <!-- Bottom label -->
+
+    <div class="hero-bottom-label">
+      <span>QUALITY</span>
+      <span>PERFORMANCE</span>
+      <span>TRUST</span>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SERVICES
+  ====================================================== -->
+
+  <section class="services-section">
+
+    <div class="section-header">
+
+      <div>
+        <span class="section-small">
+          WHAT WE OFFER
+        </span>
+
+        <h2>
+          خدمات السيارات
+        </h2>
+      </div>
+
+      <div class="section-red-line"></div>
+
+    </div>
+
+
+    <div class="service-cards">
+
+      <a
+        routerLink="/oils-filters"
+        class="service-card"
+      >
+
+        <span class="material-icons">
+          oil_barrel
+        </span>
+
+        <h3>
+          الزيوت والفلاتر
+        </h3>
+
+        <p>
+          مجموعة كبيرة من الزيوت والفلاتر
+          المناسبة لمختلف السيارات.
+        </p>
+
+        <span class="card-arrow material-icons">
+          arrow_back
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/brakes"
+        class="service-card"
+      >
+
+        <span class="material-icons">
+          settings
+        </span>
+
+        <h3>
+          الفرامل
+        </h3>
+
+        <p>
+          قطع غيار وأنظمة فرامل بجودة عالية.
+        </p>
+
+        <span class="card-arrow material-icons">
+          arrow_back
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/electrical"
+        class="service-card"
+      >
+
+        <span class="material-icons">
+          bolt
+        </span>
+
+        <h3>
+          كهرباء السيارات
+        </h3>
+
+        <p>
+          حلول وقطع كهرباء لمختلف موديلات السيارات.
+        </p>
+
+        <span class="card-arrow material-icons">
+          arrow_back
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/tires"
+        class="service-card"
+      >
+
+        <span class="material-icons">
+          tire_repair
+        </span>
+
+        <h3>
+          الإطارات
+        </h3>
+
+        <p>
+          إطارات ومستلزمات سيارات بجودة ممتازة.
+        </p>
+
+        <span class="card-arrow material-icons">
+          arrow_back
+        </span>
+
+      </a>
+
+    </div>
+
+  </section>
+
 </section>

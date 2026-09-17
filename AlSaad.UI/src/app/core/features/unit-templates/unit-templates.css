@@ -1,0 +1,13 @@
+.page-header { margin-bottom: 1.5rem; }
+.table-wrapper { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td { padding: 0.75rem 1rem; text-align: right; border-bottom: 1px solid #eee; }
+.data-table th { background: #fafafa; font-weight: 600; }
+.badge { padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.8rem; }
+.badge.active { background: #e6f7ec; color: #1a7f37; }
+.badge.inactive { background: #fbe9e9; color: #c0392b; }
+.view-link { color: #2c5aa0; text-decoration: none; font-size: 0.9rem; }
+.view-link:hover { text-decoration: underline; }
+.status-message { padding: 1rem; text-align: center; color: #666; }
+.status-message.error { color: #c0392b; }
+.empty-row { text-align: center; color: #999; padding: 2rem; }

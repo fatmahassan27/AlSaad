@@ -1,0 +1,35 @@
+<a routerLink="/inventory/unit-templates" class="back-link">→ رجوع لكل القوالب</a>
+
+<div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+<div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
+
+<div *ngIf="template && !isLoading" class="details-card">
+  <h1>{{ template.templateName }}</h1>
+
+  <div class="info-grid">
+    <div><span class="label">الوحدة الأساسية:</span> {{ template.mainUnitName }}</div>
+    <div><span class="label">الاختصار:</span> {{ template.unitSmallName || '-' }}</div>
+    <div><span class="label">الحالة:</span> {{ template.isActive ? 'نشط' : 'موقوف' }}</div>
+  </div>
+
+  <h2>وحدات التحويل الفرعية</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>الاسم</th>
+        <th>معامل التحويل</th>
+        <th>الاختصار</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let factor of template.unitFactors">
+        <td>{{ factor.factorName }}</td>
+        <td>{{ factor.factor }}</td>
+        <td>{{ factor.smallName || '-' }}</td>
+      </tr>
+      <tr *ngIf="template.unitFactors.length === 0">
+        <td colspan="3" class="empty-row">مفيش وحدات تحويل فرعية</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -13,17 +13,17 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./header.css']
 })
 export class Header {
-  @Output() toggleSidebar = new EventEmitter<void>();
+
+  @Output() menuToggle = new EventEmitter<void>();
 
   cartItemsCount = 3;
 
-navLinks = [
-  { label: 'الرئيسية', path: '/home' },
-  { label: 'قطع الغيار', path: '/makers' },
-  { label: 'الموديلات', path: '/models' }
-];
+  toggleMenu(): void {
+    console.log('MENU CLICKED');
+    this.menuToggle.emit();
+  }
 
-  onToggleSidebar(): void {
-    this.toggleSidebar.emit();
+  logout(): void {
+    console.log('Logout');
   }
 }

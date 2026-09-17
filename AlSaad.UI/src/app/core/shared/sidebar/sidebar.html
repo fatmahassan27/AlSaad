@@ -1,57 +1,164 @@
-<nav class="top-menu">
+<!-- Overlay -->
+<div
+  class="sidebar-overlay"
+  [class.visible]="isOpen"
+  (click)="closeSidebar()"
+></div>
 
-  <ul class="menu">
 
-    <li
-      *ngFor="let category of categories"
-      class="menu-item"
+<!-- Sidebar -->
+<aside
+  class="sidebar"
+  [class.open]="isOpen"
+  dir="rtl"
+>
+
+  <!-- Header -->
+  <div class="sidebar-header">
+
+    <a
+      routerLink="/home"
+      class="sidebar-brand"
+      (click)="closeSidebar()"
     >
 
-      <a
-        *ngIf="category.path"
-        [routerLink]="category.path"
-        class="menu-link"
-      >
-        {{ category.label }}
-
-        <span *ngIf="category.children">
-          ▾
+      <div class="brand-icon">
+        <span class="material-icons">
+          directions_car
         </span>
-      </a>
+      </div>
 
-      <span
-        *ngIf="!category.path"
-        class="menu-link"
-      >
-        {{ category.label }}
-
-        <span *ngIf="category.children">
-          ▾
+      <div class="brand-text">
+        <span class="brand-name">
+          السعد
         </span>
-      </span>
 
-      <ul
-        *ngIf="category.children"
-        class="submenu"
-      >
-        <li *ngFor="let child of category.children">
-          <a [routerLink]="child.path">
-            {{ child.label }}
-          </a>
-        </li>
-      </ul>
+        <span class="brand-subtitle">
+          قطع غيار السيارات
+        </span>
+      </div>
 
-    </li>
-<li class="logout-container">
+    </a>
+
     <button
       type="button"
-      class="logout-button"
-      /* (click)="logout()" */
+      class="close-sidebar"
+      aria-label="إغلاق القائمة"
+      (click)="closeSidebar()"
     >
-      تسجيل خروج
+      <span class="material-icons">
+        close
+      </span>
     </button>
-  </li>
-  </ul>
+
+  </div>
 
 
-</nav>
+  <!-- Content -->
+  <div class="sidebar-content">
+
+    <div class="menu-title">
+      القائمة الرئيسية
+    </div>
+
+    <ul class="menu">
+
+      <li
+        *ngFor="let category of categories"
+        class="menu-item"
+        [class.has-children]="category.children"
+      >
+
+        <!-- ================= DIRECT LINK ================= -->
+
+        <a
+          *ngIf="category.path"
+          [routerLink]="category.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="menu-link"
+          (click)="closeSidebar()"
+        >
+
+          <span class="menu-icon material-icons">
+            folder
+          </span>
+
+          <span class="menu-label">
+            {{ category.label }}
+          </span>
+
+          <span class="link-arrow material-icons">
+            chevron_left
+          </span>
+
+        </a>
+
+
+        <!-- ================= PARENT MENU ================= -->
+
+        <button
+          *ngIf="!category.path && category.children"
+          type="button"
+          class="menu-link menu-button"
+          [class.active]="isSubmenuOpen(category)"
+          (click)="toggleSubmenu(category)"
+        >
+
+          <span class="menu-icon material-icons">
+            folder
+          </span>
+
+          <span class="menu-label">
+            {{ category.label }}
+          </span>
+
+          <span
+            class="dropdown-arrow material-icons"
+            [class.rotated]="isSubmenuOpen(category)"
+          >
+            expand_more
+          </span>
+
+        </button>
+
+
+        <!-- ================= SUBMENU ================= -->
+
+        <ul
+          *ngIf="category.children"
+          class="submenu"
+          [class.expanded]="isSubmenuOpen(category)"
+        >
+
+          <li
+            *ngFor="let child of category.children"
+            class="submenu-item"
+          >
+
+            <a
+              [routerLink]="child.path"
+              routerLinkActive="active"
+              class="submenu-link"
+              (click)="closeSidebar()"
+            >
+
+              <span class="submenu-line"></span>
+
+              <span class="submenu-label">
+                {{ child.label }}
+              </span>
+
+            </a>
+
+          </li>
+
+        </ul>
+
+      </li>
+
+    </ul>
+
+  </div>
+
+</aside>

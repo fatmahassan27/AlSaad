@@ -1,14 +1,36 @@
-<a routerLink="/inventory/stores" class="back-link">→ رجوع لكل المخازن</a>
+<section class="page-header">
+  <h1>المخازن</h1>
+</section>
 
 <div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
 <div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
 
-<div *ngIf="store && !isLoading" class="details-card">
-  <h1>{{ store.name }}</h1>
-
-  <div class="info-grid">
-    <div><span class="label">العنوان:</span> {{ store.shippingAddress || '-' }}</div>
-    <div><span class="label">مخزن رئيسي:</span> {{ store.isPrimary ? 'نعم' : 'لا' }}</div>
-    <div><span class="label">الحالة:</span> {{ getStatusLabel(store.activeStatus) }}</div>
-  </div>
+<div class="table-wrapper" *ngIf="!isLoading && !errorMessage">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>الاسم</th>
+        <th>العنوان</th>
+        <th>رئيسي؟</th>
+        <th>الحالة</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let store of stores">
+        <td>{{ store.name }}</td>
+        <td>{{ store.shippingAddress || '-' }}</td>
+        <td>{{ store.isPrimary ? 'نعم' : 'لا' }}</td>
+        <td>
+          <span class="badge">{{ getStatusLabel(store.activeStatus) }}</span>
+        </td>
+        <td>
+          <a [routerLink]="['/inventory/stores', store.id]" class="view-link">عرض التفاصيل</a>
+        </td>
+      </tr>
+      <tr *ngIf="stores.length === 0">
+        <td colspan="5" class="empty-row">مفيش مخازن لعرضها</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

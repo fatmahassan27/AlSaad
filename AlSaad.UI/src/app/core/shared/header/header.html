@@ -1,0 +1,94 @@
+<header class="site-header">
+
+  <div class="header-inner">
+
+    <!-- Menu -->
+    <button
+      type="button"
+      class="menu-button"
+      aria-label="فتح القائمة"
+      (click)="toggleMenu()"
+    >
+      <span class="material-icons">menu</span>
+      <span class="menu-text">القائمة</span>
+    </button>
+
+
+    <!-- Logo -->
+    <a
+      routerLink="/home"
+      class="brand"
+    >
+
+      <div class="brand-icon">
+        <span class="material-icons">
+          directions_car
+        </span>
+      </div>
+
+      <div class="brand-text">
+
+        <span class="brand-name">
+          السعد
+        </span>
+
+        <span class="brand-subtitle">
+          AUTO PARTS
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <!-- Actions -->
+    <div class="header-actions">
+
+      <button
+        type="button"
+        class="header-action"
+        aria-label="سلة المشتريات"
+      >
+        <span class="material-icons">
+          shopping_cart
+        </span>
+
+        <span
+          *ngIf="cartItemsCount > 0"
+          class="cart-badge"
+        >
+          {{ cartItemsCount }}
+        </span>
+      </button>
+
+
+      <button
+        type="button"
+        class="header-action"
+        aria-label="الحساب"
+      >
+        <span class="material-icons">
+          person
+        </span>
+      </button>
+
+
+      <button
+        type="button"
+        class="logout-button"
+        (click)="logout()"
+      >
+        <span class="material-icons">
+          logout
+        </span>
+
+        <span>
+          تسجيل خروج
+        </span>
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
