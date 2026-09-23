@@ -41,18 +41,115 @@ namespace AlSaad.Infrastructure.Services
         private static ProductDto MapToDto(DaftraProduct product) => new()
         {
             Id = product.Id,
+
+            SiteId = product.SiteId,
+            StaffId = product.StaffId,
+
             Name = product.Name,
             Description = product.Description,
-            Price = product.UnitPrice??0,
+
+            UnitPrice = product.UnitPrice,
+            DefaultQuantity = product.DefaultQuantity,
+
+            Tax1 = product.Tax1,
+            Tax2 = product.Tax2,
+
+            PurchasingTax1 = product.PurchasingTax1,
+            PurchasingTax2 = product.PurchasingTax2,
+
+            SupplierId = product.SupplierId,
+
             Brand = product.Brand,
-            Category = product.ProductCategory.FirstOrDefault()?.Name ?? product.Category,
-            Code = product.ProductCode,
+            BrandId = product.BrandId,
+
+            Category = product.ProductCategory?.FirstOrDefault()?.Name ?? product.Category,
+            Tags = product.Tags,
+
+            BuyPrice = product.BuyPrice,
+
+            ProductCode = product.ProductCode,
+            SupplierCode = product.SupplierCode,
+
+            TrackStock = product.TrackStock,
+            TrackingType = product.TrackingType,
+
+            StockBalance = product.StockBalance,
+            LowStockThreshold = product.LowStockThreshold,
+
             Barcode = product.Barcode,
-            InStock = product.StockBalance > 0,
-            StockQuantity = product.StockBalance,
-            IsActive = product.Status == 0
+
+            Notes = product.Notes,
+
+            Deactivate = product.Deactivate,
+            Status = product.Status,
+
+            Created = DateTime.TryParse(product.Created, out var created) ? created : null,
+            Modified = DateTime.TryParse(product.Modified, out var modified) ? modified : null,
+
+            FollowUpStatus = product.FollowUpStatus,
+
+            UpdatedPrice = product.UpdatedPrice,
+            AveragePrice = product.AveragePrice,
+
+            Type = product.Type,
+
+            RawStoreId = product.RawStoreId,
+
+            Class = product.Class,
+            ExtraDetails = product.ExtraDetails,
+
+            MinimumPrice = product.MinimumPrice,
+            ProfitMargin = product.ProfitMargin,
+
+            Discount = product.Discount,
+            DiscoutType = product.DiscoutType,
+
+            DurationMinutes = product.DurationMinutes,
+
+            AvailabeOnline = product.AvailabeOnline,
+
+            SourceType = product.SourceType,
+            SourceId = product.SourceId,
+
+            BranchId = product.BranchId,
+
+            IsFeatured = product.IsFeatured,
+
+            BundleType = product.BundleType,
+            ItemGroupId = product.ItemGroupId,
+
+            DisplayOrder = product.DisplayOrder,
+
+            ProductStoreBalance = product.ProductStoreBalance,
+
+            BundleFinalCost = product.BundleFinalCost,
+
+            ProductPendingQTY = product.ProductPendingQTY,
+
+            ProductAvailableQTY = product.ProductAvailableQTY,
+
+            ProductCategory = product.ProductCategory?.Select(static category => MapCategoryToDto(category)).ToList()?? new List<ProductCategoryDto>(),
+            ProductStock = new List<ProductStockDto>()
+            // مؤقتًا لحد ما نعمل DTOs الخاصة بالصور
+            // ProductImage = ...,
+            // ProductImageS3 = ...,
+
+
         };
 
-      
+        private static ProductCategoryDto MapCategoryToDto(DaftraProductCategory category) => new()
+        {
+            Id = category.Id,
+            Name = category.Name,
+            Description = category.Description,
+            CategoryType = category.CategoryType,
+            ParentId = category.ParentId,
+            Created = DateTime.TryParse(category.Created, out var created) ? created : null,
+            Modified = DateTime.TryParse(category.Modified, out var modified) ? modified : null,
+            Image = category.Image,
+            MacAddress = category.MacAddress,
+            BranchId = category.BranchId,
+            Status = category.Status
+        };
     }
 }

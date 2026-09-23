@@ -4,7 +4,7 @@
 <div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
 
 <div *ngIf="category && !isLoading" class="details-card">
-  <img *ngIf="category.imageUrl" [src]="category.imageUrl" [alt]="category.name" class="category-image" />
+  <img *ngIf="category.image" [src]="category.image" [alt]="category.name" class="category-image" />
 
   <h1>{{ category.name }}</h1>
 
@@ -13,7 +13,7 @@
       <span class="label">الوصف:</span> {{ category.description }}
     </div>
     <div>
-      <span class="label">التصنيف الأب:</span> {{ category.parentCategoryName || 'تصنيف رئيسي' }}
+      <span class="label">التصنيف الأب:</span> {{ category.categoryType || 'تصنيف رئيسي' }}
     </div>
   </div>
 </div>

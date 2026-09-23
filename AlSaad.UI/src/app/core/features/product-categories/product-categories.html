@@ -20,7 +20,7 @@
       <tr *ngFor="let category of categories">
         <td>{{ category.name }}</td>
         <td>{{ category.description || '-' }}</td>
-        <td>{{ category.parentCategoryName || '-' }}</td>
+        <td>{{ category.categoryType || '-' }}</td>
         <td>
           <a [routerLink]="['/categories', category.id]" class="view-link">عرض التفاصيل</a>
         </td>

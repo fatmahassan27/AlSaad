@@ -1,19 +1,39 @@
-import { Component , OnInit ,inject,PLATFORM_ID } from '@angular/core';
-import { CommonModule,isPlatformBrowser  } from '@angular/common';
+import {
+  Component,
+  OnInit,
+  inject,
+  PLATFORM_ID
+} from '@angular/core';
+
+import {
+  CommonModule,
+  isPlatformBrowser
+} from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
+
 import { ProductService } from '../../services/product-service';
 import { Product } from '../../models/Product';
+
 @Component({
   selector: 'app-products',
-  standalone :true,
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule
+  ],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
-export class Products implements OnInit{
-   products: Product[] = [];
-   filteredProducts: Product[] = [];
+export class Products implements OnInit {
+
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
+
+  // =========================
   // Search fields
+  // =========================
+
   codeSearch = '';
   nameSearch = '';
   brandSearch = '';
@@ -22,105 +42,305 @@ export class Products implements OnInit{
   stockSearch = '';
   statusSearch = '';
 
-  searchTerm = '';
-  isLoading =false;
-  errorMessage = '';
-    private platformId = inject(PLATFORM_ID);
+  // =========================
+  // Details
+  // =========================
 
-   constructor(private productService: ProductService) {}
+  selectedProduct: Product | null = null;
+
+  // =========================
+  // State
+  // =========================
+
+  isLoading = false;
+  errorMessage = '';
+
+  // =========================
+  // Pagination
+  // =========================
+
+  currentPage = 1;
+  pageSize = 20;
+  pageCount = 0;
+  totalResults = 0;
+
+  private platformId = inject(PLATFORM_ID);
+
+  constructor(
+    private productService: ProductService
+  ) {}
+
+  // =========================
+  // Init
+  // =========================
 
   ngOnInit(): void {
 
     if (isPlatformBrowser(this.platformId)) {
-      this.loadProducts();
+      this.loadProducts(1);
     }
 
   }
-   loadProducts(): void {
+
+  // =========================
+  // Load Products
+  // =========================
+
+  loadProducts(page: number = 1): void {
+
     this.isLoading = true;
+    this.errorMessage = '';
 
-    this.productService.getProducts().subscribe({
-      next: (response) => {
-        this.products = response.items;
-        this.filteredProducts = response.items;
+    this.productService
+      .getProducts(page, this.pageSize)
+      .subscribe({
 
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading products:', error);
+        next: (response) => {
 
-        this.errorMessage = 'حصل خطأ أثناء تحميل المنتجات';
-        this.isLoading = false;
-      }
-    });
+          console.log('Products Response:', response);
+
+          this.products = response.items ?? [];
+
+          this.filteredProducts = [...this.products];
+
+          this.currentPage = response.page;
+
+          this.pageCount = response.pageCount;
+
+          this.totalResults = response.totalResults;
+
+          this.isLoading = false;
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Error loading products:',
+            error
+          );
+
+          this.errorMessage =
+            'حصل خطأ أثناء تحميل المنتجات';
+
+          this.isLoading = false;
+        }
+
+      });
   }
-filterProducts(): void {
-const code = this.codeSearch.trim().toLowerCase();
-const name = this.nameSearch.trim().toLowerCase();
-const brand = this.brandSearch.trim().toLowerCase();
-const category = this.categorySearch.trim().toLowerCase();
-const price = this.priceSearch.trim().toLowerCase();
-const stock = this.stockSearch.trim().toLowerCase();
-const status = this.statusSearch.trim().toLowerCase();
 
-this.filteredProducts = this.products.filter(product => {
+  // =========================
+  // Pagination
+  // =========================
 
-  const matchesCode =
-    !code ||
-    (product.code ?? '').toLowerCase().includes(code);
+  goToPage(page: number): void {
 
-  const matchesName =
-    !name ||
-    (product.name ?? '').toLowerCase().includes(name);
+    if (
+      page < 1 ||
+      page > this.pageCount ||
+      page === this.currentPage
+    ) {
+      return;
+    }
 
-  const matchesBrand =
-    !brand ||
-    (product.brand ?? '').toLowerCase().includes(brand);
+    this.loadProducts(page);
+  }
 
-  const matchesCategory =
-    !category ||
-    (product.category ?? '').toLowerCase().includes(category);
+  nextPage(): void {
 
-  const matchesPrice =
-    !price ||
-    product.price.toString().includes(price);
+    if (this.currentPage < this.pageCount) {
 
-  const matchesStock =
-    !stock ||
-    product.stockQuantity.toString().includes(stock);
+      this.loadProducts(
+        this.currentPage + 1
+      );
+    }
+  }
 
-  const productStatus = product.isActive
-    ? 'نشط'
-    : 'موقوف';
+  previousPage(): void {
 
-  const matchesStatus =
-    !status ||
-    productStatus.toLowerCase().includes(status);
+    if (this.currentPage > 1) {
 
-  return (
-    matchesCode &&
-    matchesName &&
-    matchesBrand &&
-    matchesCategory &&
-    matchesPrice &&
-    matchesStock &&
-    matchesStatus
-  );
-});
+      this.loadProducts(
+        this.currentPage - 1
+      );
+    }
+  }
 
-}
+  // =========================
+  // Search / Filter
+  // =========================
+
+  filterProducts(): void {
+
+    const code =
+      this.codeSearch.trim().toLowerCase();
+
+    const name =
+      this.nameSearch.trim().toLowerCase();
+
+    const brand =
+      this.brandSearch.trim().toLowerCase();
+
+    const category =
+      this.categorySearch.trim().toLowerCase();
+
+    const price =
+      this.priceSearch.trim().toLowerCase();
+
+    const stock =
+      this.stockSearch.trim().toLowerCase();
+
+    const status =
+      this.statusSearch.trim().toLowerCase();
+
+    this.filteredProducts =
+      this.products.filter(product => {
+
+        // =========================
+        // Code
+        // =========================
+
+        const matchesCode =
+          !code ||
+          (product.productCode ?? '')
+            .toLowerCase()
+            .includes(code);
+
+        // =========================
+        // Name
+        // =========================
+
+        const matchesName =
+          !name ||
+          (product.name ?? '')
+            .toLowerCase()
+            .includes(name);
+
+        // =========================
+        // Brand
+        // =========================
+
+        const matchesBrand =
+          !brand ||
+          (product.brand ?? '')
+            .toLowerCase()
+            .includes(brand);
+
+        // =========================
+        // Category
+        // =========================
+
+        const matchesCategory =
+          !category ||
+          (product.category ?? '')
+            .toLowerCase()
+            .includes(category);
+
+        // =========================
+        // Price
+        // =========================
+
+        const productPrice =
+          product.unitPrice ?? 0;
+
+        const matchesPrice =
+          !price ||
+          productPrice
+            .toString()
+            .includes(price);
+
+        // =========================
+        // Stock
+        // =========================
+
+        const productStock =
+          product.stockBalance ?? 0;
+
+        const matchesStock =
+          !stock ||
+          productStock
+            .toString()
+            .includes(stock);
+
+        // =========================
+        // Status
+        // =========================
+
+        const productStatus =
+          this.getProductStatus(product);
+
+        const matchesStatus =
+          !status ||
+          productStatus
+            .toLowerCase()
+            .includes(status);
+
+        return (
+          matchesCode &&
+          matchesName &&
+          matchesBrand &&
+          matchesCategory &&
+          matchesPrice &&
+          matchesStock &&
+          matchesStatus
+        );
+
+      });
+  }
+
+  // =========================
+  // Product Status
+  // =========================
+
+  getProductStatus(product: Product): string {
+
+    if (
+      product.deactivate === '1' ||
+      product.status === '0'
+    ) {
+      return 'موقوف';
+    }
+
+    return 'نشط';
+  }
+
+  isProductActive(product: Product): boolean {
+
+    return this.getProductStatus(product) === 'نشط';
+  }
+
+  // =========================
+  // Product Details
+  // =========================
+
+  showProductDetails(product: Product): void {
+
+    this.selectedProduct = product;
+
+  }
+
+  closeProductDetails(): void {
+
+    this.selectedProduct = null;
+
+  }
+
+  // =========================
+  // Clear Filters
+  // =========================
 
   clearFilters(): void {
 
-      this.codeSearch = '';
-      this.nameSearch = '';
-      this.brandSearch = '';
-      this.categorySearch = '';
-      this.priceSearch = '';
-      this.stockSearch = '';
-      this.statusSearch = '';
+    this.codeSearch = '';
+    this.nameSearch = '';
+    this.brandSearch = '';
+    this.categorySearch = '';
+    this.priceSearch = '';
+    this.stockSearch = '';
+    this.statusSearch = '';
 
-      this.filteredProducts = this.products;
+    this.filteredProducts = [
+      ...this.products
+    ];
+  }
 
-}
 }

@@ -17,7 +17,7 @@ namespace AlSaad.Infrastructure.ExternalServices.Daftra.DaftraServices
         public DaftraProductCategoryClient(HttpClient httpClient) : base(httpClient) { }
         public Task<DaftraProductCategoryListResponse> GetCategoriesAsync(int page = 1, int limit = 20, int? parentId = null, CancellationToken cancellationToken = default)
         {
-            var url = $"product_categories.json?page={page}&limit={limit}";
+            var url =  $"product_categories.json?page={page}&limit={limit}";
             if (parentId.HasValue)
                 url += $"&parent_id={parentId.Value}";
 

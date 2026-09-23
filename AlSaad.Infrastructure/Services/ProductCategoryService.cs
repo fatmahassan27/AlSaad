@@ -24,7 +24,7 @@ namespace AlSaad.Infrastructure.Services
 
             return new PagedResult<ProductCategoryDto>
             {
-                Items = response.Data.Select(x => MapToDto(x.ProductCategory)).ToList(),
+                Items = response.Data.Select(x => MapCategoryToDto(x.ProductCategory)).ToList(),
                 Page = response.Pagination?.Page ?? page,
                 PageCount = response.Pagination?.PageCount ?? 1,
                 TotalResults = response.Pagination?.TotalResults ?? response.Data.Count
@@ -33,16 +33,21 @@ namespace AlSaad.Infrastructure.Services
         public async Task<ProductCategoryDto?> GetCategoryByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             var response = await _daftraProductCategoryClient.GetCategoryByIdAsync(id, cancellationToken);
-            return response is null ? null : MapToDto(response.Data.Category);
+            return response is null ? null : MapCategoryToDto(response.Data.Category);
         }
-        private static ProductCategoryDto MapToDto(DaftraProductCategory category) => new()
+        private static ProductCategoryDto MapCategoryToDto(DaftraProductCategory category) => new()
         {
             Id = category.Id,
             Name = category.Name,
             Description = category.Description,
-            ParentId = category.ParentId ?? 0,
-            ParentCategoryName = category.ParentCategory?.Name,
-            ImageUrl = category.Image
+            CategoryType = category.CategoryType,
+            ParentId = category.ParentId,
+            Created = DateTime.TryParse(category.Created, out var created)? created: null,
+            Modified = DateTime.TryParse(category.Modified, out var modified)? modified: null,
+            Image = category.Image,
+            MacAddress = category.MacAddress,
+            BranchId = category.BranchId,
+            Status = category.Status
         };
     }
 }

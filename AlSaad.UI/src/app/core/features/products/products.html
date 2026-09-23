@@ -2,149 +2,760 @@
   <h1>المنتجات</h1>
 </section>
 
-<div class="table-wrapper" *ngIf="!isLoading && !errorMessage">
+
+<!-- =========================
+     Products Table
+========================= -->
+
+<div
+  class="table-wrapper"
+  *ngIf="!isLoading && !errorMessage"
+>
 
   <table class="data-table">
-<thead>
 
-  <!-- Column Names -->
-  <tr>
-    <th>الكود</th>
-    <th>اسم المنتج</th>
-    <th>الماركة</th>
-    <th>الكاتيجوري</th>
-    <th>السعر</th>
-    <th>المخزون</th>
-    <th>الحالة</th>
-  </tr>
+    <thead>
 
-  <!-- Search Row -->
-  <tr class="search-row">
+      <!-- =========================
+           Column Names
+      ========================= -->
 
-    <th>
-      <input
-        type="text"
-        [(ngModel)]="codeSearch"
-        (input)="filterProducts()"
-        placeholder="بحث بالكود"
-      />
-    </th>
+      <tr>
 
-    <th>
-      <input
-        type="text"
-        [(ngModel)]="nameSearch"
-        (input)="filterProducts()"
-        placeholder="بحث بالاسم"
-      />
-    </th>
+        <th>الكود</th>
 
-    <th>
-      <input
-        type="text"
-        [(ngModel)]="brandSearch"
-        (input)="filterProducts()"
-        placeholder="بحث بالماركة"
-      />
-    </th>
+        <th>اسم المنتج</th>
 
-    <th>
-      <input
-        type="text"
-        [(ngModel)]="categorySearch"
-        (input)="filterProducts()"
-        placeholder="بحث بالكاتيجوري"
-      />
-    </th>
+        <th>الماركة</th>
 
-    <th>
-      <input
-        type="text"
-        [(ngModel)]="priceSearch"
-        (input)="filterProducts()"
-        placeholder="بحث بالسعر"
-      />
-    </th>
+        <th>الكاتيجوري</th>
 
-    <th>
-      <input
-        type="text"
-        [(ngModel)]="stockSearch"
-        (input)="filterProducts()"
-        placeholder="بحث بالمخزون"
-      />
-    </th>
+        <th>السعر</th>
 
-    <th>
-      <input
-        type="text"
-        [(ngModel)]="statusSearch"
-        (input)="filterProducts()"
-        placeholder="نشط / موقوف"
-      />
-    </th>
+        <th>المخزون</th>
 
-  </tr>
+        <th>الحالة</th>
 
-</thead>
+        <th>التفاصيل</th>
 
-<tbody>
+      </tr>
 
-  <tr *ngFor="let product of filteredProducts">
 
-    <td>
-      {{ product.code || '-' }}
-    </td>
+      <!-- =========================
+           Search Row
+      ========================= -->
 
-    <td>
-      {{ product.name }}
-    </td>
+      <tr class="search-row">
 
-    <td>
-      {{ product.brand || '-' }}
-    </td>
+        <th>
 
-    <td>
-      {{ product.category || '-' }}
-    </td>
+          <input
+            type="text"
+            [(ngModel)]="codeSearch"
+            (input)="filterProducts()"
+            placeholder="بحث بالكود"
+          />
 
-    <td>
-      {{ product.price }} جنيه
-    </td>
+        </th>
 
-    <td>
-      {{ product.stockQuantity }}
-    </td>
 
-    <td>
-      <span
-        [class]="product.isActive
-          ? 'badge active'
-          : 'badge inactive'"
+        <th>
+
+          <input
+            type="text"
+            [(ngModel)]="nameSearch"
+            (input)="filterProducts()"
+            placeholder="بحث بالاسم"
+          />
+
+        </th>
+
+
+        <th>
+
+          <input
+            type="text"
+            [(ngModel)]="brandSearch"
+            (input)="filterProducts()"
+            placeholder="بحث بالماركة"
+          />
+
+        </th>
+
+
+        <th>
+
+          <input
+            type="text"
+            [(ngModel)]="categorySearch"
+            (input)="filterProducts()"
+            placeholder="بحث بالكاتيجوري"
+          />
+
+        </th>
+
+
+        <th>
+
+          <input
+            type="text"
+            [(ngModel)]="priceSearch"
+            (input)="filterProducts()"
+            placeholder="بحث بالسعر"
+          />
+
+        </th>
+
+
+        <th>
+
+          <input
+            type="text"
+            [(ngModel)]="stockSearch"
+            (input)="filterProducts()"
+            placeholder="بحث بالمخزون"
+          />
+
+        </th>
+
+
+        <th>
+
+          <input
+            type="text"
+            [(ngModel)]="statusSearch"
+            (input)="filterProducts()"
+            placeholder="نشط / موقوف"
+          />
+
+        </th>
+
+
+        <th>
+
+          <button
+            type="button"
+            class="clear-filter-btn"
+            (click)="clearFilters()"
+          >
+            مسح
+          </button>
+
+        </th>
+
+      </tr>
+
+    </thead>
+
+
+    <!-- =========================
+         Products
+    ========================= -->
+
+    <tbody>
+
+      <tr
+        *ngFor="let product of filteredProducts"
       >
-        {{ product.isActive ? 'نشط' : 'موقوف' }}
-      </span>
-    </td>
 
-  </tr>
+        <!-- Code -->
 
-  <tr *ngIf="filteredProducts.length === 0">
+        <td>
 
-    <td colspan="7" class="empty-row">
-      مفيش منتجات لعرضها
-    </td>
+          {{ product.productCode || '-' }}
 
-  </tr>
+        </td>
 
-</tbody>
+
+        <!-- Name -->
+
+        <td>
+
+          {{ product.name || '-' }}
+
+        </td>
+
+
+        <!-- Brand -->
+
+        <td>
+
+          {{ product.brand || '-' }}
+
+        </td>
+
+
+        <!-- Category -->
+
+        <td>
+
+          {{ product.category || '-' }}
+
+        </td>
+
+
+        <!-- Price -->
+
+        <td>
+
+          {{ product.unitPrice ?? 0 }}
+          جنيه
+
+        </td>
+
+
+        <!-- Stock -->
+
+        <td>
+
+          {{ product.stockBalance ?? 0 }}
+
+        </td>
+
+
+        <!-- Status -->
+
+        <td>
+
+          <span
+            [class]="
+              isProductActive(product)
+                ? 'badge active'
+                : 'badge inactive'
+            "
+          >
+
+            {{
+              isProductActive(product)
+                ? 'نشط'
+                : 'موقوف'
+            }}
+
+          </span>
+
+        </td>
+
+
+        <!-- Details -->
+
+        <td>
+
+          <button
+            type="button"
+            class="details-btn"
+            (click)="showProductDetails(product)"
+          >
+            عرض التفاصيل
+          </button>
+
+        </td>
+
+      </tr>
+
+
+      <!-- Empty -->
+
+      <tr
+        *ngIf="
+          filteredProducts.length === 0
+        "
+      >
+
+        <td
+          colspan="8"
+          class="empty-row"
+        >
+
+          مفيش منتجات لعرضها
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
   </table>
 
+
+  <!-- =========================
+       Pagination
+  ========================= -->
+
+  <div
+    class="pagination"
+    *ngIf="pageCount > 1"
+  >
+
+    <button
+      class="page-arrow"
+      [disabled]="currentPage === 1"
+      (click)="previousPage()"
+      aria-label="الصفحة السابقة"
+    >
+      ‹
+    </button>
+
+
+    <div class="page-number">
+
+      {{ currentPage }}
+
+      <span>/</span>
+
+      {{ pageCount }}
+
+    </div>
+
+
+    <button
+      class="page-arrow"
+      [disabled]="currentPage === pageCount"
+      (click)="nextPage()"
+      aria-label="الصفحة التالية"
+    >
+      ›
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       Total
+  ========================= -->
+
+  <div
+    class="pagination-info"
+    *ngIf="totalResults > 0"
+  >
+
+    إجمالي المنتجات:
+    {{ totalResults }}
+
+  </div>
+
 </div>
 
-<div *ngIf="isLoading" class="status-message">
+
+<!-- =========================
+     Loading
+========================= -->
+
+<div
+  *ngIf="isLoading"
+  class="status-message"
+>
+
   جاري التحميل...
+
 </div>
 
-<div *ngIf="errorMessage" class="status-message error">
+
+<!-- =========================
+     Error
+========================= -->
+
+<div
+  *ngIf="errorMessage"
+  class="status-message error"
+>
+
   {{ errorMessage }}
+
+</div>
+
+
+<!-- =====================================================
+     Product Details Modal
+===================================================== -->
+
+<div
+  class="product-modal-overlay"
+  *ngIf="selectedProduct"
+  (click)="closeProductDetails()"
+>
+
+  <div
+    class="product-modal"
+    (click)="$event.stopPropagation()"
+  >
+
+    <!-- Header -->
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          تفاصيل المنتج
+        </span>
+
+        <h2>
+          {{ selectedProduct.name || '-' }}
+        </h2>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="modal-close"
+        (click)="closeProductDetails()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         Basic Information
+    ========================= -->
+
+    <div class="details-section">
+
+      <h3>البيانات الأساسية</h3>
+
+      <div class="details-grid">
+
+        <div class="detail-item">
+
+          <span>الكود</span>
+
+          <strong>
+            {{ selectedProduct.productCode || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>الباركود</span>
+
+          <strong>
+            {{ selectedProduct.barcode || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>الماركة</span>
+
+          <strong>
+            {{ selectedProduct.brand || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>التصنيف</span>
+
+          <strong>
+            {{ selectedProduct.category || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>السعر</span>
+
+          <strong>
+            {{ selectedProduct.unitPrice ?? 0 }}
+            جنيه
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>سعر الشراء</span>
+
+          <strong>
+            {{ selectedProduct.buyPrice ?? 0 }}
+            جنيه
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>متوسط السعر</span>
+
+          <strong>
+            {{ selectedProduct.averagePrice ?? 0 }}
+            جنيه
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>المخزون</span>
+
+          <strong>
+            {{ selectedProduct.stockBalance ?? 0 }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>نوع التتبع</span>
+
+          <strong>
+            {{ selectedProduct.trackingType || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>المورد</span>
+
+          <strong>
+            {{ selectedProduct.supplierId || '-' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Description
+    ========================= -->
+
+    <div
+      class="details-section"
+      *ngIf="selectedProduct.description"
+    >
+
+      <h3>الوصف</h3>
+
+      <p class="description">
+
+        {{ selectedProduct.description }}
+
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         Extra Information
+    ========================= -->
+
+    <div class="details-section">
+
+      <h3>بيانات إضافية</h3>
+
+      <div class="details-grid">
+
+        <div class="detail-item">
+
+          <span>Tags</span>
+
+          <strong>
+            {{ selectedProduct.tags || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>كود المورد</span>
+
+          <strong>
+            {{ selectedProduct.supplierCode || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>حد المخزون المنخفض</span>
+
+          <strong>
+            {{ selectedProduct.lowStockThreshold ?? 0 }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>الخصم</span>
+
+          <strong>
+            {{ selectedProduct.discount ?? 0 }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>هامش الربح</span>
+
+          <strong>
+            {{ selectedProduct.profitMargin ?? 0 }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>الحالة</span>
+
+          <strong>
+
+            {{
+              isProductActive(selectedProduct)
+                ? 'نشط'
+                : 'موقوف'
+            }}
+
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>تاريخ الإنشاء</span>
+
+          <strong>
+            {{ selectedProduct.created || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span>آخر تعديل</span>
+
+          <strong>
+            {{ selectedProduct.modified || '-' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Categories
+    ========================= -->
+
+    <div
+      class="details-section"
+      *ngIf="
+        selectedProduct.productCategory?.length
+      "
+    >
+
+      <h3>التصنيفات</h3>
+
+      <div class="category-list">
+
+        <div
+          class="category-item"
+          *ngFor="
+            let category
+            of selectedProduct.productCategory
+          "
+        >
+
+          <strong>
+            {{ category.name || '-' }}
+          </strong>
+
+          <span>
+            {{ category.description || '' }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Product Available Quantity
+    ========================= -->
+
+    <div
+      class="details-section"
+      *ngIf="
+        selectedProduct.productAvailableQTY
+      "
+    >
+
+      <h3>الكميات المتاحة</h3>
+
+      <div class="quantity-list">
+
+        <div
+          class="quantity-item"
+          *ngFor="
+            let item
+            of selectedProduct.productAvailableQTY
+              | keyvalue
+          "
+        >
+
+          <span>
+            المخزن {{ item.key }}
+          </span>
+
+          <strong>
+            {{ item.value }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeProductDetails()"
+      >
+
+        إغلاق
+
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
