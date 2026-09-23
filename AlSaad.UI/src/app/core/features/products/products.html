@@ -1,5 +1,5 @@
 <section class="page-header">
-  <h1>المنتجات</h1>
+  <h1>Products</h1>
 </section>
 
 
@@ -198,8 +198,13 @@
 
         <td>
 
-          {{ product.unitPrice ?? 0 }}
-          جنيه
+        <div>
+    {{ product.unitPrice ?? 0 }} L.E
+  </div>
+
+  <div>
+    {{ product.buyPrice ?? 0 }} L.E
+  </div>
 
         </td>
 
@@ -239,14 +244,13 @@
         <!-- Details -->
 
         <td>
-
-          <button
-            type="button"
-            class="details-btn"
-            (click)="showProductDetails(product)"
-          >
-            عرض التفاصيل
-          </button>
+<button
+  type="button"
+  class="details-btn"
+  [routerLink]="['/inventory/products', product.id]"
+>
+  عرض التفاصيل
+</button>
 
         </td>
 

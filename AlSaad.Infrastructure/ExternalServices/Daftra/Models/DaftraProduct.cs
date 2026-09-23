@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace AlSaad.Infrastructure.ExternalServices.Daftra.Models
 {
@@ -163,23 +160,41 @@ namespace AlSaad.Infrastructure.ExternalServices.Daftra.Models
         [JsonPropertyName("bundle_final_cost")]
         public decimal? BundleFinalCost { get; set; }
 
-        [JsonPropertyName("productPendingQTY")]
-        public List<object>? ProductPendingQTY { get; set; }
 
+        // Daftra can return this field as different JSON shapes
+        // such as [] or {}.
+        // JsonElement allows us to receive any valid JSON shape.
+        [JsonPropertyName("productPendingQTY")]
+        public JsonElement? ProductPendingQTY { get; set; }
+
+
+        // Daftra normally returns:
+        // {
+        //   "1": 0,
+        //   "2": 10
+        // }
+        //
+        // But sometimes it can return [].
+        // FlexibleDictionaryConverter handles both cases.
         [JsonPropertyName("productAvailableQTY")]
         public Dictionary<string, decimal>? ProductAvailableQTY { get; set; }
 
+
         [JsonPropertyName("ProductCategory")]
-        public List<DaftraProductCategory>? ProductCategory { get; set; } 
+        public List<DaftraProductCategory>? ProductCategory { get; set; }
 
+
+        // Can have different shapes, so JsonElement is safer.
         [JsonPropertyName("ProductStock")]
-        public JsonElement? ProductStock { get; set; } 
+        public JsonElement? ProductStock { get; set; }
 
-        // مؤقتًا لحد ما نعمل Models الخاصة بالصور
+
+        // Temporarily kept as JsonElement because
+        // Daftra may return different structures.
         [JsonPropertyName("ProductImage")]
-        public List<object>? ProductImage { get; set; }
+        public JsonElement? ProductImage { get; set; }
 
         [JsonPropertyName("ProductImageS3")]
-        public List<object>? ProductImageS3 { get; set; }
+        public JsonElement? ProductImageS3 { get; set; }
     }
 }

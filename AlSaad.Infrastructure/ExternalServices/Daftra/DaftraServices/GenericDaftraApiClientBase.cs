@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlSaad.Infrastructure.ExternalServices.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,22 +17,40 @@ namespace AlSaad.Infrastructure.ExternalServices.Daftra.DaftraServices
 
         protected static readonly JsonSerializerOptions JsonOptions = new()
         {
-            NumberHandling = JsonNumberHandling.AllowReadingFromString
+            NumberHandling = JsonNumberHandling.AllowReadingFromString,
+            PropertyNameCaseInsensitive = true
         };
-
+        static GenericDaftraApiClientBase()
+        {
+            JsonOptions.Converters.Add(new FlexibleDictionaryConverter());
+        }
         protected GenericDaftraApiClientBase(HttpClient httpClient)
         {
             HttpClient = httpClient;
         }
-        protected async Task<TResponse> GetListAsync<TResponse>(string url, CancellationToken cancellationToken)
-           where TResponse : new()
+      
+        protected async Task<TResponse> GetListAsync<TResponse>(string url,CancellationToken cancellationToken)
+            where TResponse : new()
         {
             var response = await HttpClient.GetAsync(url, cancellationToken);
             response.EnsureSuccessStatusCode();
 
-            var result = await response.Content.ReadFromJsonAsync<TResponse>(JsonOptions, cancellationToken);
+            //var json = await response.Content.ReadAsStringAsync(cancellationToken);
+            var result = await response.Content.ReadFromJsonAsync<TResponse>(JsonOptions, cancellationToken); 
             return result ?? new TResponse();
+
         }
+
+        //protected async Task<TResponse> GetListAsync<TResponse>(string url, CancellationToken cancellationToken)
+        //   where TResponse : new()
+        //{
+        //    var response = await HttpClient.GetAsync(url, cancellationToken);
+        //    response.EnsureSuccessStatusCode();
+
+        //    var result = await response.Content.ReadFromJsonAsync<TResponse>(JsonOptions, cancellationToken);
+
+        //    return result ?? new TResponse();
+        //}
         protected async Task<TResponse?> GetSingleAsync<TResponse>(string url, CancellationToken cancellationToken)
            where TResponse : class
         {

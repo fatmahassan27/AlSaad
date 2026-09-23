@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AlSaad.Application.DTOs
@@ -110,11 +111,11 @@ namespace AlSaad.Application.DTOs
 
         public decimal? BundleFinalCost { get; set; }
 
-        public List<object>? ProductPendingQTY { get; set; }
+        public JsonElement? ProductPendingQTY { get; set; }
 
-        public Dictionary<string, decimal>? ProductAvailableQTY { get; set; }
+        public Dictionary<string, decimal> ProductAvailableQTY { get; set; } = new();
 
-       // public List<ProductImageDto>? ProductImage { get; set; }
+        // public List<ProductImageDto>? ProductImage { get; set; }
 
         public List<ProductCategoryDto>? ProductCategory { get; set; }
 

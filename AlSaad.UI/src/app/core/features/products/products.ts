@@ -9,7 +9,7 @@ import {
   CommonModule,
   isPlatformBrowser
 } from '@angular/common';
-
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { ProductService } from '../../services/product-service';
@@ -20,7 +20,8 @@ import { Product } from '../../models/Product';
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './products.html',
   styleUrl: './products.css',

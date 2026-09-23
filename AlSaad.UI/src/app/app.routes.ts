@@ -9,6 +9,7 @@ import { Cart } from '../app/core/features/cart/cart';
 import { Part } from './core/cars/part/part';
 import { Account } from './core/features/account/account';
 import { Products } from './core/features/products/products';
+import { ProductDetails } from './core/features/product-details/product-details';
 import { Requisitions } from './core/features/requisitions/requisitions';
 import { RequisitionDetails } from './core/features/requisition-details/requisition-details';
 import { ProductCategories } from './core/features/product-categories/product-categories';
@@ -41,6 +42,7 @@ export const routes: Routes = [
         children: [
           { path: '', redirectTo: 'products', pathMatch: 'full' },
           { path: 'products', component: Products },
+          { path: 'products/:id', component: ProductDetails },
           { path: 'categories', component: ProductCategories },
           { path: 'categories/:id', component: CategoryDetails },
           { path: 'requisitions', component: Requisitions },
