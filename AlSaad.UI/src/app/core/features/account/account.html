@@ -1,66 +1,200 @@
-<section class="page-header">
-  <h1>حسابك</h1>
-  <div class="balance-card">
-    <span class="balance-label">رصيدك الحالي</span>
-    <span class="balance-value">{{ currentBalance | number }} جنيه</span>
+<div class="account-page" dir="rtl">
+
+  <!-- ========================= -->
+  <!-- Top utility bar -->
+  <!-- ========================= -->
+  <div class="topbar">
+    <div class="topbar__right">تابع طلبك · كنا وعدنا في قطع أصلية 100%</div>
+    <div class="topbar__left">
+      <a href="#">عرض توضيحي</a>
+      <span class="dot">·</span>
+      <a href="#">بيانات وأسعار نموذجية</a>
+    </div>
   </div>
-  
-</section>
 
-<section class="section">
-  <h2 class="section-title">ملخص معاملاتك على مدار آخر 6 أشهر</h2>
+  <!-- ========================= -->
+  <!-- Header -->
+  <!-- ========================= -->
+  <header class="header">
+    <div class="header__brand">
+      <span class="brand-mark">S</span>
+      <div class="brand-text">
+        <strong>السعد</strong>
+        <span>قطع غيار السيارات</span>
+      </div>
+    </div>
 
-  <div class="table-wrapper">
-    <table class="data-table summary-table">
-      <thead>
-        <tr>
-          <th>الشهر</th>
-          <th *ngFor="let m of monthlySummary">{{ m.month }} ({{ m.year }})</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="row-label">صافي مشترياتك</td>
-          <td *ngFor="let m of monthlySummary">{{ m.netPurchases | number }}</td>
-        </tr>
-        <tr>
-          <td class="row-label">صافي مدفوعاتك</td>
-          <td *ngFor="let m of monthlySummary">{{ m.netPayments | number }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <nav class="header__nav">
+      <a href="#">الرئيسية</a>
+      <a href="#">تسوق القطع</a>
+      <a href="#">البحث عن المركبة</a>
+      <a href="#">العروض</a>
+      <a href="#" class="active">طلباتي</a>
+      <a href="#">حسابي</a>
+    </nav>
+
+    <div class="header__search">
+      <input type="text" placeholder="ابحث باسم القطعة، الكود أو رقم OEM" />
+      <button type="button">بحث</button>
+    </div>
+
+    <div class="header__actions">
+      <button type="button" class="icon-btn">
+        <span>حسابي</span>
+      </button>
+      <button type="button" class="icon-btn cart-btn">
+        <span>السلة</span>
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================= -->
+  <!-- Breadcrumb -->
+  <!-- ========================= -->
+  <div class="breadcrumb">
+    <a href="#">الرئيسية</a>
+    <span>/</span>
+    <span>كشف الحساب</span>
   </div>
-</section>
 
-<section class="section">
-  <h2 class="section-title">تفاصيل الحركة</h2>
+  <!-- ========================= -->
+  <!-- Page body -->
+  <!-- ========================= -->
+  <div class="account-layout">
 
-  <div class="table-wrapper">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>تاريخ العملية</th>
-          <th>العملية</th>
-          <th>قيمة العملية</th>
-          <th>الرصيد قبل العملية</th>
-          <th>الرصيد بعد العملية</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let t of transactions">
-          <td>{{ t.date }}</td>
-          <td>{{ t.operationType }}</td>
-          <td>{{ t.operationValue | number }} جنيه</td>
-          <td [class.negative]="t.balanceBefore < 0">{{ t.balanceBefore | number }}</td>
-          <td [class.negative]="t.balanceAfter < 0">{{ t.balanceAfter | number }}</td>
-          <td>
-            <button type="button" class="view-btn" (click)="viewStatement(t)">
-              عرض كشف الحساب
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Main column -->
+    <main class="account-main">
+
+      <div class="account-main__head">
+        <div>
+          <span class="pill">كشف حساب العميل</span>
+          <h1>كشف الحساب</h1>
+          <p class="subtitle">
+            {{ accountInfo.customerName }} · كود الحساب: {{ accountInfo.accountCode }}
+          </p>
+        </div>
+      </div>
+
+      <div class="balance-card">
+        <div class="balance-card__meta">
+          <span>آخر حركة: {{ accountInfo.lastMovementDate }}</span>
+          <span>العملة: {{ accountInfo.currency }}</span>
+        </div>
+        <div class="balance-card__amount">
+          <span>الرصيد الحالي</span>
+          <strong>{{ accountInfo.balance | number }} ج.م</strong>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="filters__field filters__field--search">
+          <label>ابحث في الحركات</label>
+          <input
+            type="text"
+            placeholder="المرجع أو وصف الحركة"
+            [(ngModel)]="searchTerm"
+          />
+        </div>
+
+        <div class="filters__field">
+          <label>من تاريخ</label>
+          <input type="date" [(ngModel)]="dateFrom" />
+        </div>
+
+        <div class="filters__field">
+          <label>إلى تاريخ</label>
+          <input type="date" [(ngModel)]="dateTo" />
+        </div>
+
+        <button type="button" class="filters__clear" (click)="clearFilters()">
+          مسح الفلاتر
+        </button>
+      </div>
+
+      <div class="toolbar">
+        <span class="toolbar__count">{{ transactions.length }} حركات</span>
+        <div class="toolbar__actions">
+          <button type="button" class="toolbar__btn">
+            <strong>PDF</strong> حفظ
+          </button>
+          <button type="button" class="toolbar__btn">طباعة</button>
+        </div>
+      </div>
+
+      <div class="statement-table">
+        <div class="table-row table-row--head">
+          <span>التاريخ</span>
+          <span>المرجع</span>
+          <span>الوصف</span>
+          <span>مدين</span>
+          <span>دائن</span>
+          <span>الرصيد</span>
+        </div>
+
+        <div class="table-row" *ngFor="let tx of transactions">
+          <span>{{ tx.date }}</span>
+          <span class="ref">{{ 10 }}</span>
+          <span>{{ 10 }}</span>
+          <span>{{10}}</span>
+          <span>{{ 10}}</span>
+          <strong>{{ 10 }}</strong>
+        </div>
+      </div>
+
+      <p class="statement-note">
+        الرصيد الموضح لكل حركة هو الرصيد بعدها، لا تتأثر الأرصدة التاريخية.
+      </p>
+    </main>
+
+    <!-- Side navigation card -->
+    <aside class="account-side">
+      <a href="#" class="side-link">لوحة الحساب</a>
+      <a href="#" class="side-link">طلباتي</a>
+      <a href="#" class="side-link side-link--active">كشف الحساب</a>
+      <a href="#" class="side-link">تسوق القطع</a>
+      <a href="#" class="side-link">تسجيل الخروج</a>
+    </aside>
+
   </div>
-</section>
+
+  <!-- ========================= -->
+  <!-- Footer -->
+  <!-- ========================= -->
+  <footer class="site-footer">
+    <div class="site-footer__col">
+      <div class="footer-brand">
+        <span class="brand-mark">S</span>
+        <div class="brand-text">
+          <strong>السعد</strong>
+          <span>قطع غيار السيارات</span>
+        </div>
+      </div>
+      <p>
+        شبكة القطع الموثوقة والطلب الأسرع. حلول عملية لصيانة قطع الخيار.
+      </p>
+    </div>
+
+    <div class="site-footer__col">
+      <h4>التسوق</h4>
+      <a href="#">جميع قطع الخيار</a>
+      <a href="#">الفئات</a>
+      <a href="#">الشركات المصنعة</a>
+    </div>
+
+    <div class="site-footer__col">
+      <h4>حساب الأعمال</h4>
+      <a href="#">لوحة الحساب</a>
+      <a href="#">طلباتي</a>
+      <a href="#">كشف الحساب</a>
+    </div>
+
+    <div class="site-footer__col">
+      <h4>دليل الشراء</h4>
+      <a href="#">اختيار المركبة</a>
+      <a href="#">التأكد من التوافق</a>
+      <a href="#">مراجعة الطلب</a>
+    </div>
+  </footer>
+
+</div>

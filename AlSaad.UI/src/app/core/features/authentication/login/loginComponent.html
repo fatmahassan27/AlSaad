@@ -1,116 +1,202 @@
-<div class="auth-screen">
-  <!-- Branding Panel -->
-  <aside class="brand-panel">
-    <div class="brand-content">
-      <div class="logo">AlSaad</div>
+<div class="login-page" dir="rtl">
 
-      <h2>Find your next car.</h2>
+  <!-- ========================= -->
+  <!-- Top utility bar -->
+  <!-- ========================= -->
+  <div class="topbar">
+    <div class="topbar__right">تابع طلبك · كنا وعدنا في قطع أصلية 100%</div>
+    <div class="topbar__left">
+      <a href="#">عرض توضيحي</a>
+      <span class="dot">·</span>
+      <a href="#">بيانات وأسعار نموذجية</a>
+    </div>
+  </div>
 
-      <p>
-        A trusted marketplace to discover, compare,
-        and find the car that's right for you.
-      </p>
-
-      <div class="brand-decoration">
-        <div class="road"></div>
-        <div class="road-line"></div>
+  <!-- ========================= -->
+  <!-- Header -->
+  <!-- ========================= -->
+  <header class="header">
+    <div class="header__brand">
+      <span class="brand-mark">S</span>
+      <div class="brand-text">
+        <strong>السعد</strong>
+        <span>قطع غيار السيارات</span>
       </div>
     </div>
-  </aside>
 
-  <!-- Login Panel -->
-  <main class="form-panel">
-    <div class="form-wrapper">
+    <nav class="header__nav">
+      <a href="#">الرئيسية</a>
+      <a href="#">تسوق القطع</a>
+      <a href="#">البحث عن المركبة</a>
+      <a href="#">العروض</a>
+      <a href="#">طلباتي</a>
+      <a href="#" class="active">حسابي</a>
+    </nav>
 
-      <div class="mobile-logo">AlSaad</div>
+    <div class="header__search">
+      <input type="text" placeholder="ابحث باسم القطعة، الكود أو رقم OEM" />
+      <button type="button">بحث</button>
+    </div>
 
-      <form
-        class="auth-card"
-        [formGroup]="form"
-        (ngSubmit)="onSubmit()"
-      >
-        <div class="auth-header">
-          <h1>Welcome back</h1>
-          <p>Sign in to continue to your account.</p>
+    <div class="header__actions">
+      <button type="button" class="icon-btn">
+        <span>حسابي</span>
+      </button>
+      <button type="button" class="icon-btn cart-btn">
+        <span>السلة</span>
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================= -->
+  <!-- Split body -->
+  <!-- ========================= -->
+  <div class="login-split">
+
+    <!-- Left promo panel -->
+    <section class="login-promo">
+      <span class="login-promo__eyebrow">السعد لقطع غيار السيارات</span>
+      <h1>أعمالك تتحرك.<br />ونحن نساعدك على الاستمرار.</h1>
+      <p>
+        اطلع على فطلقتك، راجع أسعارك حسابك، وأكد طلب احتياجاتك اليومية
+        بسهولة.
+      </p>
+
+      <div class="login-promo__visual" aria-hidden="true">
+        <div class="login-promo__ring">
+          <span class="login-promo__label login-promo__label--top">PRECISION / PERFORMANCE</span>
+          <span class="login-promo__label login-promo__label--bottom">AL SAAD — PARTS DIVISION</span>
+        </div>
+      </div>
+
+      <div class="login-promo__trust">
+        <span>✓</span>
+        قطع موثوقة · مطبوعات واضحة · طلب أسرع
+      </div>
+    </section>
+
+    <!-- Right form panel -->
+    <section class="login-form-panel">
+      <span class="login-form-panel__eyebrow">بوابة عملاء السعد</span>
+      <h2>مرحبًا بعودتك</h2>
+      <p class="login-form-panel__subtitle">
+        كل طلباتك وأسعار حسابك في مكان واحد.
+      </p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <label class="field">
+          <span>البريد الإلكتروني</span>
+          <input
+            type="email"
+            placeholder="أدخل بريدك الإلكتروني"
+            formControlName="email"
+          />
+          <span
+            class="field-error"
+            *ngIf="form.controls.email.invalid && form.controls.email.touched"
+          >
+            <ng-container *ngIf="form.controls.email.errors?.['required']">
+              البريد الإلكتروني مطلوب.
+            </ng-container>
+            <ng-container *ngIf="form.controls.email.errors?.['email']">
+              أدخل بريد إلكتروني صحيح.
+            </ng-container>
+          </span>
+        </label>
+
+        <label class="field">
+          <span>كلمة المرور</span>
+          <input
+            type="password"
+            placeholder="أدخل كلمة المرور"
+            formControlName="password"
+          />
+          <span
+            class="field-error"
+            *ngIf="form.controls.password.invalid && form.controls.password.touched"
+          >
+            <ng-container *ngIf="form.controls.password.errors?.['required']">
+              كلمة المرور مطلوبة.
+            </ng-container>
+            <ng-container *ngIf="form.controls.password.errors?.['minlength']">
+              كلمة المرور 6 أحرف على الأقل.
+            </ng-container>
+          </span>
+        </label>
+
+        <div class="field-row">
+          <a href="#" class="forgot-link">نسيت كلمة المرور؟</a>
+          <label class="checkbox">
+            تذكرني
+            <input type="checkbox" />
+          </label>
         </div>
 
-        <!-- Error -->
-        <div
-          class="alert"
-          *ngIf="errorMessage()"
-          role="alert"
-        >
+        <div class="disclaimer" *ngIf="errorMessage()">
           {{ errorMessage() }}
         </div>
 
-        <!-- Email -->
-        <div class="field">
-          <label for="email">Email address</label>
-
-          <input
-            id="email"
-            type="email"
-            formControlName="email"
-            placeholder="you@example.com"
-            autocomplete="email"
-          />
-
-          <span
-            class="field-error"
-            *ngIf="
-              form.controls.email.invalid &&
-              form.controls.email.touched
-            "
-          >
-            Please enter a valid email address.
-          </span>
-        </div>
-
-        <!-- Password -->
-        <div class="field">
-          <div class="field-label-row">
-            <label for="password">Password</label>
-
-            <a href="#" class="forgot-link">
-              Forgot password?
-            </a>
-          </div>
-
-          <input
-            id="password"
-            type="password"
-            formControlName="password"
-            placeholder="Enter your password"
-            autocomplete="current-password"
-          />
-
-          <span
-            class="field-error"
-            *ngIf="
-              form.controls.password.invalid &&
-              form.controls.password.touched
-            "
-          >
-            Password must be at least 6 characters.
-          </span>
-        </div>
-
-        <!-- Submit -->
-        <button
-          type="submit"
-          class="btn-primary"
-          [disabled]="isSubmitting()"
-        >
-          <span *ngIf="!isSubmitting()">Log In</span>
+        <button type="submit" class="submit-btn" [disabled]="isSubmitting()">
+          <span aria-hidden="true">←</span>
+          {{ isSubmitting() ? 'جاري الدخول...' : 'تسجيل الدخول' }}
         </button>
 
-        <!-- Register -->
-        <p class="auth-footer">
-          Don't have an account?
-          <a routerLink="/register">Create an account</a>
-        </p>
+        <div class="form-links">
+          <a routerLink="/register">ليس لديك حساب أعمال؟ تواصل مع المبيعات</a>
+          <a href="#">استكشف الحساب التجريبي بدون إدخال بيانات</a>
+        </div>
       </form>
+    </section>
+  </div>
 
+  <!-- ========================= -->
+  <!-- Footer -->
+  <!-- ========================= -->
+  <footer class="site-footer">
+    <div class="site-footer__col">
+      <div class="footer-brand">
+        <span class="brand-mark">S</span>
+        <div class="brand-text">
+          <strong>السعد</strong>
+          <span>قطع غيار السيارات</span>
+        </div>
+      </div>
+      <p>
+        شبكة القطع الموثوقة والطلب الأسرع. حلول عملية لمتاجر قطع الخيار
+        والورش وتجار الجملة.
+      </p>
     </div>
-  </main>
+
+    <div class="site-footer__col">
+      <h4>التسوق</h4>
+      <a href="#">جميع قطع الخيار</a>
+      <a href="#">الفئات</a>
+      <a href="#">الشركات المصنعة</a>
+      <a href="#">البحث حسب المركبة</a>
+    </div>
+
+    <div class="site-footer__col">
+      <h4>حساب الأعمال</h4>
+      <a href="#">لوحة الحساب</a>
+      <a href="#">طلباتي</a>
+      <a href="#">كشف الحساب</a>
+      <a href="#">تسجيل الدخول</a>
+    </div>
+
+    <div class="site-footer__col">
+      <h4>دليل الشراء</h4>
+      <a href="#">اختيار المركبة</a>
+      <a href="#">التأكد من التوافق</a>
+      <a href="#">مراجعة الطلب</a>
+      <a href="#">في خدمتك، من البحث إلى الطلب</a>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>عرض توضيحي لبوابة أعمال السعد</span>
+      <span>© 2026 السعد لقطع غيار السيارات</span>
+    </div>
+  </footer>
+
 </div>

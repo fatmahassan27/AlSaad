@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartItem } from '../../models/Cart-Item';
 
-
 @Component({
   selector: 'app-cart',
   standalone:true,
@@ -12,6 +11,8 @@ import { CartItem } from '../../models/Cart-Item';
   styleUrl: './cart.css',
 })
 export class Cart {
+    discount = 0;
+
    items: CartItem[] = [
     {
       code: 'SP-001',
@@ -45,14 +46,35 @@ export class Cart {
     }
   ];
 
+  getsubtotal(): number {
+    return this.items.reduce(
+      (sum, item) => sum + item.price * item.qty,
+      0
+    );
+  }
   remove(code: string): void {
     this.items = this.items.filter(item => item.code !== code);
   }
 
-  get totalPrice(): number {
-    return this.items.reduce(
-      (total, item) => total + (item.price * item.qty),
-      0
-    );
+increaseQty(item: CartItem): void {
+    item.qty += 1;
   }
+ 
+  decreaseQty(item: CartItem): void {
+    if (item.qty > 1) {
+      item.qty -= 1;
+    }
+  }
+ 
+  removeItem(item: CartItem): void {
+    this.items = this.items.filter((i) => i !== item);
+  }
+ 
+  submitOrder(): void {
+    if (!this.items.length) {
+      return;
+    }
+    console.log('Order submitted:', this.items);
+  }
+  
 }

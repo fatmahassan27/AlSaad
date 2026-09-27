@@ -1,162 +1,63 @@
-:host {
-  display: block;
+/* =========================================================
+   SITE FOOTER
+========================================================= */
 
+.site-footer {
   width: 100%;
-}
+  max-width: 1250px;
 
-.app-footer {
-  width: 100%;
+  margin: 0 auto;
 
-  background: #030303;
+  padding: 55px 40px 45px;
 
-  color: #ffffff;
+  display: grid;
 
-  border-top: 2px solid #e00000;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+
+  gap: 55px;
+
+  background: #ffffff;
+
+  border-top: 3px solid #e00000;
+
+  box-sizing: border-box;
 
   font-family: 'Cairo', sans-serif;
 }
 
 
 /* =========================================================
-   CONTENT
+   FOOTER COLUMN
 ========================================================= */
 
-.footer-content {
-  max-width: 1200px;
+.site-footer__col {
+  min-width: 0;
 
-  margin: auto;
+  display: flex;
 
-  padding: 55px 35px;
+  flex-direction: column;
 
-  display: grid;
-
-  grid-template-columns:
-    1.5fr 1fr 1fr;
-
-  gap: 60px;
-
-  box-sizing: border-box;
+  align-items: flex-start;
 }
 
 
 /* =========================================================
-   COLUMNS
+   BRAND
 ========================================================= */
 
-.footer-col h4 {
-  margin: 0 0 20px;
-
-  color: #ffffff;
-
-  font-size: 15px;
-
-  font-weight: 800;
-}
-
-.footer-col h4::after {
-  content: '';
-
-  display: block;
-
-  width: 35px;
-
-  height: 3px;
-
-  margin-top: 8px;
-
-  background: #e00000;
-}
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.footer-logo {
+.footer-brand {
   display: flex;
 
   align-items: center;
 
   gap: 10px;
 
-  margin-bottom: 15px;
+  margin-bottom: 17px;
 }
 
-.footer-logo span {
-  color: #ffffff;
-
-  font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 20px;
-
-  font-weight: 900;
-
-  letter-spacing: 1px;
-}
-
-.footer-col.about p {
-  max-width: 380px;
-
-  margin: 0;
-
-  color: #777;
-
-  font-size: 11px;
-
-  line-height: 2;
-}
-
-
-/* =========================================================
-   LINKS
-========================================================= */
-
-.footer-col ul {
-  list-style: none;
-
-  padding: 0;
-
-  margin: 0;
-}
-
-.footer-col li {
-  margin-bottom: 10px;
-}
-
-.footer-col a {
-  color: #888;
-
-  text-decoration: none;
-
-  font-size: 11px;
-
-  transition:
-    color 0.2s ease,
-    padding-right 0.2s ease;
-}
-
-.footer-col a:hover {
-  color: #e00000;
-
-  padding-right: 5px;
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.social-icons {
-  display: flex;
-
-  gap: 10px;
-}
-
-.social-icons::before {
-  content: '✦';
-
-  width: 35px;
-  height: 35px;
+.footer-brand .brand-mark {
+  width: 38px;
+  height: 38px;
 
   display: flex;
 
@@ -165,54 +66,183 @@
 
   background: #111111;
 
-  border: 1px solid #292929;
+  color: #ffffff;
 
-  color: #e00000;
+  border-radius: 7px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 18px;
+
+  font-weight: 900;
+}
+
+.footer-brand .brand-text {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.footer-brand .brand-text strong {
+  color: #151515;
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  line-height: 1.3;
+}
+
+.footer-brand .brand-text span {
+  color: #888888;
+
+  font-size: 10px;
+
+  line-height: 1.3;
 }
 
 
 /* =========================================================
-   BOTTOM
+   DESCRIPTION
 ========================================================= */
 
-.footer-bottom {
-  min-height: 55px;
+.site-footer__col > p {
+  max-width: 300px;
 
-  padding: 0 30px;
+  margin: 0;
 
-  display: flex;
+  color: #777777;
 
-  align-items: center;
-  justify-content: center;
+  font-size: 11px;
 
-  background: #080808;
+  line-height: 2;
 
-  border-top: 1px solid #1f1f1f;
+  text-align: right;
+}
 
-  color: #555;
+
+/* =========================================================
+   TITLES
+========================================================= */
+
+.site-footer__col h4 {
+  position: relative;
+
+  margin: 0 0 20px;
+
+  color: #222222;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  line-height: 1.5;
+}
+
+.site-footer__col h4::after {
+  content: '';
+
+  display: block;
+
+  width: 30px;
+  height: 3px;
+
+  margin-top: 8px;
+
+  background: #e00000;
+
+  border-radius: 2px;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.site-footer__col a {
+  position: relative;
+
+  display: inline-block;
+
+  margin-bottom: 11px;
+
+  color: #777777;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  line-height: 1.7;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.site-footer__col a:hover {
+  color: #e00000;
+
+  transform: translateX(-4px);
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM LINE
+========================================================= */
+
+.site-footer::after {
+  content: '© 2026 السعد — قطع غيار السيارات';
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 16px;
+
+  background: #fafafa;
+
+  border-top: 1px solid #eeeeee;
+
+  color: #888888;
 
   font-family: Arial, Helvetica, sans-serif;
 
   font-size: 9px;
-
-  letter-spacing: 0.5px;
 
   text-align: center;
 }
 
 
 /* =========================================================
-   MOBILE
+   IMPORTANT
 ========================================================= */
 
-@media (max-width: 700px) {
+:host {
+  display: block;
 
-  .footer-content {
-    grid-template-columns: 1fr;
+  width: 100%;
 
-    gap: 35px;
+  position: relative;
 
-    padding: 45px 25px;
+  padding-bottom: 52px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 950px) {
+
+  .site-footer {
+    grid-template-columns: 1
   }
-
 }

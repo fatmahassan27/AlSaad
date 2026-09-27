@@ -1,38 +1,36 @@
-<footer class="app-footer">
-  <div class="footer-content">
-    <div class="footer-col about">
-      <div class="footer-logo">
-        <!-- <mat-icon>directions_car</mat-icon> -->
-        <span>قطع غيار السيارات</span>
+
+  <footer class="site-footer">
+    <div class="site-footer__col">
+      <div class="footer-brand">
+        <span class="brand-mark">S</span>
+        <div class="brand-text">
+          <strong>السعد</strong>
+          <span>قطع غيار السيارات</span>
+        </div>
       </div>
       <p>
-        موقعك الموثوق لشراء قطع غيار السيارات الأصلية والبديلة بأفضل الأسعار
-        وتوصيل لكل المحافظات.
+        شبكة القطع الموثوقة والطلب الأسرع. حلول عملية لصيانة قطع الخيار.
       </p>
     </div>
 
-    <div class="footer-col links">
-      <h4>روابط سريعة</h4>
-      <ul>
-        <li *ngFor="let link of quickLinks">
-          <a [routerLink]="link.path">{{ link.label }}</a>
-        </li>
-      </ul>
+    <div class="site-footer__col">
+      <h4>التسوق</h4>
+      <a href="#">جميع قطع الخيار</a>
+      <a href="#">الفئات</a>
+      <a href="#">الشركات المصنعة</a>
     </div>
 
-    <div class="footer-col contact">
-      <h4>تواصل معنا</h4>
-      <!-- <p><mat-icon inline="true">call</mat-icon> 19XXX</p> -->
-      <!-- <p><mat-icon inline="true">email</mat-icon> support&#64;example.com</p> -->
-      <div class="social-icons">
-        <!-- <a href="#" aria-label="فيسبوك"><mat-icon>facebook</mat-icon></a>
-        <a href="#" aria-label="واتساب"><mat-icon>chat</mat-icon></a>
-        <a href="#" aria-label="انستجرام"><mat-icon>camera_alt</mat-icon></a> -->
-      </div>
+    <div class="site-footer__col">
+      <h4>حساب الأعمال</h4>
+      <a href="#">لوحة الحساب</a>
+      <a href="#">طلباتي</a>
+      <a href="#">كشف الحساب</a>
     </div>
-  </div>
 
-  <div class="footer-bottom">
-    <span>&copy; {{ currentYear }} قطع غيار السيارات - جميع الحقوق محفوظة</span>
-  </div>
-</footer>
+    <div class="site-footer__col">
+      <h4>دليل الشراء</h4>
+      <a href="#">اختيار المركبة</a>
+      <a href="#">التأكد من التوافق</a>
+      <a href="#">مراجعة الطلب</a>
+    </div>
+  </footer>

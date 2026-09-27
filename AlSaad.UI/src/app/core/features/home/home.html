@@ -1,339 +1,242 @@
-<section class="home-page">
+<div class="home" dir="rtl">
 
-  <!-- =====================================================
-       HERO
-  ====================================================== -->
+  <!-- ========================= -->
+  <!-- Top utility bar -->
+  <!-- ========================= -->
+  <div class="topbar">
+    <div class="topbar__right">تابع طلبك · كنا وعيدنا في قطع أصلية 100%</div>
+    <div class="topbar__left">
+      <a href="#">عرض توضيحي</a>
+      <span class="dot">·</span>
+      <a href="#">بيانات وأسعار نموذجية</a>
+    </div>
+  </div>
 
-  <section class="hero">
-
-    <!-- Decorative Elements -->
-    <div class="hero-red-shape shape-one"></div>
-    <div class="hero-red-shape shape-two"></div>
-    <div class="hero-red-line"></div>
-
-
-    <!-- ================= CONTENT ================= -->
-
-    <div class="hero-content">
-
-      <div class="hero-small-title">
-        <span></span>
-        PREMIUM AUTO PARTS
-        <span></span>
+  <!-- ========================= -->
+  <!-- Header -->
+  <!-- ========================= -->
+  <header class="header">
+    <div class="header__brand">
+      <span class="brand-mark">S</span>
+      <div class="brand-text">
+        <strong>السعد</strong>
+        <span>قطع غيار السيارات</span>
       </div>
+    </div>
 
+    <nav class="header__nav">
+      <a href="#" class="active">الرئيسية</a>
+      <a href="#">تسوق القطع</a>
+      <a routerLink="/inventory/products" routerLinkActive="active">المنتجات</a>
+      <a href="#">البحث عن المركبة</a>
+      <a href="#">العروض</a>
+      <a href="#">طلباتي</a>
+      <a href="#">حسابي</a>
+    </nav>
 
-      <h1>
+    <div class="header__search">
+      <input type="text" placeholder="ابحث باسم القطعة، الكود أو رقم OEM" />
+      <button type="button">بحث</button>
+    </div>
 
-        <span class="white-text">
-          CAR
-        </span>
+    <div class="header__actions">
+      <button type="button" class="icon-btn">
+        <span>حسابي</span>
+      </button>
+      <button type="button" class="icon-btn cart-btn">
+        <span>السلة</span>
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
 
-        <span class="red-text">
-          SERVICE
-        </span>
+  <!-- ========================= -->
+  <!-- Hero -->
+  <!-- ========================= -->
+  <section class="hero">
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero__ring">
+        <span class="hero__label hero__label--top">PRECISION / PERFORMANCE</span>
+        <span class="hero__label hero__label--bottom">AL SAAD — PARTS DIVISION</span>
+      </div>
+    </div>
 
-      </h1>
-
-
-      <div class="title-line"></div>
-
-
-      <p class="hero-description">
-        كل ما تحتاجه لسيارتك
-        <br>
-        قطع غيار عالية الجودة وخدمة موثوقة
+    <div class="hero__content">
+      <p class="hero__eyebrow">خبرة في قطع غيار السيارات لكل طلب</p>
+      <h1>قطع غيارك<br />بأعلى جودة.</h1>
+      <p class="hero__desc">
+        جِد قطع غيارك الدقيقة لكل سيارة وهويّة سرعة، وتحقق من التوافق
+        والسعر قبل الطلب مباشرة.
       </p>
 
-
-      <!-- Services -->
-
-      <div class="services">
-
-        <div class="service">
-
-          <span class="service-number">
-            01
-          </span>
-
-          <div>
-            <strong>
-              Full Maintenance
-            </strong>
-
-            <small>
-              صيانة كاملة
-            </small>
-          </div>
-
-        </div>
-
-
-        <div class="service">
-
-          <span class="service-number">
-            02
-          </span>
-
-          <div>
-            <strong>
-              Oil Change
-            </strong>
-
-            <small>
-              تغيير الزيوت والفلاتر
-            </small>
-          </div>
-
-        </div>
-
-
-        <div class="service">
-
-          <span class="service-number">
-            03
-          </span>
-
-          <div>
-            <strong>
-              Brake Service
-            </strong>
-
-            <small>
-              أنظمة الفرامل
-            </small>
-          </div>
-
-        </div>
-
-
-        <div class="service">
-
-          <span class="service-number">
-            04
-          </span>
-
-          <div>
-            <strong>
-              Engine Check
-            </strong>
-
-            <small>
-              فحص المحرك
-            </small>
-          </div>
-
-        </div>
-
+      <div class="hero__search">
+        <input type="text" placeholder="ابحث باسم القطعة، الكود أو رقم OEM" />
+        <button type="button">بحث</button>
       </div>
 
-
-      <!-- Buttons -->
-
-      <div class="hero-buttons">
-
-        <a
-          routerLink="/products"
-          class="primary-btn"
-        >
-          OUR PRODUCTS
-
-          <span class="material-icons">
-            arrow_back
-          </span>
-        </a>
-
-
-        <a
-          routerLink="/makers"
-          class="secondary-btn"
-        >
-          BOOK NOW
-        </a>
-
+      <div class="hero__meta">
+        <span><strong>بحث سريع:</strong> اسم القطعة</span>
+        <span><strong>رقم OEM</strong></span>
+        <span><strong>كود المنتج</strong></span>
       </div>
 
-
-      <!-- Contact -->
-
-      <div class="hero-contact">
-
-        <span>
-          +20 123 456 7890
-        </span>
-
-        <span class="contact-divider"></span>
-
-        <span>
-          @saad.auto
-        </span>
-
+      <div class="hero__links">
+        <a href="#">أسعار لحساباتك</a>
+        <a href="#">طلب مباشر وسريع</a>
+        <a href="#">علامات موثوقة</a>
       </div>
-
     </div>
-
-
-    <!-- ================= CAR ================= -->
-
-    <div class="hero-visual">
-
-      <div class="visual-circle"></div>
-
-      <div class="visual-red-block"></div>
-
-
-      <div class="car-caption">
-
-        <span>
-          AL SAAD
-        </span>
-
-        <strong>
-          AUTOMOTIVE
-        </strong>
-
-      </div>
-
-
-      <div class="visual-bottom-line"></div>
-
-    </div>
-
-
-    <!-- Bottom label -->
-
-    <div class="hero-bottom-label">
-      <span>QUALITY</span>
-      <span>PERFORMANCE</span>
-      <span>TRUST</span>
-    </div>
-
   </section>
 
-
-  <!-- =====================================================
-       SERVICES
-  ====================================================== -->
-
-  <section class="services-section">
-
-    <div class="section-header">
-
-      <div>
-        <span class="section-small">
-          WHAT WE OFFER
-        </span>
-
-        <h2>
-          خدمات السيارات
-        </h2>
-      </div>
-
-      <div class="section-red-line"></div>
-
+  <!-- ========================= -->
+  <!-- Vehicle finder -->
+  <!-- ========================= -->
+  <section class="finder">
+    <div class="finder__label">
+      <span>ابحث حسب سيارتك</span>
+      <small>القطعة المناسبة، من أول مرة.</small>
     </div>
 
-
-    <div class="service-cards">
-
-      <a
-        routerLink="/oils-filters"
-        class="service-card"
-      >
-
-        <span class="material-icons">
-          oil_barrel
-        </span>
-
-        <h3>
-          الزيوت والفلاتر
-        </h3>
-
-        <p>
-          مجموعة كبيرة من الزيوت والفلاتر
-          المناسبة لمختلف السيارات.
-        </p>
-
-        <span class="card-arrow material-icons">
-          arrow_back
-        </span>
-
-      </a>
-
-
-      <a
-        routerLink="/brakes"
-        class="service-card"
-      >
-
-        <span class="material-icons">
-          settings
-        </span>
-
-        <h3>
-          الفرامل
-        </h3>
-
-        <p>
-          قطع غيار وأنظمة فرامل بجودة عالية.
-        </p>
-
-        <span class="card-arrow material-icons">
-          arrow_back
-        </span>
-
-      </a>
-
-
-      <a
-        routerLink="/electrical"
-        class="service-card"
-      >
-
-        <span class="material-icons">
-          bolt
-        </span>
-
-        <h3>
-          كهرباء السيارات
-        </h3>
-
-        <p>
-          حلول وقطع كهرباء لمختلف موديلات السيارات.
-        </p>
-
-        <span class="card-arrow material-icons">
-          arrow_back
-        </span>
-
-      </a>
-
-
-      <a
-        routerLink="/tires"
-        class="service-card"
-      >
-
-        <span class="material-icons">
-          tire_repair
-        </span>
-
-        <h3>
-          الإطارات
-        </h3>
-
-        <p>
-          إطارات ومستلزمات سيارات بجودة ممتازة.
-        </p>
-
-        <span class="card-arrow material-icons">
-          arrow_back
-        </span>
-
-      </a>
-
+    <div class="finder__field">
+      <label>السنة</label>
+      <select>
+        <option>اختر السنة</option>
+        <option *ngFor="let year of years">{{ year }}</option>
+      </select>
     </div>
 
+    <div class="finder__field">
+      <label>الماركة</label>
+      <select>
+        <option>اختر الماركة</option>
+        <option *ngFor="let make of makes">{{ make }}</option>
+      </select>
+    </div>
+
+    <div class="finder__field">
+      <label>الموديل</label>
+      <select>
+        <option>اختر الموديل</option>
+        <option *ngFor="let model of models">{{ model }}</option>
+      </select>
+    </div>
+
+    <button type="button" class="finder__submit">
+      اعرض القطع المتوافقة
+      <span aria-hidden="true">←</span>
+    </button>
   </section>
 
-</section>
+  <!-- ========================= -->
+  <!-- Category grid -->
+  <!-- ========================= -->
+  <section class="categories">
+    <div class="section-head">
+      <a href="#" class="section-head__link">جميع الفئات ←</a>
+      <h2>تسوق حسب الفئة</h2>
+      <p>كل قطعة في مكانها</p>
+    </div>
+
+    <div class="categories__grid">
+      <a
+        href="#"
+        class="category-card"
+        *ngFor="let category of categories"
+      >
+        <span class="category-card__index">{{ category.index }}</span>
+        <div class="category-card__icon" [innerHTML]="category.icon"></div>
+        <div class="category-card__body">
+          <strong>{{ category.name }}</strong>
+          <span>تسوق الآن ←</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Best sellers table -->
+  <!-- ========================= -->
+  <section class="bestsellers">
+    <div class="section-head">
+      <a href="#" class="section-head__link">تصفح الكتالوج ←</a>
+      <h2>الأكثر طلبًا</h2>
+      <p>القطع التي يحتاجها بائعك باستمرار</p>
+    </div>
+
+    <div class="bestsellers__table">
+      <div class="table-row table-row--head">
+        <span>المنتج / الكود</span>
+        <span>المنشأ / التوافق</span>
+        <span>التوفر</span>
+        <span>السعر</span>
+        <span>الكمية / الطلب</span>
+      </div>
+
+      <div class="table-row" *ngFor="let part of bestSellers">
+        <div class="cell cell--product">
+          <div class="cell__thumb" [innerHTML]="part.icon"></div>
+          <div>
+            <strong>{{ part.name }}</strong>
+            <span>{{ part.brand }} · SKU: {{ part.sku }}</span>
+          </div>
+        </div>
+
+        <div class="cell cell--fit">
+          <strong>{{ part.compatibility }}</strong>
+          <span>المنشأ: {{ part.origin }}</span>
+        </div>
+
+        <div class="cell cell--stock">
+          <span class="stock-badge" [class.stock-badge--low]="part.lowStock">
+            {{ part.lowStock ? 'كمية محدودة' : 'متوفر' }}
+          </span>
+        </div>
+
+        <div class="cell cell--price">
+          <span class="price-old" *ngIf="part.oldPrice">{{ part.oldPrice }} ج.م</span>
+          <strong>{{ part.price }} ج.م</strong>
+        </div>
+
+        <div class="cell cell--qty">
+          <div class="qty-stepper">
+            <button type="button" (click)="decreaseQty(part)">−</button>
+            <span>{{ part.qty }}</span>
+            <button type="button" (click)="increaseQty(part)">+</button>
+          </div>
+          <button type="button" class="add-btn" (click)="addToCart(part)">
+            أضف للسلة
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- CTA banner -->
+  <!-- ========================= -->
+  <section class="cta-banner">
+    <div>
+      <span class="cta-banner__eyebrow">خدمة الطلب المتكرر</span>
+      <h3>طلباتك المتكررة، بخطوات أقل.</h3>
+      <p>
+        راجع طلباتك السابقة، أعد طلب القطع الأساسية، وتابع حالتك من مكان
+        واحد.
+      </p>
+    </div>
+    <button type="button" class="cta-banner__btn">
+      <span aria-hidden="true">←</span>
+      أنشئ طلبك الآن
+    </button>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Feature strip -->
+  <!-- ========================= -->
+  <section class="features">
+    <div class="feature" *ngFor="let feature of features">
+      <div class="feature__icon" [innerHTML]="feature.icon"></div>
+      <strong>{{ feature.title }}</strong>
+      <p>{{ feature.desc }}</p>
+    </div>
+  </section>
+</div>

@@ -1,98 +1,171 @@
-<section class="page-header">
-  <h1>سلة طلباتك</h1>
-</section>
+<div class="cart-page" dir="rtl">
 
-<div class="table-wrapper" *ngIf="items.length > 0">
+  <!-- ========================= -->
+  <!-- Top utility bar -->
+  <!-- ========================= -->
+  <div class="topbar">
+    <div class="topbar__right">تابع طلبك · كنا وعدنا في قطع أصلية 100%</div>
+    <div class="topbar__left">
+      <a href="#">عرض توضيحي</a>
+      <span class="dot">·</span>
+      <a href="#">بيانات وأسعار نموذجية</a>
+    </div>
+  </div>
 
-  <table class="data-table">
+  <!-- ========================= -->
+  <!-- Header -->
+  <!-- ========================= -->
+  <header class="header">
+    <div class="header__brand">
+      <span class="brand-mark">S</span>
+      <div class="brand-text">
+        <strong>السعد</strong>
+        <span>قطع غيار السيارات</span>
+      </div>
+    </div>
 
-    <thead>
-      <tr>
-        <th>اسم الصنف</th>
-        <th>الموديل</th>
-        <th>الماركة</th>
-        <th>بلد المنشأ</th>
-        <th>ملاحظات</th>
-        <th>السعر</th>
-        <th>الكمية</th>
-        <th>إجمالي السعر</th>
-        <th>الكود</th>
-        <th></th>
-      </tr>
-    </thead>
+    <nav class="header__nav">
+      <a href="#">الرئيسية</a>
+      <a href="#">تسوق القطع</a>
+      <a href="#">البحث عن المركبة</a>
+      <a href="#">العروض</a>
+      <a href="#">طلباتي</a>
+      <a href="#">حسابي</a>
+    </nav>
 
-    <tbody>
+    <div class="header__search">
+      <input type="text" placeholder="ابحث باسم القطعة، الكود أو رقم OEM" />
+      <button type="button">بحث</button>
+    </div>
 
-      <tr *ngFor="let item of items">
+    <div class="header__actions">
+      <button type="button" class="icon-btn">
+        <span>حسابي</span>
+      </button>
+      <button type="button" class="icon-btn cart-btn">
+        <span>السلة</span>
+        <span class="cart-count">{{ items.length }}</span>
+      </button>
+    </div>
+  </header>
 
-        <td>{{ item.name }}</td>
+  <!-- ========================= -->
+  <!-- Breadcrumb -->
+  <!-- ========================= -->
+  <div class="breadcrumb">
+    <a href="#">الرئيسية</a>
+    <span>/</span>
+    <span>سلة الطلب</span>
+  </div>
 
-        <td>{{ item.model }}</td>
+  <!-- ========================= -->
+  <!-- Page head -->
+  <!-- ========================= -->
+  <div class="cart-head">
+    <a href="#" class="cart-head__back">
+      متابعة التسوق
+      <span aria-hidden="true">←</span>
+    </a>
 
-        <td>{{ item.brand }}</td>
+    <div class="cart-head__title">
+      <span class="cart-head__eyebrow">راجع قطعك قبل الإرسال</span>
+      <h1>سلة الطلب</h1>
+      <p>تحكم بالكميات وراجع إجمالي أسعار حسابك.</p>
+    </div>
+  </div>
 
-        <td>{{ item.origin }}</td>
+  <!-- ========================= -->
+  <!-- Demo notice -->
+  <!-- ========================= -->
+  <div class="demo-banner">
+    عرض توضيحي · لن يتم إرسال طلب فعلي من هذا العرض.
+  </div>
 
-        <td>{{ item.notes }}</td>
+  <!-- ========================= -->
+  <!-- Cart body -->
+  <!-- ========================= -->
+  <div class="cart-body">
 
-        <td>
-          {{ item.price | number }} جنيه
-        </td>
+    <!-- Items / empty state -->
+    <section class="cart-items">
 
-        <td>
-          {{ item.qty }}
-        </td>
+      <div class="cart-items__table" *ngIf="items.length; else emptyState">
+        <div class="table-row table-row--head">
+          <span>القطعة</span>
+          <span>السعر</span>
+          <span>الكمية</span>
+          <span>الإجمالي</span>
+          <span></span>
+        </div>
 
-        <td>
-          {{ item.price * item.qty | number }} جنيه
-        </td>
+        <div class="table-row" *ngFor="let item of items">
+          <div class="cell cell--product">
+            <strong>{{ item.name }}</strong>
+            <span>{{ item.brand }} · SKU: {{ item.code }}</span>
+          </div>
 
-        <td>
-          {{ item.code }}
-        </td>
+          <span>{{ item.price | number }} ج.م</span>
 
-        <td>
-          <button
-            type="button"
-            class="remove-btn"
-            (click)="remove(item.code)"
-          >
-            مسح
+          <div class="qty-stepper">
+            <button type="button" (click)="decreaseQty(item)">−</button>
+            <span>{{ item.qty }}</span>
+            <button type="button" (click)="increaseQty(item)">+</button>
+          </div>
+
+          <strong>{{ item.price * item.qty | number }} ج.م</strong>
+
+          <button type="button" class="remove-btn" (click)="removeItem(item)">
+            إزالة
           </button>
-        </td>
+        </div>
+      </div>
 
-      </tr>
+      <ng-template #emptyState>
+        <div class="empty-card">
+          <h2>سلتك جاهزة لطلبك القادم</h2>
+          <p>أضف القطع من الكتالوج ثم عد لهذا العرض لمراجعتها.</p>
+          <button type="button" class="empty-card__btn">تسوق القطع</button>
+        </div>
+      </ng-template>
+    </section>
 
-    </tbody>
+    <!-- Summary -->
+    <aside class="cart-summary">
+      <h2>ملخص الطلب</h2>
 
-  </table>
+      <div class="summary-row">
+        <span>الإجمالي الفرعي</span>
+        <strong>{{100 }} ج.م</strong>
+      </div>
 
-</div>
+      <div class="summary-row">
+        <span>الخصم</span>
+        <strong>{{ discount | number }} ج.م</strong>
+      </div>
 
-<div
-  class="empty-cart"
-  *ngIf="items.length === 0"
->
-  <p>السلة فاضية دلوقتي.</p>
+      <div class="summary-row">
+        <span>الشحن والضرائب</span>
+        <strong class="muted">غير محتسبة</strong>
+      </div>
 
-  <a
-    routerLink="/makers"
-    class="cta-btn"
-  >
-    تصفح قطع الغيار
-  </a>
-</div>
+      <div class="summary-row summary-row--total">
+        <span>إجمالي الطلب</span>
+        <strong>{{ 10 }} ج.م</strong>
+      </div>
 
-<div
-  class="cart-summary"
-  *ngIf="items.length > 0"
->
-  <span>
-    عدد الأصناف: {{ items.length }}
-  </span>
+      <button
+        type="button"
+        class="submit-btn"
+        [disabled]="!items.length"
+        (click)="submitOrder()"
+      >
+        <span aria-hidden="true">←</span>
+        متابعة إرسال الطلب
+      </button>
 
-  <span>
-    مجموع سعر الطلبات:
-    {{ totalPrice | number }} جنيه
-  </span>
+      <p class="summary-note">
+        الشحن والضرائب غير مشمولين في الإجمالي المعروض.
+      </p>
+    </aside>
+  </div>
 </div>

@@ -1,1 +1,171 @@
-<p>product-details works!</p>
+<div class="product-page" dir="rtl" *ngIf="product; else loadingOrError">
+
+  <!-- ========================= -->
+  <!-- Top utility bar -->
+  <!-- ========================= -->
+  <div class="topbar">
+    <div class="topbar__right">تابع طلبك · كنا وعدنا في قطع أصلية 100%</div>
+    <div class="topbar__left">
+      <a href="#">عرض توضيحي</a>
+      <span class="dot">·</span>
+      <a href="#">بيانات وأسعار نموذجية</a>
+    </div>
+  </div>
+
+  <!-- ========================= -->
+  <!-- Header -->
+  <!-- ========================= -->
+  <header class="header">
+    <div class="header__brand">
+      <span class="brand-mark">S</span>
+      <div class="brand-text">
+        <strong>السعد</strong>
+        <span>قطع غيار السيارات</span>
+      </div>
+    </div>
+
+    <nav class="header__nav">
+      <a href="#">الرئيسية</a>
+      <a href="#" class="active">تسوق القطع</a>
+      <a href="#">البحث عن المركبة</a>
+      <a href="#">العروض</a>
+      <a href="#">طلباتي</a>
+      <a href="#">حسابي</a>
+    </nav>
+
+    <div class="header__search">
+      <input type="text" placeholder="ابحث باسم القطعة، الكود أو رقم OEM" />
+      <button type="button">بحث</button>
+    </div>
+
+    <div class="header__actions">
+      <button type="button" class="icon-btn">
+        <span>حسابي</span>
+      </button>
+      <button type="button" class="icon-btn cart-btn">
+        <span>السلة</span>
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================= -->
+  <!-- Breadcrumb -->
+  <!-- ========================= -->
+  <div class="breadcrumb">
+    <a href="#">الرئيسية</a>
+    <span>/</span>
+    <span>تفاصيل القطعة</span>
+  </div>
+
+  <!-- ========================= -->
+  <!-- Product main -->
+  <!-- ========================= -->
+  <section class="product-main">
+
+    <!-- Info column -->
+    <div class="product-info">
+      <div class="product-info__top">
+        <span class="brand-tag">{{ product.brand }}</span>
+        <span class="availability" [class.availability--low]="getIsLowStock">
+          {{ getAvailabilityLabel() }}
+        </span>
+      </div>
+
+      <h1>{{ product.name }}</h1>
+
+      <div class="codes">
+        <span>كود المنتج: <strong>{{ product.productCode }}</strong></span>
+        <span>الباركود: <strong>{{ product.barcode }}</strong></span>
+      </div>
+
+      <div class="fit-check" *ngIf="product.category || product.description">
+        <strong>{{ product.category }}</strong>
+        <span *ngIf="product.description">{{ product.description }}</span>
+      </div>
+
+      <div class="price-block">
+        <span class="price-old" *ngIf="discountLabel">{{ discountLabel }}</span>
+        <span class="price-label">سعرك</span>
+        <strong class="price-value">{{ product.unitPrice | number }} ج.م</strong>
+      </div>
+
+      <div class="cart-row">
+        <button type="button" class="add-btn" (click)="addToCart()">
+          <span aria-hidden="true">🛒</span>
+          أضف للسلة
+        </button>
+
+        <div class="qty-stepper">
+          <button type="button" (click)="decreaseQty()">−</button>
+          <span>{{ qty }}</span>
+          <button type="button" (click)="increaseQty()">+</button>
+        </div>
+      </div>
+
+      <p class="price-note">
+        سعر خاص بحسابك · راجع القطعة والكميات في السلة قبل إرسال الطلب.
+      </p>
+    </div>
+
+    <!-- Image column -->
+    <div class="product-image">
+      <span class="product-image__badge">معاينة القطعة</span>
+
+      <div class="product-image__visual" aria-hidden="true">
+        <div class="product-image__ring"></div>
+      </div>
+
+      <span class="product-image__caption">
+        صورة إرشادية، طابق كود القطعة مع مواصفات مركبتك.
+      </span>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Detail cards -->
+  <!-- ========================= -->
+  <section class="detail-cards">
+
+    <div class="detail-card">
+      <h2>الوصف</h2>
+      <p class="detail-card__vehicle" *ngIf="product.description; else noDescription">
+        {{ product.description }}
+      </p>
+      <ng-template #noDescription>
+        <p class="detail-card__note">لا يوجد وصف مضاف لهذه القطعة بعد.</p>
+      </ng-template>
+    </div>
+
+    <div class="detail-card">
+      <h2>مواصفات القطعة</h2>
+      <div class="specs-grid">
+        <div class="spec">
+          <span>الشركة المصنعة</span>
+          <strong>{{ product.brand }}</strong>
+        </div>
+        <div class="spec">
+          <span>الفئة</span>
+          <strong>{{ product.category }}</strong>
+        </div>
+        <div class="spec">
+          <span>كود المنتج</span>
+          <strong>{{ product.productCode }}</strong>
+        </div>
+        <div class="spec">
+          <span>الباركود</span>
+          <strong>{{ product.barcode }}</strong>
+        </div>
+        <div class="spec">
+          <span>الكمية المتاحة</span>
+          <strong>{{ product.stockBalance }}</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<ng-template #loadingOrError>
+  <div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+  <div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
+</ng-template>
