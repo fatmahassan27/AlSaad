@@ -11,5 +11,6 @@ namespace AlSaad.Application.Interfaces.IServices
     {
         Task<PagedResult<ProductDto>> GetProductsAsync(int page = 1, int limit = 20, CancellationToken cancellationToken = default);
         Task<ProductDto?> GetProductByIdAsync(int id, CancellationToken cancellationToken = default);
+        Task<List<BrandLookupDto>> GetDistinctBrandsAsync(CancellationToken cancellationToken = default);
     }
 }

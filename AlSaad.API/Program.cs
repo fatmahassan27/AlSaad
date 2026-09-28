@@ -70,14 +70,8 @@ builder.Services.AddDaftraHttpClient<IDaftraRequisitionClient, DaftraRequisition
 builder.Services.AddDaftraHttpClient<IDaftraProductCategoryClient, DaftraProductCategoryClient>(); 
 builder.Services.AddDaftraHttpClient<IDaftraStoreClient,DaftraStoreClient>();
 builder.Services.AddDaftraHttpClient<IDaftraStockTransactionClient,DaftraStockTransactionClient>();
-builder.Services.AddDaftraHttpClient<IDaftraBrandClient,DaftraBrandClient>();
-builder.Services.AddHttpClient<IDaftraUnitTemplateClient, DaftraUnitTemplateClient>((sp, client) =>
-{
-    var settings = sp.GetRequiredService<IOptions<DaftraSettings>>().Value;
-    client.BaseAddress = new Uri(settings.BaseUrlV2Entity);   // ⚠️ مختلف عن باقي الموديولات
-    client.DefaultRequestHeaders.Add("Accept", "application/json");
-    client.DefaultRequestHeaders.Add("apikey", settings.ApiKey);
-});
+builder.Services.AddDaftraHttpClient<IDaftraBrandClient, DaftraBrandClient>(s => s.BaseUrlV2Entity);
+builder.Services.AddDaftraHttpClient<IDaftraUnitTemplateClient, DaftraUnitTemplateClient>(s => s.BaseUrlV2Entity);
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -30,5 +30,11 @@ namespace AlSaad.API.Controllers
             var product = await _productCatalogService.GetProductByIdAsync(id, cancellationToken);
             return product is null ? NotFound() : Ok(product);
         }
+        [HttpGet("brands")]
+        public async Task<IActionResult> GetDistinctBrands(CancellationToken cancellationToken)
+        {
+            var brands = await _productCatalogService.GetDistinctBrandsAsync(cancellationToken);
+            return Ok(brands);
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AlSaad.Infrastructure.Services
 {
-     public class ProductService :IProductService
+     public class ProductService : IProductService
     {
         private readonly IDaftraProductClient _daftraApiClient;
 
@@ -36,6 +36,22 @@ namespace AlSaad.Infrastructure.Services
         {
             var response = await _daftraApiClient.GetProductByIdAsync(id, cancellationToken);
             return response is null ? null : MapToDto(response.Data.Product);
+        }
+        public async Task<List<BrandLookupDto>> GetDistinctBrandsAsync(CancellationToken cancellationToken = default)
+        {
+            var response = await _daftraApiClient.GetProductsAsync(page: 1, limit: 200, cancellationToken);
+
+            return response.Data
+                .Select(x => x.Product)
+                .Where(p => !string.IsNullOrWhiteSpace(p.Brand) && !string.IsNullOrWhiteSpace(p.BrandId))
+                .GroupBy(p => p.BrandId)
+                .Select(g => new BrandLookupDto
+                {
+                    Id = g.Key!,
+                    Name = g.First().Brand!
+                })
+                .OrderBy(b => b.Name)
+                .ToList();
         }
 
         private static ProductDto MapToDto(DaftraProduct product) => new()
