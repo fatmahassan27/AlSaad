@@ -1,4 +1,6 @@
-<div class="account-page" dir="rtl">
+<div 
+*ngIf="false"
+class="account-page" dir="rtl">
 
   <!-- ========================= -->
   <!-- Top utility bar -->
@@ -198,3 +200,151 @@
   </footer>
 
 </div>
+<!-- new account design -->
+ <main id="main" class="container page-main">
+<nav class="breadcrumb" aria-label="مسار التنقل">
+<a href="index.html">الرئيسية</a>
+<span aria-hidden="true">/</span>
+<span>كشف الحساب</span>
+</nav>
+<div class="account-layout">
+<nav class="account-nav" aria-label="قائمة الحساب">
+<a href="dashboard.html" >لوحة الحساب</a>
+<a href="orders.html" >طلباتي</a>
+<a href="account-statement.html" aria-current="page">كشف الحساب</a>
+<a href="shop.html" >تسوق القطع</a>
+<a href="login.html" >تسجيل الدخول</a>
+</nav>
+<div>
+<div class="page-heading between">
+<div>
+<p class="eyebrow">الحساب المالي</p>
+<h1>كشف الحساب</h1>
+<p class="muted">مؤسسة النور لقطع الغيار · كود الحساب <bdi>DEMO-001</bdi>
+</p>
+</div>
+<span class="badge badge-muted">كشف حساب العميل</span>
+</div>
+<div class="account-balance between">
+<div>
+<span class="muted small">الرصيد الحالي</span>
+<strong>
+<bdi>25,400</bdi> ج.م</strong>
+</div>
+<div class="small muted">آخر حركة: <bdi>18/09/2026</bdi>
+<br>العملة: الجنيه المصري</div>
+</div>
+<form id="statement-filters" class="stack-sm panel-heading">
+<div class="table-controls">
+<div class="field">
+<label for="statement-search">البحث في الحركات</label>
+<input type="search" id="statement-search" placeholder="المرجع أو وصف الحركة">
+</div>
+<div class="field">
+<label for="statement-from">من تاريخ</label>
+<input type="date" id="statement-from">
+</div>
+<div class="field">
+<label for="statement-to">إلى تاريخ</label>
+<input type="date" id="statement-to">
+</div>
+<button class="button button-secondary" type="reset">مسح الفلاتر</button>
+</div>
+<div class="between">
+<p class="result-count" id="statement-count" aria-live="polite">3 حركات</p>
+<div class="flex">
+<button class="button button-secondary" type="button" data-print>
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 2h10l4 4v16H5zM14 2v6h5M8 12h8M8 16h8"/>
+</svg> طباعة</button>
+<button class="button button-secondary" type="button" data-print title="اختر الحفظ بصيغة PDF من نافذة الطباعة">حفظ PDF</button>
+</div>
+</div>
+<p id="date-error" class="notice" role="alert" hidden>تاريخ البداية يجب أن يسبق تاريخ النهاية.</p>
+</form>
+<p class="table-scroll-hint">اسحب الجدول أفقيًا للاطلاع على المدين والدائن والرصيد.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="حركات الحساب، يمكن التمرير أفقيًا على الشاشات الصغيرة">
+<table id="statement-table">
+<caption class="sr-only">حركات حساب مؤسسة النور بالجنيه المصري</caption>
+<thead>
+<tr>
+<th scope="col">التاريخ</th>
+<th scope="col">المرجع</th>
+<th scope="col">الوصف</th>
+<th scope="col">مدين</th>
+<th scope="col">دائن</th>
+<th scope="col">الرصيد</th>
+</tr>
+</thead>
+<tbody>
+<tr data-entry data-date="2026-09-18">
+<td>
+<bdi>18/09/2026</bdi>
+</td>
+<td>
+<bdi>INV-10482</bdi>
+</td>
+<td>فاتورة مبيعات</td>
+<td>
+<bdi>12,640</bdi>
+</td>
+<td>
+<bdi>—</bdi>
+</td>
+<td>
+<strong>
+<bdi>25,400</bdi>
+</strong>
+</td>
+</tr>
+<tr data-entry data-date="2026-09-16">
+<td>
+<bdi>16/09/2026</bdi>
+</td>
+<td>
+<bdi>PAY-8831</bdi>
+</td>
+<td>دفعة نقدية</td>
+<td>
+<bdi>—</bdi>
+</td>
+<td>
+<bdi>10,000</bdi>
+</td>
+<td>
+<strong>
+<bdi>12,760</bdi>
+</strong>
+</td>
+</tr>
+<tr data-entry data-date="2026-09-15">
+<td>
+<bdi>15/09/2026</bdi>
+</td>
+<td>
+<bdi>INV-10431</bdi>
+</td>
+<td>فاتورة مبيعات</td>
+<td>
+<bdi>6,250</bdi>
+</td>
+<td>
+<bdi>—</bdi>
+</td>
+<td>
+<strong>
+<bdi>22,760</bdi>
+</strong>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="empty-state" id="statement-empty" hidden>
+<h2>لا توجد حركات مطابقة</h2>
+<p>غيّر نطاق التاريخ أو كلمات البحث.</p>
+</div>
+<p class="statement-note">الرصيد الموضح لكل حركة هو الرصيد بعدها. التصفية لا تغيّر الأرصدة التاريخية.</p>
+</div>
+</div>
+</main>
