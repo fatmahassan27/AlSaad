@@ -166,6 +166,6 @@
 </div>
 
 <ng-template #loadingOrError>
-  <div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+  <div *ngIf="isLoading()" class="status-message">جاري التحميل...</div>
   <div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
 </ng-template>

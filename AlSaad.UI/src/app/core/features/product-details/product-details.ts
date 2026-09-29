@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../models/Product';
 import { ActivatedRoute,RouterModule } from '@angular/router';
@@ -13,7 +13,7 @@ import { ProductService } from '../../services/product-service';
 })
 export class ProductDetails  implements OnInit {
   product: Product | null = null;
-  isLoading = true;
+  isLoading = signal(true);
   errorMessage = '';
   qty = 1;
   constructor(
@@ -25,18 +25,18 @@ export class ProductDetails  implements OnInit {
 
     if (!id) {
       this.errorMessage = 'رقم المنتج غير صحيح.';
-      this.isLoading = false;
+      this.isLoading.set(false);
       return;
     }
       this.productService.getProductById(id).subscribe({
       next: (data) => {
         this.product = data;
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
       error: (err) => {
         console.error('Error loading product', err);
         this.errorMessage = 'المنتج ده مش موجود أو حصل خطأ في التحميل.';
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
     });
    
