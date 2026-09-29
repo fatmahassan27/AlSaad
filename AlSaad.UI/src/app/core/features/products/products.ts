@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   inject,
-  PLATFORM_ID
+  PLATFORM_ID,
+  signal
 } from '@angular/core';
 
 import {
@@ -53,7 +54,7 @@ export class Products implements OnInit {
   // State
   // =========================
 
-  isLoading = false;
+  isLoading = signal(false);
   errorMessage = '';
 
   // =========================
@@ -89,7 +90,7 @@ export class Products implements OnInit {
 
   loadProducts(page: number = 1): void {
 
-    this.isLoading = true;
+    this.isLoading.update(() => true);
     this.errorMessage = '';
 
     this.productService
@@ -110,7 +111,7 @@ export class Products implements OnInit {
 
           this.totalResults = response.totalResults;
 
-          this.isLoading = false;
+          this.isLoading.update(() => false);
         },
 
         error: (error) => {
@@ -123,7 +124,7 @@ export class Products implements OnInit {
           this.errorMessage =
             'حصل خطأ أثناء تحميل المنتجات';
 
-          this.isLoading = false;
+          this.isLoading.update(() => false);
         }
 
       });

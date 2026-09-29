@@ -9,7 +9,7 @@
 
 <div
   class="table-wrapper"
-  *ngIf="!isLoading && !errorMessage"
+  *ngIf="!isLoading() && !errorMessage"
 >
 
   <table class="data-table">
@@ -342,7 +342,7 @@
 ========================= -->
 
 <div
-  *ngIf="isLoading"
+  *ngIf="isLoading()"
   class="status-message"
 >
 
