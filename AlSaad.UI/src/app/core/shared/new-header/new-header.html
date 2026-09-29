@@ -24,20 +24,22 @@
 <button class="button" type="submit">بحث</button>
 </form>
 <div class="header-actions">
-<a href="login.html" aria-label="تسجيل الدخول إلى حسابك">
-<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<a routerLink="/login" aria-label="تسجيل الدخول إلى حسابك">
+<svg 
+class="icon" viewBox="0 0 24 24" aria-hidden="true">
 <circle cx="12" cy="7" r="4"/>
 <path d="M4 22v-3a8 8 0 0 1 16 0v3"/>
 </svg>
 <span class="action-label">حسابي</span>
 </a>
-<a href="cart.html" aria-label="السلة">
+<a 
+routerLink="/carts" aria-label="السلة">
 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
 <path d="M2 3h3l3 12h10l3-9H6"/>
 <circle cx="9" cy="20" r="1"/>
 <circle cx="18" cy="20" r="1"/>
 </svg>
-<span class="count" data-cart-count>0</span>
+<span class="count" data-cart-count>2</span>
 </a>
 <button type="button" class="icon-button menu-toggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="main-nav">
 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">

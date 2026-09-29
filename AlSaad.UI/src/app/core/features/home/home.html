@@ -60,29 +60,22 @@
 <div>
 <label for="vehicle-year">السنة</label>
 <select id="vehicle-year" name="year">
-<option value="">اختر السنة</option>
-<option>2024</option>
-<option>2023</option>
-<option>2022</option>
-<option>2021</option>
-<option>2020</option>
-<option>2019</option>
+<option >اختر السنة</option>
+ <option *ngFor="let year of years">{{ year }}</option>
 </select>
 </div>
 <div>
 <label for="vehicle-make">الماركة</label>
 <select id="vehicle-make" name="make">
-<option value="">اختر الماركة</option>
-<option>Hyundai</option>
-<option>Kia</option>
+<option >اختر الماركة</option>
+ <option *ngFor="let make of makes">{{ make }}</option>
 </select>
 </div>
 <div>
 <label for="vehicle-model">الموديل</label>
 <select id="vehicle-model" name="model">
-<option value="">اختر الموديل</option>
-<option>Elantra</option>
-<option>Cerato</option>
+<option >اختر الموديل</option>
+       <option *ngFor="let model of models">{{ model }}</option>
 </select>
 </div>
 <button class="button button-dark" type="submit">اعرض القطع المتوافقة <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
