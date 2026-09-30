@@ -51,8 +51,19 @@ routerLink="/carts" aria-label="السلة">
 <nav class="site-nav" id="main-nav" aria-label="التنقل الرئيسي">
 <div class="container nav-inner">
 <a routerLink="/home" routerLinkActive="active">الرئيسية</a>
+<a style="position: relative;" class="con" >
+  المحتوي
+  <ul class="sub-menu" style="z-index: 1000;width:150px;position: absolute; top: 100%; right: 0; display: none; background-color: black; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px; list-style: none;">
+     <li><span routerLink="/inventory/brands" routerLinkActive="active">الماركات</span></li>
+    <li><span routerLink="/inventory/categories" routerLinkActive="active">الأقسام</span></li>
+     <li><span routerLink="/inventory/products" routerLinkActive="active">المنتجات</span></li>
+      <li><span routerLink="/inventory/requisitions" routerLinkActive="active">حركات المخزون</span></li>
+          <li><span routerLink="/inventory/stores" routerLinkActive="active"> المخازن</span></li>
+                    <li><span routerLink="/inventory/stock-transactions" routerLinkActive="active"> حركات المخزون التفصيلية</span></li>
+                    <li><span routerLink="/inventory/unit-templates" routerLinkActive="active">   قوالب الوحدات</span></li>
+  </ul>
+</a>
 <a href="shop.html" >تسوق القطع</a>
-  <a routerLink="/inventory/products" routerLinkActive="active">المنتجات</a>
 <a href="index.html#vehicle-finder" >البحث عن المركبة</a>
 <a href="dashboard.html#offers" >العروض</a>
 <a href="orders.html" >طلباتي</a>

@@ -9,7 +9,7 @@ import { PagedResult } from '../models/PagedResult';
   providedIn: 'root',
 })
 export class BrandService {
-     private readonly baseUrl = `${environment.apiUrl}/brands`;
+     private readonly baseUrl = `${environment.apiUrl}/Brand`;
 
   constructor(private http: HttpClient) {}
 
