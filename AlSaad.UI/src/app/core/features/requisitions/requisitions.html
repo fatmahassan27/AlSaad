@@ -2,11 +2,11 @@
   <h1>حركات المخزون</h1>
 </section>
 
-<div *ngIf="isLoading" class="status-message">جاري التحميل...</div>
+<div *ngIf="isLoading()" class="status-message">جاري التحميل...</div>
 
 <div *ngIf="errorMessage" class="status-message error">{{ errorMessage }}</div>
 
-<div class="table-wrapper" *ngIf="!isLoading && !errorMessage">
+<div class="table-wrapper" *ngIf="!isLoading() && !errorMessage">
   <table class="data-table">
     <thead>
       <tr>

@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , OnInit, signal} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductCategoryService } from '../../services/product-category-service';
@@ -12,7 +12,7 @@ import { ProductCategory } from '../../models/ProductCategory';
 })
 export class ProductCategories  implements OnInit{
   categories: ProductCategory[] = [];
-  isLoading = true;
+  isLoading = signal(true);
   errorMessage = '';
 
   constructor(private categoryService: ProductCategoryService) {}
@@ -21,18 +21,18 @@ export class ProductCategories  implements OnInit{
     this.loadCategories();
   }
   loadCategories(): void {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.errorMessage = '';
 
     this.categoryService.getCategories().subscribe({
       next: (result) => {
         this.categories = result.items;
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
       error: (err) => {
         console.error('Error loading categories', err);
         this.errorMessage = 'حصل خطأ في تحميل الكاتيجوريز، حاول تاني.';
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
     });
   }

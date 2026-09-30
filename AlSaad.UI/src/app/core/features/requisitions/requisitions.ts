@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { RequisitionService } from '../../services/requisition-service';
@@ -12,7 +12,7 @@ import { Requisition, getRequisitionTypeLabel, getRequisitionStatusLabel } from 
 export class Requisitions implements OnInit {
 
    requisitions: Requisition[] = [];
-  isLoading = true;
+  isLoading = signal(true);
   errorMessage = '';
 
     // نخليهم متاحين في الـ templates
@@ -26,18 +26,18 @@ export class Requisitions implements OnInit {
 
 
   loadRequisitions(): void {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.errorMessage = '';
 
     this.requisitionService.getRequisitions().subscribe({
       next: (result) => {
         this.requisitions = result.items;
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
       error: (err) => {
         console.error('Error loading requisitions', err);
         this.errorMessage = 'حصل خطأ في تحميل حركات المخزون، حاول تاني.';
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
     });
   }

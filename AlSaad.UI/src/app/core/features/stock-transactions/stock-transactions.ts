@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StockTransactionService } from '../../services/stock-transaction-service';
@@ -12,7 +12,7 @@ import {StockTransaction,getTransactionTypeLabel,getSourceTypeLabel,getStockTran
 export class StockTransactions  implements OnInit {
 
  transactions: StockTransaction[] = [];
-  isLoading = true;
+  isLoading = signal(true);
   errorMessage = '';
 
   getTypeLabel = getTransactionTypeLabel;
@@ -25,18 +25,18 @@ export class StockTransactions  implements OnInit {
     this.loadTransactions();
   }
   loadTransactions(): void {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.errorMessage = '';
 
     this.stockTransactionService.getStockTransactions().subscribe({
       next: (result) => {
         this.transactions = result.items;
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
       error: (err) => {
         console.error('Error loading stock transactions', err);
         this.errorMessage = 'حصل خطأ في تحميل حركات المخزون التفصيلية، حاول تاني.';
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
     });
   }

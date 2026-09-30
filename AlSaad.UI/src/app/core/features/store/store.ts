@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreService } from '../../services/store-service';
@@ -13,7 +13,7 @@ import { Stores, getStoreStatusLabel } from '../../models/Stores';
 export class Store implements OnInit {
 
    stores: Stores[] = [];
-  isLoading = true;
+  isLoading = signal(true);
   errorMessage = '';
 
   getStatusLabel = getStoreStatusLabel;
@@ -24,18 +24,18 @@ export class Store implements OnInit {
     this.loadStores();
   }
     loadStores(): void {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.errorMessage = '';
 
     this.storeService.getStores().subscribe({
       next: (result) => {
         this.stores = result.items;
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
       error: (err) => {
         console.error('Error loading stores', err);
         this.errorMessage = 'حصل خطأ في تحميل المخازن، حاول تاني.';
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
     });
   }
