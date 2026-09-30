@@ -1,0 +1,63 @@
+<a class="skip-link" href="#main">انتقل إلى المحتوى</a>
+<div class="utility-bar">
+<div class="container between">
+<span>شريك أعمالك في قطع الغيار · كيا وهيونداي</span>
+<span>عرض توضيحي · بيانات وأسعار نموذجية</span>
+</div>
+</div>
+<header class="site-header">
+<div class="container header-main">
+<a class="logo" href="index.html" aria-label="السعد لقطع غيار السيارات — الرئيسية">
+<span class="logo-mark" aria-hidden="true">S</span>
+<span>
+<strong>السعد</strong>
+<small>لقطع غيار السيارات</small>
+</span>
+</a>
+<form class="search-box header-search" action="shop.html" role="search">
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="10" cy="10" r="6.5"/>
+<path d="m15 15 5 5"/>
+</svg>
+<label class="sr-only" for="header-search">ابحث باسم القطعة، الكود أو رقم OEM</label>
+<input id="header-search" name="q" type="search" placeholder="ابحث باسم القطعة، الكود أو رقم OEM">
+<button class="button" type="submit">بحث</button>
+</form>
+<div class="header-actions">
+<a routerLink="/login" aria-label="تسجيل الدخول إلى حسابك">
+<svg 
+class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="7" r="4"/>
+<path d="M4 22v-3a8 8 0 0 1 16 0v3"/>
+</svg>
+<span class="action-label">حسابي</span>
+</a>
+<a 
+routerLink="/carts" aria-label="السلة">
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M2 3h3l3 12h10l3-9H6"/>
+<circle cx="9" cy="20" r="1"/>
+<circle cx="18" cy="20" r="1"/>
+</svg>
+<span class="count" data-cart-count>2</span>
+</a>
+<button type="button" class="icon-button menu-toggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="main-nav">
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M3 6h18M3 12h18M3 18h18"/>
+</svg>
+</button>
+</div>
+</div>
+<nav class="site-nav" id="main-nav" aria-label="التنقل الرئيسي">
+<div class="container nav-inner">
+<a routerLink="/home" routerLinkActive="active">الرئيسية</a>
+<a href="shop.html" >تسوق القطع</a>
+  <a routerLink="/inventory/products" routerLinkActive="active">المنتجات</a>
+<a href="index.html#vehicle-finder" >البحث عن المركبة</a>
+<a href="dashboard.html#offers" >العروض</a>
+<a href="orders.html" >طلباتي</a>
+<a routerLink="/account" routerLinkActive="active">حسابي</a>
+<span class="nav-note">قطع موثوقة. أعمال مستمرة.</span>
+</div>
+</nav>
+</header>

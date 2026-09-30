@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component ,inject ,signal } from '@angular/core';
 import { ReactiveFormsModule ,FormBuilder,Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/AuthService';
 
 
 @Component({
   selector: 'app-registeration',
   standalone:true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,RouterModule],
   templateUrl: './registeration.html',
   styleUrl: './registeration.css',
 })

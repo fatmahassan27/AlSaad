@@ -1,4 +1,6 @@
-<div class="login-page" dir="rtl">
+<div
+*ngIf="false"
+ class="login-page" dir="rtl">
 
   <!-- ========================= -->
   <!-- Top utility bar -->
@@ -200,3 +202,84 @@
   </footer>
 
 </div>
+<!-- ======== new one ===== -->
+<main id="main" class="login-layout">
+<section class="login-form">
+<p class="eyebrow">بوابة عملاء السعد</p>
+<h1>مرحبًا بعودتك</h1>
+<p class="muted">كل طلباتك وأسعار حسابك في مكان واحد.</p>
+<form 
+[formGroup]="form" (ngSubmit)="onSubmit()"
+id="login-form" class="stack">
+<div class="field">
+<label for="identity">البريد الإلكتروني</label>
+<input type="email"
+            placeholder="أدخل بريدك الإلكتروني"
+            formControlName="email">
+                   <span
+            class="field-error"
+            *ngIf="form.controls.email.invalid && form.controls.email.touched"
+          >
+            <ng-container *ngIf="form.controls.email.errors?.['required']">
+              البريد الإلكتروني مطلوب.
+            </ng-container>
+            <ng-container *ngIf="form.controls.email.errors?.['email']">
+              أدخل بريد إلكتروني صحيح.
+            </ng-container>
+          </span>
+</div>
+<div class="field">
+<label for="password">كلمة المرور</label>
+<input    type="password"
+            placeholder="أدخل كلمة المرور"
+            formControlName="password">
+            <span
+            class="field-error"
+            *ngIf="form.controls.password.invalid && form.controls.password.touched"
+          >
+            <ng-container *ngIf="form.controls.password.errors?.['required']">
+              كلمة المرور مطلوبة.
+            </ng-container>
+            <ng-container *ngIf="form.controls.password.errors?.['minlength']">
+              كلمة المرور 6 أحرف على الأقل.
+            </ng-container>
+          </span>
+</div>
+<div class="between">
+<label class="checkbox-label" for="remember">
+<input id="remember" type="checkbox"> تذكرني</label>
+    <div class="disclaimer" *ngIf="errorMessage()">
+          {{ errorMessage() }}
+        </div>
+<a class="text-link" href="#" data-placeholder="استعادة كلمة المرور غير متاحة في النموذج التجريبي.">نسيت كلمة المرور؟</a>
+</div>
+<p class="notice" id="login-help">واجهة تجريبية: لا تدخل بيانات حقيقية. لا تُرسل أو تُحفظ بيانات الدخول.</p>
+<button class="button button-large full-width" type="submit" [disabled]="isSubmitting()"> 
+   {{ isSubmitting() ? 'جاري الدخول...' : 'تسجيل الدخول' }} 
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M20 12H4m6-6-6 6 6 6"/>
+</svg>
+</button>
+</form>
+<p 
+ 
+class="small muted">ليس لديك حساب أعمال؟ <a class="text-link" routerLink="/register" data-placeholder="سيتم إضافة بيانات التواصل مع المبيعات عند الإطلاق.">تواصل مع المبيعات</a>
+</p>
+<a class="text-link" routerLink="/home">استكشف الحساب التجريبي دون إدخال بيانات</a>
+</section>
+<aside class="login-aside">
+<p class="eyebrow">السعد لقطع غيار السيارات</p>
+<h2>أعمالك تتحرك.<br>ونحن نساعدك على الاستمرار.</h2>
+<p>اعثر على قطعتك، راجع أسعارك، وأعد طلب احتياجاتك اليومية بسهولة.</p>
+<img src="/images/hero-mechanical.svg" width="640" height="500" alt="" aria-hidden="true">
+<div class="flex">
+<span>
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 2 9 4v6c0 5-9 10-9 10S3 17 3 12V6z"/>
+<path d="m8 12 3 3 5-6"/>
+</svg>
+</span>
+<span class="small">قطع موثوقة · معلومات واضحة · طلب أسرع</span>
+</div>
+</aside>
+</main>
