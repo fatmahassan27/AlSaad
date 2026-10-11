@@ -21,5 +21,12 @@ namespace AlSaad.Infrastructure.ExternalServices.Daftra.DaftraServices
 
         public Task<DaftraSingleProductResponse?> GetProductByIdAsync(int id, CancellationToken cancellationToken = default)
             => GetSingleAsync<DaftraSingleProductResponse>($"products/{id}.json", cancellationToken);
+        public Task<DaftraCreateResponse> CreateProductAsync(DaftraCreateProductRequest request, CancellationToken cancellationToken = default)
+            => PostAsync<DaftraCreateProductRequest, DaftraCreateResponse>("products.json", request, cancellationToken);
+        public Task<bool> UpdateProductAsync(int id, DaftraUpdateProductRequest request, CancellationToken cancellationToken = default)
+            => PutAsync($"products/{id}.json", request, cancellationToken);
+
+        public Task<bool> DeleteProductAsync(int id, CancellationToken cancellationToken = default)
+            => DeleteAsync($"products/{id}.json", cancellationToken);
     }
 }

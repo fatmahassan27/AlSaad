@@ -44,12 +44,12 @@ namespace AlSaad.Infrastructure.Services
                     Message = "User Name is already exist"
                 };
             }
-            if (!await _roleManager.RoleExistsAsync("User"))
-                return new AuthenticationResponseDTO
-                {
-                    Success = false,
-                    Message = "Unable to register with this Role."
-                };
+            //if (!await _roleManager.RoleExistsAsync("User"))
+            //    return new AuthenticationResponseDTO
+            //    {
+            //        Success = false,
+            //        Message = "Unable to register with this Role."
+            //    };
 
             var user = new ApplicationUser
             {
@@ -79,15 +79,15 @@ namespace AlSaad.Infrastructure.Services
             //    Success = false,
             //    Message = "Unable to register with user"
             //};
-            var roleResult = await _userManager.AddToRoleAsync(user, "User");
-            if (!roleResult.Succeeded)
-            {
-                return new AuthenticationResponseDTO
-                {
-                    Success = false,
-                    Message = string.Join(", ", roleResult.Errors.Select(e => e.Description))
-                };
-            }
+            //var roleResult = await _userManager.AddToRoleAsync(user, "User");
+            //if (!roleResult.Succeeded)
+            //{
+            //    return new AuthenticationResponseDTO
+            //    {
+            //        Success = false,
+            //        Message = string.Join(", ", roleResult.Errors.Select(e => e.Description))
+            //    };
+            //}
 
             var token = _tokenService.GenerateToken(user);
 

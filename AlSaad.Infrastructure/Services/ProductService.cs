@@ -89,7 +89,7 @@ namespace AlSaad.Infrastructure.Services
             TrackStock = product.TrackStock,
             TrackingType = product.TrackingType,
 
-            StockBalance = product.StockBalance,
+            StockBalance = product.StockBalance ?? 0,
             LowStockThreshold = product.LowStockThreshold,
 
             Barcode = product.Barcode,
@@ -167,5 +167,63 @@ namespace AlSaad.Infrastructure.Services
             BranchId = category.BranchId,
             Status = category.Status
         };
+        public async Task<int> CreateProductAsync(CreateProductDto dto, CancellationToken cancellationToken = default)
+        {
+            var request = new DaftraCreateProductRequest
+            {
+                Product = new DaftraCreateProductBody
+                {
+                    Name = dto.Name.Trim(),
+                    Type = dto.Type,
+                    ProductCode = NullIfEmpty(dto.ProductCode),
+                    Barcode = NullIfEmpty(dto.Barcode),   // "" بتتحول null، لأن Daftra بتشترط 5 حروف على الأقل لو اتبعت
+                    Description = NullIfEmpty(dto.Description),
+                    Notes = NullIfEmpty(dto.Notes),
+                    UnitPrice = dto.UnitPrice,
+                    BuyPrice = dto.BuyPrice,
+                    Discount = dto.Discount,
+                    DiscountType = dto.DiscountType,
+                    Brand = NullIfEmpty(dto.Brand),
+                    CategoriesId = dto.CategoryIds is { Count: > 0 } ? dto.CategoryIds : null,
+                    Tags = NullIfEmpty(dto.Tags),
+                    Status = dto.Status,
+                    TrackStock = dto.TrackStock ? 1 : 0,
+                    InitialStockLevel = dto.TrackStock ? dto.InitialStockLevel : null,
+                    StoreId = dto.TrackStock ? dto.StoreId : null,
+                    LowStockThreshold = dto.LowStockThreshold
+                }
+            };
+
+            var response = await _daftraApiClient.CreateProductAsync(request, cancellationToken);
+            return response.Id;
+        }
+
+        private static string? NullIfEmpty(string? value)
+            => string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+        public Task<bool> UpdateProductAsync(int id, UpdateProductDto dto, CancellationToken cancellationToken = default)
+        {
+            var request = new DaftraUpdateProductRequest
+            {
+                Product = new DaftraUpdateProductBody
+                {
+                    Name = dto.Name?.Trim(),
+                    ProductCode = dto.ProductCode?.Trim(),
+                    Barcode = dto.Barcode?.Trim(),
+                    Description = dto.Description,
+                    Notes = dto.Notes,
+                    UnitPrice = dto.UnitPrice,
+                    BuyPrice = dto.BuyPrice,
+                    Brand = dto.Brand?.Trim(),
+                    CategoriesId = dto.CategoryIds is { Count: > 0 } ? dto.CategoryIds : null,
+                    Status = dto.Status,
+                    LowStockThreshold = dto.LowStockThreshold
+                }
+            };
+
+            return _daftraApiClient.UpdateProductAsync(id, request, cancellationToken);
+        }
+
+        public Task<bool> DeleteProductAsync(int id, CancellationToken cancellationToken = default)
+            => _daftraApiClient.DeleteProductAsync(id, cancellationToken);
     }
 }

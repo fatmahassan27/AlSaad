@@ -71,7 +71,7 @@ namespace AlSaad.Infrastructure.ExternalServices.Daftra.Models
         public string? TrackingType { get; set; }
 
         [JsonPropertyName("stock_balance")]
-        public decimal StockBalance { get; set; }
+        public decimal? StockBalance { get; set; }
 
         [JsonPropertyName("low_stock_thershold")]
         public decimal? LowStockThreshold { get; set; }
