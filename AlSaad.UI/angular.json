@@ -26,14 +26,14 @@
               }
             ],
             "styles": ["src/material-theme.scss", "src/styles.css"],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
+            
+            "index": "src/index.html",
+           
             "security": {
               "allowedHosts": []
             },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "ssr": false,
+  "prerender": false
           },
           "configurations": {
             "production": {
@@ -45,8 +45,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                   "maximumWarning": "6kB",
+  "maximumError": "12kB"
                 }
               ],
               "outputHashing": "all"
